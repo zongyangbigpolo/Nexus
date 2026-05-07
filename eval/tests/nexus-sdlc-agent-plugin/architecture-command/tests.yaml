@@ -1,0 +1,12 @@
+- vars:
+    specialization: auto
+    task: design
+    context: 'Auth system with Azure AD B2C and microservices backend'
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled an architecture design request with specialization=auto, task=design, and context describing an auth system with Azure AD B2C and microservices.
+
+        Score 1.0 if ALL of the following are true:
+        - Auto-detects the appropriate specialization from the context (cloud or solution, given Azure AD B2C and microservices keywords)        
+      threshold: 1

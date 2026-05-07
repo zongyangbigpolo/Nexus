@@ -1,0 +1,38 @@
+{
+  "name": "NexusAgent",
+  "owner": {
+    "name": "icaclientmac",
+    "email": "icaclientmac@cloud.com"
+  },
+  "metadata": {
+    "description": "Marketplace of GitHub Copilot plugins for icaclientmac team workflows and reusable agent packages (macOS platform).",
+    "version": "1.0.0",
+    "pluginRoot": "./plugins"
+  },
+  "plugins": [
+    {
+      "name": "nexus-common-agent-plugin",
+      "source": "nexus-common-agent-plugin",
+      "description": "Common shared agents packaged as a self-contained VS Code agent plugin.",
+      "version": "2026.04.7"
+    },
+    {
+      "name": "nexus-sdlc-agent-plugin",
+      "source": "nexus-sdlc-agent-plugin",
+      "description": "SDLC workflow agent plugin for macOS development.",
+      "version": "2026.04.7"
+    },
+    {
+      "name": "nexus-macos-native-plugin",
+      "source": "nexus-macos-native-plugin",
+      "description": "Native macOS development plugin for icaclientmac — Xcode build, ObjC/Swift, Virtual Channels, CI.",
+      "version": "2026.04.7"
+    },
+    {
+      "name": "nexus-release-management-plugin",
+      "source": "nexus-release-management-plugin",
+      "description": "Release management workflow agent plugin.",
+      "version": "2026.04.7"
+    }
+  ]
+}

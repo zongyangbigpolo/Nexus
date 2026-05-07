@@ -1,0 +1,11 @@
+- vars:
+    __userPrompt: "jira={{jira}}"
+    jira: SPA-1234    
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled a bug investigation request for jiraId=SPA-1234 with a NullReferenceException log.
+
+        Score 1.0 if ALL of the following are true:
+        - Identifies this as a bug investigation task and references SPA-1234 explicitly        
+      threshold: 1

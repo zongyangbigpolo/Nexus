@@ -1,0 +1,3 @@
+~bash_profile
+plugins/nexus-release-management-plugin/config/jira-assignees-github-repos.json
+*.code-workspace

@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+description: 'SPA Common AI Agents - Git Prompt Evaluation'
+prompts:
+  - file://../../../providers/copilot-prompt-loader.js
+defaultTest:
+  vars:    
+    __promptFile: spa-common-agent-plugin/commands/git.md
+  options:
+    provider: file://../../../providers/azure-gpt5-provider.js
+providers:
+  - file://../../../providers/azure-gpt5-provider.js
+tests: file://tests.yaml

@@ -1,0 +1,12 @@
+- vars:
+    action: create
+    type: story
+    jira: ''
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled a JIRA story creation request with action=create and type=story.
+
+        Score 1.0 if ALL of the following are true:
+        - Identifies this as a single JIRA story creation task (not a full hierarchy)        
+      threshold: 1

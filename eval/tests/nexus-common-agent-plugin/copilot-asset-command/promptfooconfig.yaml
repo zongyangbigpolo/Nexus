@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+description: 'SPA Common AI Agents - Copilot Asset Prompt Evaluation'
+prompts:
+  - file://../../../providers/copilot-prompt-loader.js
+defaultTest:
+  vars:
+    __promptFile: spa-common-agent-plugin/commands/copilot-asset.md
+    tool_choice: none #TODO: This prompt requires mocking these tools: copilot-asset-validation or repository-context-discovery
+  options:
+    provider: file://../../../providers/azure-gpt5-provider.js
+providers:
+  - file://../../../providers/azure-gpt5-provider.js
+tests: file://tests.yaml

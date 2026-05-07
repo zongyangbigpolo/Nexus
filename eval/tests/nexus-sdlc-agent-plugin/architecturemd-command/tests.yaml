@@ -1,0 +1,10 @@
+- vars:
+    depth: standard
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled an ARCHITECTURE.md generation request with depth=standard.
+
+        Score 1.0 if ALL of the following are true:
+        - Treats this as a standard-depth scan (all 14 template sections, 2+ diagrams expected)        
+      threshold: 1

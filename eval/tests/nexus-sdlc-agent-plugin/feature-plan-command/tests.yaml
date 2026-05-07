@@ -1,0 +1,34 @@
+- description: Test feature planning with Confluence spec decomposition into epics and stories
+  vars:
+    action: create
+    source: 'https://citrix.atlassian.net/wiki/spaces/CWS/pages/834306930/CTXENG-2222+SPA+CEP+-+Provision+users+in+Google+Directory+using+UPN+as+Email'
+    jira: CTXENG-2222
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly planned a JIRA hierarchy from the Confluence specification for provisioning users in Google Directory using UPN as Email.
+
+        Score 1.0 if ALL of the following are true:
+
+        **Confluence Spec Retrieval**:
+        - The agent fetched the Confluence page
+        - The agent read and understood the spec content about UPN-based provisioning for Google Directory
+
+        **Epic Decomposition** (must identify at a minimum 3 epics):
+        - Epic 1: Admin UI changes (ztna-ui-cep-mfe) — configuration controls for choosing Email vs UPN
+        - Epic 2: SPA Proxy Service changes — orchestrating the UPN/Email setting across deployments
+        - Epic 3: SPA Plugin (on-premise component) — integrating UPN-based lookups into app enumeration and launch workflows
+
+        **Hierarchy Structure**:
+        - Proposes a CTXENG → Epics → Stories hierarchy
+        - Each epic has at least one story underneath it
+        - Stories include meaningful summaries related to the spec content
+
+        **Labels and Metadata**:
+        - References the JIRA ID CTXENG-2222 explicitly
+        - Includes AI-Generated label on created tickets
+
+        **Checkpoint Behavior**:
+        - Presents the planned hierarchy for review before creating tickets (or clearly states it would do so)
+        - Present an per story sizing in story points (SP)
+      threshold: 1

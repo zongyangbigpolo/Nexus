@@ -1,0 +1,15 @@
+- vars:
+    subscription: SPAHybridDev
+    days: 30
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled an Azure cost analysis request with subscription=SPAHybridDev and days=30.
+
+        Score 1.0 if ALL of the following are true:
+        - Identifies this as a cost analysis task for the last 30 days
+        - References the subscription "SPAHybridDev" explicitly
+        - Describes or begins the workflow: confirm context, analyze costs, identify top drivers, find orphaned resources, generate recommendations
+        - Plans to output a cost breakdown by service/resource with optimization recommendations and estimated savings
+        - Does NOT skip the time-period scoping (30 days)
+      threshold: 1

@@ -1,0 +1,9 @@
+{
+    "name": "nexus-sdlc-agent-plugin",
+    "description": "SDLC workflow agent plugin for macOS development.",
+    "version": "2026.04.7",
+    "commands": "./commands/",
+    "agents": "./agents/",
+    "skills": "./skills/",
+    "mcpServers": "./.mcp.json"
+}

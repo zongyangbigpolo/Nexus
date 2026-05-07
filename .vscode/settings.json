@@ -1,0 +1,38 @@
+{
+  // ═══════════════════════════════════════════════════════════════════════════
+  // GitHub Copilot - Custom Instructions & Agents
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Enable copilot-instructions.md and *.instructions.md files
+  "github.copilot.chat.codeGeneration.useInstructionFiles": true,
+  // Enable AGENTS.md file support
+  "chat.useAgentsMdFile": true,
+  // Enable nested AGENTS.md files in subfolders (this is about AGENTS.md, not agent definitions)
+  "chat.useNestedAgentsMdFiles": true,
+  // Enable Agent Skills (preview feature)
+  "chat.useAgentSkills": true,
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Instruction File Locations
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Search the plugin-owned instruction folders used by this marketplace repo.
+  "chat.instructionsFilesLocations": {
+    "plugins/nexus-common-agent-plugin/instructions": true,
+    "plugins/nexus-sdlc-agent-plugin/instructions": true
+  },
+  // Command discovery in this repo comes from plugin.json.
+  // Shared repo-level guidance lives in .github/copilot-instructions.md.
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Recommended Copilot Behaviors
+  // ═══════════════════════════════════════════════════════════════════════════
+  // Show prompt recommendations when starting new chat
+  "chat.promptFilesRecommendations": {
+    "enabled": true
+  },
+  // Custom File associations
+  "files.associations": {
+    "*.agent.md": "chatagent",
+    "*.instructions.md": "instructions",
+    "*.prompt.md": "prompt",
+    "SKILL.md": "skill"
+  },
+  "editor.linkedEditing": true
+}

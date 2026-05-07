@@ -1,0 +1,9 @@
+{
+    "name": "nexus-macos-native-plugin",
+    "description": "Native macOS development plugin for icaclientmac — Xcode build, ObjC/Swift, Virtual Channels, CI.",
+    "version": "2026.04.7",
+    "commands": "./commands/",
+    "agents": "./agents/",
+    "skills": "./skills/",
+    "mcpServers": "./.mcp.json"
+}

@@ -1,0 +1,11 @@
+- vars:
+    subscription: SPAHybridDev
+    type: security
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled an Azure security audit request with subscription=SPAHybridDev and type=security.
+
+        Score 1.0 if ALL of the following are true:
+        - Identifies this as a security-scoped audit (NSGs, public access, encryption)        
+      threshold: 1

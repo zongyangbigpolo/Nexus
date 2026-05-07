@@ -1,0 +1,14 @@
+- vars:
+    action: suggest
+    source: fake-repo-path    
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled an AGENTS.md suggestion request with source=fake-repo-path and action=suggest.
+
+        Score 1.0 if ALL of the following are true:
+        - Operates in "suggest" mode — reports findings and proposed additions WITHOUT creating or modifying any files        
+        - Attempts to scan the repository structure (lists files, detects tech stack, identifies build/test commands, or notes the path is not accessible)
+        - Proposes what an AGENTS.md file should contain for the scanned repo (e.g. suggested sections, stack details, commands, conventions)
+        - Does NOT write or save the AGENTS.md file — only suggests content
+      threshold: 1

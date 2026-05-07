@@ -1,0 +1,12 @@
+- vars:
+    mode: validate
+    target: all
+    name: ''
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled a Copilot asset validation request with mode=validate and target=all.
+
+        Score 1.0 if ALL of the following are true:
+        - Identifies this as a validation-mode task (not create or review)        
+      threshold: 1

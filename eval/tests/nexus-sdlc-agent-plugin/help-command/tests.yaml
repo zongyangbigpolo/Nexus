@@ -1,0 +1,13 @@
+- vars:
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly displayed the quick reference help output.
+
+        Score 1.0 if ALL of the following are true:
+        - Displays a table or list of available prompts with at least 10 entries
+        - Includes key prompts such as /start, /task, /bugfix, /feature-spec, /feature-plan, /git, /jira
+        - Includes agent names or a brief mention of available agents
+        - Recommends /start as the entry point for users unsure which prompt to use
+        - Output is structured and readable (table or organized list format)
+      threshold: 1

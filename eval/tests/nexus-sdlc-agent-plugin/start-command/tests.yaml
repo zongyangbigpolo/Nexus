@@ -1,0 +1,146 @@
+- description: Test routing through a bugfix prompt using a JIRA bugfix
+  vars:    
+    request: Implement JIRA bug SPA-1234
+    jira: SPA-1234
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the router agent correctly handled the request "Implement JIRA bug SPA-1234".
+
+        Score 1.0 if ALL of the following are true:
+        - Provides a confidence level
+        - Correctly identifies this as a bug report, not a story
+        - Routes to /bugfix command
+        - Does NOT attempt to fix the bug itself — it only routes
+      threshold: 1      
+      
+- description: Test routing for a JIRA feature implementation request
+  vars:    
+    request: Implement JIRA story SPA-9876
+    jira: SPA-9876 
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the router agent correctly handled the request "Implement feature SPA-9876".
+
+        Score 1.0 if ALL of the following are true:
+        - Provides a confidence level as a percentage
+        - Correctly identifies this as a feature implementation request
+        - Acknowledges or references the JIRA ID SPA-9876 explicitly     
+        - Does NOT attempt to implement the feature itself — it only routes
+      threshold: 1
+
+- description: Test routing through a bugfix prompt but passing a JIRA story
+  vars:    
+    request: Implement JIRA bug SPA-9876
+    jira: SPA-9876 
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the router agent correctly handled the request "Implement JIRA bug SPA-9876".
+
+        Score 1.0 if ALL of the following are true:
+        - Provides a confidence level
+        - Correctly identifies this as a bug report or a story (both are valid interpretations)
+        - Routes to dev-coordinator or /task command (feature implementation)
+        - Does NOT attempt to fix the bug itself — it only routes
+      threshold: 1        
+
+- description: Test routing for an Azure cost analysis request
+  vars:    
+    request: |
+      Review the Azure costs for the current calendar month
+      Subscription ID is 1234-5678-9101
+      Produce a high-level summary report
+      You have read-only Cost Management access
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the router agent correctly handled the request "Review the Azure costs for this month".
+
+        Score 1.0 if ALL of the following are true:
+        - Correctly identifies this as an Azure cost analysis request
+        - Routes to /azure-costs
+        - Does NOT attempt to perform the analysis itself — it only routes
+      threshold: 1
+      
+- description: Test routing for a feature specification authoring request
+  vars:    
+    request: Write a spec for CTXENG-9876
+    jira: CTXENG-9876 
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the router agent correctly handled the request "Write a feature spec for CTXENG-9876".
+
+        Score 1.0 if ALL of the following are true:
+        - Correctly identifies this as a feature specification authoring request
+        - Routes to `spec-author`
+        - Acknowledges or references the JIRA ID CTXENG-9876 explicitly        
+        - Does NOT attempt to write the spec itself — it only routes
+      threshold: 1
+
+- description: Test routing for a feature planning request
+  vars:    
+    request: Plan the work for CTXENG-4567
+    jira: CTXENG-4567
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the router agent correctly handled the request "Plan the work for CTXENG-4567".
+
+        Score 1.0 if ALL of the following are true:
+        - Provides a confidence level
+        - Correctly identifies this as a feature planning request
+        - Routes to `feature-planner` agent or /feature-plan command
+        - Acknowledges or references the JIRA ID CTXENG-4567 explicitly
+        - Does NOT attempt to plan the work itself — it only routes
+      threshold: 1
+
+- description: Test routing for an AGENTS.md generation request
+  vars:    
+    request: Generate an AGENTS.md file for this repository
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the router agent correctly handled the request "Generate an AGENTS.md file for this repository".
+
+        Score 1.0 if ALL of the following are true:
+        - Provides a confidence level
+        - Correctly identifies this as an AGENTS.md generation request
+        - Routes to `architect` agent or /agentsmd command
+        - Does NOT attempt to generate the file itself — it only routes
+      threshold: 1
+
+- description: Test routing for an ARCHITECTURE.md generation request
+  vars:    
+    request: Generate an ARCHITECTURE.md document for this project
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the router agent correctly handled the request "Generate an ARCHITECTURE.md document for this project".
+
+        Score 1.0 if ALL of the following are true:
+        - Provides a confidence level
+        - Correctly identifies this as an architecture documentation generation request
+        - Routes to `architect` agent or /architecturemd command
+        - Does NOT attempt to generate the document itself — it only routes
+      threshold: 1
+
+- description: Test routing for a task to decompose an epic into stories
+  vars:    
+    request: Decompose epic SPA-999 into implementable stories and create them in JIRA
+    jira: SPA-999
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the router agent correctly handled the request "Decompose epic SPA-999 into implementable stories and create them in JIRA".
+
+        Score 1.0 if ALL of the following are true:
+        - Provides a confidence level
+        - Correctly identifies this as a feature implementation or task decomposition request
+        - Routes to `dev-coordinator` agent or /feature-planner command
+        - Acknowledges or references the JIRA ID SPA-999 explicitly
+        - Recognizes the intent to decompose the epic and create child stories
+        - Does NOT attempt to decompose the epic or create stories itself — it only routes
+      threshold: 1

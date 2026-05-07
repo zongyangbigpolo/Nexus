@@ -1,0 +1,12 @@
+- vars:
+    scope: branch
+    focus: security
+    path: feature/SPA-9876-fix-auth
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled a code review request with scope=branch and focus=security.
+
+        Score 1.0 if ALL of the following are true:
+        - Identifies this as a security-focused code review of all branch changes vs master        
+      threshold: 1

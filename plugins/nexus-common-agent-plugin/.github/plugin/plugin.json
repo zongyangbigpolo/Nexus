@@ -1,0 +1,9 @@
+{
+    "name": "nexus-common-agent-plugin",
+    "description": "Common shared agents packaged as a self-contained VS Code agent plugin.",
+    "version": "2026.04.7",
+    "commands": "./commands/",
+    "agents": "./agents/",
+    "skills": "./skills/",
+    "mcpServers": "./.mcp.json"
+}

@@ -1,0 +1,13 @@
+- vars:
+    action: create
+    source: text
+    space: SPA
+    title: 'ZTNA Policy Configuration Overview'
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled a Confluence article creation request with action=create, source=text, space=SPA, title="ZTNA Policy Configuration Overview".
+
+        Score 1.0 if ALL of the following are true:
+        - Identifies this as a Confluence article creation task (action=create)        
+      threshold: 1

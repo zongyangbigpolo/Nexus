@@ -1,0 +1,14 @@
+- vars:
+    target: src/api/auth/
+    scope: injection
+    compliance: ''
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled a security analysis request with target=src/api/auth/, scope=injection, and no compliance framework.
+
+        Score 1.0 if ALL of the following are true:
+        - Identifies this as an injection-focused security analysis of src/api/auth/        
+        - Scans or plans to scan the target path src/api/auth/ for injection-related vulnerabilities                
+        - Does NOT perform an auth or crypto analysis — scope is injection only
+      threshold: 1

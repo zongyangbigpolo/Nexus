@@ -1,0 +1,9 @@
+{
+    "name": "cloud-troubleshooting-plugin",
+    "description": "Cloud, Kubernetes, and Docker troubleshooting agent plugin for production incident triage and diagnostics.",
+    "version": "2026.04.1",
+    "commands": "./commands/",
+    "agents": "./agents/",
+    "skills": "./skills/",
+    "mcpServers": "./.mcp.json"
+}

@@ -1,0 +1,11 @@
+- vars:
+    type: logs
+    focus: authentication failures
+  assert:
+    - type: llm-rubric
+      value: |
+        Evaluate whether the agent correctly handled a log analysis request with type=logs and focus="authentication failures".
+
+        Score 1.0 if ALL of the following are true:
+        - Acts as an analyzer agent        
+      threshold: 1

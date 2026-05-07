@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
+
+# Learn more about building a configuration: https://promptfoo.dev/docs/configuration/guide
+
+description: 'SPA Common AI Agents - Agents.md Prompt Evaluation'
+prompts:
+  - file://../../../providers/copilot-prompt-loader.js
+defaultTest:
+  vars:
+    __promptFile: spa-sdlc-agent-plugin/commands/agentsmd.md
+    tool_choice: auto
+  options:
+    provider: file://../../../providers/azure-gpt5-provider.js
+providers:
+  - file://../../../providers/azure-gpt5-provider.js
+tests: file://tests.yaml

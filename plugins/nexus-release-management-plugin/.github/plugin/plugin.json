@@ -1,0 +1,9 @@
+{
+    "name": "nexus-release-management-plugin",
+    "description": "Release management workflow agent plugin.",
+    "version": "2026.04.7",
+    "commands": "./commands/",
+    "agents": "./agents/",
+    "skills": "./skills/",
+    "mcpServers": "./.mcp.json"
+}

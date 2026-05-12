@@ -24,7 +24,7 @@ This playbook provides **operational details only**: examples, templates, mappin
 | Acceptance criteria format | [Acceptance Criteria Format](#acceptance-criteria-format) |
 | Story categories checklist | [Common Story Categories](#common-story-categories) |
 | Full quality checklist | [Quality Checklist](#quality-checklist-before-finalizing) |
-| CTXENG/Epic/Story examples | [Examples](#example-ctxeng-output) |
+| ENG/Epic/Story examples | [Examples](#example-ctxeng-output) |
 
 ---
 
@@ -38,7 +38,7 @@ This playbook provides **operational details only**: examples, templates, mappin
 
 **JQL for finding existing Epics**:
 ```
-project = SPAOP AND type = Epic AND summary ~ "[Component]" AND status != Done
+project = APP2 AND type = Epic AND summary ~ "[Component]" AND status != Done
 ```
 
 ## Acceptance Criteria Format
@@ -95,7 +95,7 @@ Each Story should include:
 
 ## JIRA Project & Component Mapping
 
-> **Note**: This section contains **SPA-specific** mappings as a reference example.
+> **Note**: This section contains **APP-specific** mappings as a reference example.
 > For other repositories, check the repository's `AGENTS.md` for project/component mappings,
 > or ask the user if not documented.
 
@@ -103,21 +103,21 @@ Use this table to determine the correct JIRA project and component for each Epic
 
 | Component/Service | JIRA Project | Component Name | Team |
 |-------------------|--------------|----------------|------|
-| **SPA Proxy Service** | `SPAOP` | `SPA Proxy Service` | SPA Hybrid Team |
-| **SPA Plugin** (Broker) | `SPAOP` | `Broker - Runtime` | SPA Hybrid Team |
-| **SPA Admin UI** | `SPAOP` | `Console - UI` | SPA UI Team |
-| **SPA Micro Frontend (MFE)** | `SPAOP` | `Console - UI` | SPA UI Team |
-| **SPA Config Service** | `SPA` | `GW Core` | SPA Service Team |
-| **CEP Integration Service** | `SPA` | `CEP Integration Service` | SPA Service Team |
-| **Gateway Core** | `SPA` | `GW Core` | SPA Service Team |
+| **APP Proxy Service** | `APP2` | `APP Proxy Service` | APP Hybrid Team |
+| **APP Plugin** (Broker) | `APP2` | `Broker - Runtime` | APP Hybrid Team |
+| **APP Admin UI** | `APP2` | `Console - UI` | APP UI Team |
+| **APP Micro Frontend (MFE)** | `APP2` | `Console - UI` | APP UI Team |
+| **APP Config Service** | `APP` | `GW Core` | APP Service Team |
+| **CEP Integration Service** | `APP` | `CEP Integration Service` | APP Service Team |
+| **Gateway Core** | `APP` | `GW Core` | APP Service Team |
 
 **Default Investment Type**: `CTXBV Linked Feature`
 
 **Component Auto-Detection Examples**:
-- File path `src/Citrix.Spa.Web.Api.SpaProxyService/...` → SPA Proxy Service → SPAOP
-- Section heading "Admin UI Changes" → SPA Admin UI → SPAOP, Console - UI
-- Service name "CEP Integration Service" → CEP Integration Service → SPA
-- File path `src/Broker/Runtime/...` → SPA Plugin (Broker) → SPAOP, Broker - Runtime
+- File path `src/Organization.Spa.Web.Api.SpaProxyService/...` → APP Proxy Service → APP2
+- Section heading "Admin UI Changes" → APP Admin UI → APP2, Console - UI
+- Service name "CEP Integration Service" → CEP Integration Service → APP
+- File path `src/Broker/Runtime/...` → APP Plugin (Broker) → APP2, Broker - Runtime
 
 ---
 
@@ -192,13 +192,13 @@ Ensure these categories are covered when breaking down a feature:
 
 ---
 
-## Example: CTXENG Output
+## Example: ENG Output
 
-When creating a CTXENG (feature-level) ticket, use this format:
+When creating a ENG (feature-level) ticket, use this format:
 
 **Required Fields**:
-- **Project**: `CTXENG`
-- **Issue Type**: `CTXENG`
+- **Project**: `ENG`
+- **Issue Type**: `ENG`
 - **Summary**: `[Feature Name]`
 - **Description**: Business value, objectives, affected components, success criteria
 - **Link to Confluence specification**
@@ -209,22 +209,22 @@ When creating a CTXENG (feature-level) ticket, use this format:
 
 **Template**:
 ```
-CTXENG-XXXXX: [Feature Name]
+ENG-XXXXX: [Feature Name]
 Target: Q2 2026 Release
-Owner: Engineering Manager - SPA Team
+Owner: Engineering Manager - APP Team
 
 Description:
 [Feature description and business value]
 
 Affected Components:
-- SPA Proxy Service
-- SPA Plugin (Broker)
-- SPA Admin UI
+- APP Proxy Service
+- APP Plugin (Broker)
+- APP Admin UI
 
 Epic Breakdown:
-1. SPAOP-XXX: SPA Proxy Service - [Feature Name] (X stories, Y points)
-2. SPAOP-XXX: SPA Plugin - [Feature Name] (X stories, Y points)
-3. SPAOP-XXX: SPA Admin UI - [Feature Name] (X stories, Y points)
+1. APP2-XXX: APP Proxy Service - [Feature Name] (X stories, Y points)
+2. APP2-XXX: APP Plugin - [Feature Name] (X stories, Y points)
+3. APP2-XXX: APP Admin UI - [Feature Name] (X stories, Y points)
 
 Success Criteria:
 - [ ] All stories completed and merged
@@ -243,7 +243,7 @@ Success Criteria:
 - **Epic Name**: `[Component] - [Feature Name]`
 - **Summary**: Same as Epic Name
 - **Description**: Component-specific changes, technical design, APIs/DB changes
-- **Epic Link**: Link to CTXENG
+- **Epic Link**: Link to ENG
 - **Components**: Select the appropriate component
 - **Assignee**: Component tech lead or team lead
 - **Labels**: `AI-Generated`, component-specific tags
@@ -252,10 +252,10 @@ Success Criteria:
 **Before Creating**: Print confirmation:
 ```
 Creating Epic:
-  Project: [SPAOP/SPA/etc - based on component mapping]
+  Project: [APP2/APP/etc - based on component mapping]
   Title: [Component] - [Feature Name]
   Component: [Specific component name]
-  Parent: [CTXENG ticket ID] - [CTXENG title]
+  Parent: [ENG ticket ID] - [ENG title]
 ```
 
 ---
@@ -264,7 +264,7 @@ Creating Epic:
 
 **Template**:
 ```
-SPAOP-XXX: Implement Gateway API for [Feature]
+APP2-XXX: Implement Gateway API for [Feature]
 
 Description:
 Implement the REST API endpoint for [specific functionality].
@@ -282,7 +282,7 @@ Technical Notes:
 - Add OpenAPI annotations for Swagger docs
 
 Story Points: 3
-Component: SPA Proxy Service
+Component: APP Proxy Service
 Labels: AI-Generated, api
 ```
 
@@ -300,111 +300,111 @@ Creating Story:
 ## Example: Complete JIRA Hierarchy with Dependencies
 
 ```
-CTXENG-1234: SPA Gateway Failover & Multi-Region Support
+ENG-1234: APP Gateway Failover & Multi-Region Support
 |
-+-- Epic: SPAOP-567: SPA Proxy Service - Gateway Failover
++-- Epic: APP2-567: APP Proxy Service - Gateway Failover
     |
     | Execution Order (based on dependencies):
-    | 1. SPAOP-569 (DB Migration) --> SPAOP-568 (API)
-    | 2. SPAOP-570 (Health Check) --> SPAOP-568 (API)
-    | 3. SPAOP-568 (API) --> SPAOP-571 (Orchestration)
-    | 4. SPAOP-571 --> SPAOP-572 (Circuit Breaker), SPAOP-573 (Integration)
-    | 5. SPAOP-572, SPAOP-573 --> SPAOP-574 (Config)
+    | 1. APP2-569 (DB Migration) --> APP2-568 (API)
+    | 2. APP2-570 (Health Check) --> APP2-568 (API)
+    | 3. APP2-568 (API) --> APP2-571 (Orchestration)
+    | 4. APP2-571 --> APP2-572 (Circuit Breaker), APP2-573 (Integration)
+    | 5. APP2-572, APP2-573 --> APP2-574 (Config)
     |
-    +-- Story: SPAOP-568: Implement Gateway Discovery API (3 pts)
-    |         blocked by: SPAOP-569, SPAOP-570
-    +-- Story: SPAOP-569: Add Database Migration for Gateway Regions (2 pts)
-    |         blocks: SPAOP-568
-    +-- Story: SPAOP-570: Implement Health Check Service (3 pts)
-    |         blocks: SPAOP-568
-    +-- Story: SPAOP-571: Build Failover Orchestration Logic (5 pts)
-    |         blocked by: SPAOP-568
-    +-- Story: SPAOP-572: Add Circuit Breaker Pattern (3 pts)
-    |         blocked by: SPAOP-571
-    +-- Story: SPAOP-573: Add Integration Tests for Failover (3 pts)
-    |         blocked by: SPAOP-571
-    +-- Story: SPAOP-574: Update Configuration Schema (2 pts)
-              blocked by: SPAOP-572, SPAOP-573
+    +-- Story: APP2-568: Implement Gateway Discovery API (3 pts)
+    |         blocked by: APP2-569, APP2-570
+    +-- Story: APP2-569: Add Database Migration for Gateway Regions (2 pts)
+    |         blocks: APP2-568
+    +-- Story: APP2-570: Implement Health Check Service (3 pts)
+    |         blocks: APP2-568
+    +-- Story: APP2-571: Build Failover Orchestration Logic (5 pts)
+    |         blocked by: APP2-568
+    +-- Story: APP2-572: Add Circuit Breaker Pattern (3 pts)
+    |         blocked by: APP2-571
+    +-- Story: APP2-573: Add Integration Tests for Failover (3 pts)
+    |         blocked by: APP2-571
+    +-- Story: APP2-574: Update Configuration Schema (2 pts)
+              blocked by: APP2-572, APP2-573
 │
-├── Epic: SPAOP-600: SPA Plugin - Multi-Region Discovery
-│   ├── Story: SPAOP-601: Add Region Discovery Client (3 pts)
-│   │         blocks: SPAOP-602
-│   ├── Story: SPAOP-602: Implement Gateway Selection Logic (3 pts)
-│   │         blocked by: SPAOP-601, blocks: SPAOP-603
-│   ├── Story: SPAOP-603: Add Unit Tests for Region Selection (2 pts)
-│   │         blocked by: SPAOP-602
-│   └── Story: SPAOP-604: Update Plugin Configuration (1 pt)
-│             blocked by: SPAOP-602
+├── Epic: APP2-600: APP Plugin - Multi-Region Discovery
+│   ├── Story: APP2-601: Add Region Discovery Client (3 pts)
+│   │         blocks: APP2-602
+│   ├── Story: APP2-602: Implement Gateway Selection Logic (3 pts)
+│   │         blocked by: APP2-601, blocks: APP2-603
+│   ├── Story: APP2-603: Add Unit Tests for Region Selection (2 pts)
+│   │         blocked by: APP2-602
+│   └── Story: APP2-604: Update Plugin Configuration (1 pt)
+│             blocked by: APP2-602
 │
-└── Epic: SPAOP-650: SPA Admin UI - Region Management
-    ├── Story: SPAOP-651: Create Region Configuration Page (5 pts)
-    │         blocks: SPAOP-652, SPAOP-653
-    ├── Story: SPAOP-652: Add Gateway Health Status Widget (3 pts)
-    │         blocked by: SPAOP-651
-    ├── Story: SPAOP-653: Implement Region CRUD Operations (3 pts)
-    │         blocked by: SPAOP-651
-    └── Story: SPAOP-654: Add Tests for Region UI (2 pts)
-            blocked by: SPAOP-652, SPAOP-653
+└── Epic: APP2-650: APP Admin UI - Region Management
+    ├── Story: APP2-651: Create Region Configuration Page (5 pts)
+    │         blocks: APP2-652, APP2-653
+    ├── Story: APP2-652: Add Gateway Health Status Widget (3 pts)
+    │         blocked by: APP2-651
+    ├── Story: APP2-653: Implement Region CRUD Operations (3 pts)
+    │         blocked by: APP2-651
+    └── Story: APP2-654: Add Tests for Region UI (2 pts)
+            blocked by: APP2-652, APP2-653
 ```
 
 **Cross-Epic Dependencies** (if applicable):
 ```
-SPAOP-602 (Plugin - Gateway Selection) 
-    is blocked by: SPAOP-568 (Proxy - Gateway API)
+APP2-602 (Plugin - Gateway Selection) 
+    is blocked by: APP2-568 (Proxy - Gateway API)
     
-SPAOP-652 (UI - Health Widget)
-    is blocked by: SPAOP-570 (Proxy - Health Check Service)
+APP2-652 (UI - Health Widget)
+    is blocked by: APP2-570 (Proxy - Health Check Service)
 ```
 
 ---
 
 ## Example: Incremental Story Creation
 
-**Scenario**: Feature spec was updated with a new "Rate Limiting" section. User provides link: `https://citrix.atlassian.net/wiki/spaces/~user/pages/123456#RateLimiting`
+**Scenario**: Feature spec was updated with a new "Rate Limiting" section. User provides link: `https://example.atlassian.net/wiki/spaces/~user/pages/123456#RateLimiting`
 
 **Workflow**:
 
 1. **Parse Section**: Read "Rate Limiting" section from Confluence
    - Extracted: Add rate limiting middleware, new config settings, update API responses
    
-2. **Identify Component**: "SPA Proxy Service"
+2. **Identify Component**: "APP Proxy Service"
 
-3. **Map to JIRA Project**: `SPAOP`
+3. **Map to JIRA Project**: `APP2`
 
 4. **Search for Existing Epic**:
    ```
-   JQL: project = SPAOP AND type = Epic AND summary ~ "SPA Proxy Service" AND status != Done
+   JQL: project = APP2 AND type = Epic AND summary ~ "APP Proxy Service" AND status != Done
    ```
-   - Found: `SPAOP-567: SPA Proxy Service - Gateway Failover`
+   - Found: `APP2-567: APP Proxy Service - Gateway Failover`
 
-5. **Create New Stories** (linked to SPAOP-567):
+5. **Create New Stories** (linked to APP2-567):
    ```
-   SPAOP-575: Add Rate Limiting Middleware to Settings API
+   APP2-575: Add Rate Limiting Middleware to Settings API
    - Labels: AI-Generated, api, performance
    - Story Points: 3
-   - Epic Link: SPAOP-567
+   - Epic Link: APP2-567
    
-   SPAOP-576: Add Rate Limit Configuration to appsettings.json
+   APP2-576: Add Rate Limit Configuration to appsettings.json
    - Labels: AI-Generated, configuration
    - Story Points: 1
-   - Epic Link: SPAOP-567
+   - Epic Link: APP2-567
    
-   SPAOP-577: Update API Responses to Include Rate Limit Headers
+   APP2-577: Update API Responses to Include Rate Limit Headers
    - Labels: AI-Generated, api
    - Story Points: 2
-   - Epic Link: SPAOP-567
+   - Epic Link: APP2-567
    
-   SPAOP-578: Add Integration Tests for Rate Limiting
+   APP2-578: Add Integration Tests for Rate Limiting
    - Labels: AI-Generated, testing
    - Story Points: 3
-   - Epic Link: SPAOP-567
+   - Epic Link: APP2-567
    ```
 
 ---
 
 ## Quality Checklist (Before Finalizing)
 
-**CTXENG**:
+**ENG**:
 - ✅ Complete description with business value
 - ✅ Links to Confluence spec
 - ✅ All affected components listed
@@ -412,7 +412,7 @@ SPAOP-652 (UI - Health Widget)
 
 **Epics**:
 - ✅ One Epic per affected component
-- ✅ All Epics linked to CTXENG
+- ✅ All Epics linked to ENG
 - ✅ Technical design summary included
 - ✅ Assigned to component owners
 
@@ -455,5 +455,5 @@ After creating all JIRAs:
 1. **Review with Tech Leads**: Validate breakdown and estimates
 2. **Sequence Work**: Order Stories in Epics by dependency and priority
 3. **Assign to Sprint**: Add Stories to upcoming sprints based on capacity
-4. **Notify Teams**: Share CTXENG link with all affected teams
+4. **Notify Teams**: Share ENG link with all affected teams
 5. **Track Progress**: Monitor Epic/Story completion in dashboards

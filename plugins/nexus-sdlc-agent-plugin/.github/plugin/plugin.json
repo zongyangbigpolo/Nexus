@@ -1,6 +1,6 @@
 {
     "name": "nexus-sdlc-agent-plugin",
-    "description": "SDLC workflow agent plugin for macOS development.",
+    "description": "SDLC workflow agent plugin for desktop OS development.",
     "version": "2026.04.7",
     "commands": "./commands/",
     "agents": "./agents/",

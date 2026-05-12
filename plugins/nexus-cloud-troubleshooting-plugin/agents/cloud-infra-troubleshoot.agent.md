@@ -94,7 +94,7 @@ Load [network-connectivity-diagnostics](../skills/network-connectivity-diagnosti
 Load [cloud-health-checker](../skills/cloud-health-checker/SKILL.md):
 - Cloud provider service status for the affected region
 - VM/instance health
-- Managed K8s control plane status
+- Managed Kubernetes control plane status
 - Cloud networking (VPC, subnets, security groups / NSGs)
 
 ### Phase 5: Log and Metric Analysis

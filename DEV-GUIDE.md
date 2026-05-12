@@ -6,7 +6,7 @@ For operator-facing usage guidance, see the root `README.md`. For plugin-specifi
 
 ## Purpose
 
-This repository is a marketplace of GitHub Copilot agent plugins for icaclientmac team workflows, focused on macOS platform development. Each plugin is expected to be independently installable and to document only the assets it ships.
+This repository is a marketplace of GitHub Copilot agent plugins for target repository team workflows, focused on desktop OS platform development. Each plugin is expected to be independently installable and to document only the assets it ships.
 
 The marketplace currently includes:
 
@@ -14,6 +14,7 @@ The marketplace currently includes:
 - `nexus-sdlc-agent-plugin` — 15 commands, 9 agents, 10 skills, 5 instructions
 - `nexus-macos-native-plugin` — 3 commands, 2 agents, 13 skills, 1 instruction
 - `nexus-release-management-plugin` — 4 commands, 2 agents, 2 skills
+- `cloud-troubleshooting-plugin` — 4 commands, 4 agents, 10 skills
 
 ## Maintainer Workflow
 
@@ -30,12 +31,20 @@ Example SDLC eval run:
 bash eval/tests/nexus-sdlc-agent-plugin/run-all-evals.sh
 ```
 
+Marketplace deployment validation:
+
+```bash
+npm run phase0
+```
+
+Run this before publishing marketplace updates. It validates marketplace registration, plugin manifests, asset frontmatter, eval prompt paths, runtime prerequisites, and eval provider importability.
+
 ## Marketplace Layout
 
 ```text
 .github/plugin/marketplace.json   # Marketplace manifest and plugin registry
 .github/copilot-instructions.md   # Shared repository-level Copilot guidance
-plugins/                          # All installable agent plugins (4 plugins)
+plugins/                          # All installable agent plugins (5 plugins)
 eval/                             # Prompt and workflow evaluation assets
 ARCHITECTURE.md                   # System architecture documentation
 README.md                         # Marketplace usage guide
@@ -126,7 +135,7 @@ Use this sequence when introducing a new plugin to the marketplace.
 Create a new folder under `plugins/`, for example:
 
 ```text
-plugins/spa-my-new-plugin/
+plugins/nexus-example-plugin/
 ```
 
 At minimum, add:
@@ -143,7 +152,7 @@ Create `.github/plugin/plugin.json` in the plugin folder with the standard shape
 
 ```json
 {
-  "name": "spa-my-new-plugin",
+  "name": "nexus-example-plugin",
   "description": "Describe the plugin's workflow scope.",
   "version": "2026.03.1",
   "commands": "./commands/",
@@ -176,8 +185,8 @@ Update `.github/plugin/marketplace.json` and add an entry under `plugins`:
 
 ```json
 {
-  "name": "spa-my-new-plugin",
-  "source": "spa-my-new-plugin",
+  "name": "nexus-example-plugin",
+  "source": "nexus-example-plugin",
   "description": "Describe the plugin's workflow scope.",
   "version": "2026.03.1"
 }

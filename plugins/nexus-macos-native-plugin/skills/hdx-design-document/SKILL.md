@@ -1,19 +1,19 @@
 ---
 name: hdx-design-document
 description: >
-  Design document template and guidelines for HDX/icaclientmac features.
+  Design document template and guidelines for platform/target repository features.
   Follows the project's Docs/ convention for technical design documentation.
 trigger: |
   Activate when the user mentions:
   - Design document or design doc
-  - Feature specification for icaclientmac
-  - HDX design or architecture document
+  - Feature specification for target repository
+  - platform design or architecture document
   - Docs/ directory or documentation template
 ---
 
 # Purpose
 
-Provide the design document template used in the icaclientmac project's `Docs/` directory. Design docs capture technical decisions, architecture, and implementation plans for new features.
+Provide the design document template used in the target repository project's `Docs/` directory. Design docs capture technical decisions, architecture, and implementation plans for new features.
 
 # Template
 
@@ -56,7 +56,7 @@ How data flows through the system for this feature.
 
 Any new or modified interfaces, protocols, or APIs.
 
-### 4.4 Virtual Channel Protocol (if applicable)
+### 4.4 extension channel Protocol (if applicable)
 
 Channel name, data format, direction, message types.
 
@@ -102,7 +102,7 @@ Channel name, data format, direction, message types.
 
 # Existing Design Docs
 
-The icaclientmac project has design docs for:
+The target repository project has design docs for:
 - DNS Cache
 - Shield V2
 - PoP Survey

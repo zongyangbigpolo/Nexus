@@ -40,7 +40,7 @@ Implement high-quality, tested code based on task file. Pass security review bef
 
 | Field | Required | Source | Description |
 |-------|----------|--------|-------------|
-| JIRA ID | Yes | dev-coordinator | Ticket ID (e.g., SPA-12345) |
+| JIRA ID | Yes | dev-coordinator | Ticket ID (e.g., APP-12345) |
 | Branch | Yes | dev-coordinator | Feature branch checked out, contains JIRA ID |
 | Task File | Yes | dev-coordinator | `tasks/{JIRA_ID}-task.md` with context and AC |
 

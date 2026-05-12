@@ -26,7 +26,7 @@ For each bug ID, run a GitHub PR search scoped to the org:
 {BUG-ID} org:{org-name}
 ```
 
-Example: `SPA-32145 org:icaclientmac`
+Example: `APP-32145 org:target repository`
 
 Collect all matching PRs. A typical fix produces 2–3 PRs:
 - **Main PR** — merged to `master` or `main` (the primary fix)
@@ -48,7 +48,7 @@ For each release PR found, confirm the fix commit is present in the release bran
 list_commits(owner, repo, sha=release/{version}, perPage=30)
 ```
 
-Scan commit messages for the bug ID (e.g. `SPA-32145`). Record:
+Scan commit messages for the bug ID (e.g. `APP-32145`). Record:
 - **Commit SHA** (first 7 chars for display)
 - **Commit date**
 - **Commit message** (first line)
@@ -80,8 +80,8 @@ Output one row per bug with these columns:
 
 | Bug ID | Summary | Priority | Status | Affects Version | Fix Version | Main PR | Release PR | Release Branch | Commit SHA | Classification |
 |--------|---------|----------|--------|----------------|-------------|---------|-----------|----------------|------------|----------------|
-| SPA-32145 | Browser Policies Saving with Empty Condition Inputs | Major | Done | SPA Service 26Q2.1 | **EMPTY** | #1068 merged Feb 16 | #1069 merged Feb 17 | `release/2605.1` | 25a237d | Fix merged, Fix Version missing |
-| SPA-32291 | Numbering Alignment in Condition Column is Off Center | Trivial | Done | SPA Service 26Q2.1 | **EMPTY** | #1075 merged Feb 25 | #1076 merged Feb 25 | `release/2605.1` | bd526f6 | Fix merged, Fix Version missing |
+| APP-32145 | Browser Policies Saving with Empty Condition Inputs | Major | Done | APP Service 26Q2.1 | **EMPTY** | #1068 merged Feb 16 | #1069 merged Feb 17 | `release/2605.1` | 25a237d | Fix merged, Fix Version missing |
+| APP-32291 | Numbering Alignment in Condition Column is Off Center | Trivial | Done | APP Service 26Q2.1 | **EMPTY** | #1075 merged Feb 25 | #1076 merged Feb 25 | `release/2605.1` | bd526f6 | Fix merged, Fix Version missing |
 
 ---
 

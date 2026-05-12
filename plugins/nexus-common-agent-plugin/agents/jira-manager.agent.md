@@ -6,7 +6,7 @@ tools: ['vscode', 'read', 'search', 'atlassian/*']
 handoffs:
   - label: Need full feature breakdown
     agent: feature-planner
-    prompt: "HANDOFF from jira-manager: Requires full feature hierarchy (CTXENG, Epics, Stories). JIRA context provided above."
+    prompt: "HANDOFF from jira-manager: Requires full feature hierarchy (ENG, Epics, Stories). JIRA context provided above."
     send: true
   - label: Ready to implement
     agent: dev-coordinator
@@ -18,7 +18,7 @@ handoffs:
 
 Shared reference: [jira-common playbook](../agent-assets/jira-common.playbook.md) — project mapping, templates, sizing.
 
-⛔ **cloudId**: Before ANY Atlassian MCP call, run `list_accessible_resources` to get the UUID for `citrix.atlassian.net`. Never pass a hostname as `cloudId`.
+⛔ **cloudId**: Before ANY Atlassian MCP call, run `list_accessible_resources` to get the UUID for `example.atlassian.net`. Never pass a hostname as `cloudId`.
 
 You are a **JIRA Item Manager** for individual tickets (bug, story, task, epic).
 

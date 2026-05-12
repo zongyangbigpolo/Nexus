@@ -1,7 +1,7 @@
 ---
 name: jira-github-report-analyzer
 description: Reporting orchestrator that queries JIRA for completed issues per assignee, enriches with Epic data, links GitHub commits/PRs, and publishes consolidated reports to Confluence.
-argument-hint: "timeframe=-2w repos=ztna-ui-* keywords=performance"
+argument-hint: "timeframe=-2w repos=access-ui-* keywords=performance"
 tools: ['vscode', 'read', 'search', 'atlassian/*', 'github/*']
 handoffs:
   - label: Create follow-up JIRAs from gaps
@@ -10,13 +10,13 @@ handoffs:
     send: true
   - label: Publish report to Confluence
     agent: article-publisher
-    prompt: "HANDOFF from jira-github-report-analyzer: Action: Publish consolidated JIRA report to Confluence. PI: {pi}. Space: CWS. Parent page ID: {parentPageId}. Requestor: {requestor}. Report date: {reportDate}. Report table and summary bullets provided above."
+    prompt: "HANDOFF from jira-github-report-analyzer: Action: Publish consolidated JIRA report to Confluence. PI: {pi}. Space: DOCS. Parent page ID: {parentPageId}. Requestor: {requestor}. Report date: {reportDate}. Report table and summary bullets provided above."
     send: true
 ---
 
 # Role
 
-⛔ **cloudId**: Before ANY Atlassian MCP call, run `list_accessible_resources` to get the UUID for `citrix.atlassian.net`. Never pass a hostname as `cloudId`.
+⛔ **cloudId**: Before ANY Atlassian MCP call, run `list_accessible_resources` to get the UUID for `example.atlassian.net`. Never pass a hostname as `cloudId`.
 
 You are a **Reporting Orchestrator** that collects JIRA and GitHub data, enriches it with Epic context, and produces consolidated progress reports.
 

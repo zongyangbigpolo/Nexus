@@ -17,7 +17,7 @@ Usage
       --input /path/to/mcp_list_commits_output.json \\
       --workdir /tmp/rd_work \\
       --page  1 \\
-      [--jira-prefixes SPAOP,SPA,CTXENG,SPACON,SPATEC,ZTNA,ZTA]
+      [--jira-prefixes APP2,APP,ENG,SPACON,SPATEC,access,ZTA]
 
 State files written/updated
 ---------------------------
@@ -41,9 +41,9 @@ def build_jira_pattern(prefixes: str) -> re.Pattern:
     """Return a compiled regex for the given comma-separated JIRA project prefixes.
 
     Uses a non-capturing group so that re.findall() returns the *full* JIRA ID
-    (e.g. "SPAOP-11092") rather than just the project-key prefix.
-    Prefixes are sorted longest-first so that e.g. "SPAOP" is tried before
-    "SPA", preventing a partial match on the longer token.
+    (e.g. "APP2-11092") rather than just the project-key prefix.
+    Prefixes are sorted longest-first so that e.g. "APP2" is tried before
+    "APP", preventing a partial match on the longer token.
     """
     parts = sorted(
         [re.escape(p.strip()) for p in prefixes.split(",") if p.strip()],
@@ -167,7 +167,7 @@ def main():
                         help="Directory for state files (default: /tmp/rd_work)")
     parser.add_argument("--page", type=int, default=1,
                         help="Page number being processed (for display only)")
-    parser.add_argument("--jira-prefixes", default="SPAOP,SPA,CTXENG,SPACON,SPATEC,ZTNA,ZTA",
+    parser.add_argument("--jira-prefixes", default="APP2,APP,ENG,SPACON,SPATEC,access,ZTA",
                         help="Comma-separated JIRA project prefixes to match")
     args = parser.parse_args()
 

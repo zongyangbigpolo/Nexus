@@ -1,16 +1,16 @@
 ---
 name: xcode-build
-description: Build the icaclientmac Xcode project — full build, incremental build, or specific target.
+description: Build the target repository native build tool project — full build, incremental build, or specific target.
 agent: build-engineer
 ---
 
-# Xcode Build
+# Build
 
-Build the icaclientmac project using xcodebuild.
+Build the target repository project using xcodebuild.
 
 ## Target
 
-${input:target:Scheme or target (default: ICAClientUniversalBinary, or specify a scheme/target)}
+${input:target:Scheme or target (default: SampleApp, or specify a scheme/target)}
 
 ## Build Type
 

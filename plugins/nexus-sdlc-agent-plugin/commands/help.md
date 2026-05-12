@@ -38,9 +38,9 @@ description: Quick reference for all available prompts and agents with usage exa
 
 | Prompt | Description |
 |--------|-------------|
-| `/xcode-build` | Build icaclientmac Xcode project |
+| `/xcode-build` | Build target repository native build tool project |
 | `/xcode-test` | Run XCTest tests |
-| `/vc-scaffold` | Scaffold Virtual Channel code |
+| `/vc-scaffold` | Scaffold extension channel code |
 
 ## Release Management Prompts (`nexus-release-management-plugin`)
 

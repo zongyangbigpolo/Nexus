@@ -1,36 +1,36 @@
 ---
 name: virtual-channel-sdk
 description: >
-  ICA Virtual Channel SDK patterns for icaclientmac. Covers VC lifecycle, data handling,
+  extension channel SDK patterns for target repository. Covers channel lifecycle, data handling,
   protocol registration, and bidirectional communication patterns.
 trigger: |
   Activate when the user mentions:
-  - Virtual Channel development or VC SDK
-  - ICA channel implementation
+  - extension channel development or channel SDK
+  - integration channel implementation
   - Channel open, close, or data transfer
-  - VC protocol or channel registration
+  - channel protocol or channel registration
 ---
 
 # Purpose
 
-Guide developers through implementing ICA Virtual Channels in icaclientmac. Virtual Channels provide bidirectional communication between the ICA client and Citrix server-side components.
+Guide developers through implementing extension channels in target repository. extension channels provide bidirectional communication between the protocol client and Organization server-side components.
 
-# VC Architecture Overview
+# channel Architecture Overview
 
 ```
-┌─────────────────────┐          ICA Protocol          ┌─────────────────────┐
-│   macOS Client      │ ◄══════════════════════════════►│   Citrix Server     │
+┌─────────────────────┐          protocol Protocol          ┌─────────────────────┐
+│   desktop OS Client      │ ◄══════════════════════════════►│   Organization Server     │
 │                     │                                 │                     │
-│  ┌───────────────┐  │     Virtual Channel Data        │  ┌───────────────┐  │
-│  │ VC Module     │◄─┼─────────────────────────────────┼─►│ Server VC     │  │
+│  ┌───────────────┐  │     extension channel Data        │  ┌───────────────┐  │
+│  │ channel Module     │◄─┼─────────────────────────────────┼─►│ Server channel     │  │
 │  │ (Client-side) │  │                                 │  │ (Server-side) │  │
 │  └───────────────┘  │                                 │  └───────────────┘  │
 └─────────────────────┘                                 └─────────────────────┘
 ```
 
-# VC Lifecycle
+# channel Lifecycle
 
-1. **Registration** — VC module registers with the ICA client during initialization
+1. **Registration** — channel module registers with the protocol client during initialization
 2. **Channel Open** — server opens the channel after session establishment
 3. **Data Exchange** — client and server exchange data packets
 4. **Channel Close** — channel closes when session ends or explicitly closed
@@ -103,7 +103,7 @@ static NSString * const kChannelName = @"CTX<NAME>";
 
 - (void)sendData:(NSData *)data {
     if (!self.isOpen) return;
-    // Send data to server via VC API
+    // Send data to server via channel API
 }
 
 @end
@@ -118,20 +118,20 @@ Used when the client initiates data transfer (e.g., FIDO2 authentication respons
 Used when the server pushes data to the client (e.g., sensor data requests, UI update commands).
 
 ## Bidirectional
-Most VCs use bidirectional communication with a request-response or event-driven pattern.
+Most channels use bidirectional communication with a request-response or event-driven pattern.
 
-# Known Virtual Channels in icaclientmac
+# Known extension channels in target repository
 
-| VC Name | Purpose | Direction |
+| channel Name | Purpose | Direction |
 |---------|---------|-----------|
 | FIDO2 | WebAuthn/FIDO2 authentication | Bidirectional |
 | EUEM | End User Experience Monitoring | Client → Server |
 | MultiTouch | Touch/trackpad events | Client → Server |
 | SENS | System Event Notification | Bidirectional |
 
-> **Note**: Discover actual VC implementations by searching for files matching `*Channel.m` or `*Channel.h` in the project.
+> **Note**: Discover actual channel implementations by searching for files matching `*Channel.m` or `*Channel.h` in the project.
 
-# Testing VCs
+# Testing channels
 
 1. Mock the channel protocol for unit tests
 2. Test lifecycle methods: `channelDidOpen`, `channelDidClose`
@@ -141,7 +141,7 @@ Most VCs use bidirectional communication with a request-response or event-driven
 
 # Integration Points
 
-- VCs register with the ICA client's channel manager during app initialization
-- Channel data is multiplexed over the ICA protocol connection
-- VCs should handle channel close gracefully (session disconnect, network loss)
-- VCs must be thread-safe — data callbacks may arrive on background threads
+- channels register with the protocol client's channel manager during app initialization
+- Channel data is multiplexed over the protocol protocol connection
+- channels should handle channel close gracefully (session disconnect, network loss)
+- channels must be thread-safe — data callbacks may arrive on background threads

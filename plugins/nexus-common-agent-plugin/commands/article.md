@@ -18,7 +18,7 @@ Create, update, or publish articles to Confluence with professional formatting a
   - `file` = read from markdown file (path required)
   - `text` = direct input in chat
 - **Path** (if source=file): ${input:path}
-- **Space**: ${input:space} (e.g., `SPA`, `CWS`, `CTXENG`)
+- **Space**: ${input:space} (e.g., `APP`, `DOCS`, `ENG`)
 - **Title**: ${input:title}
 - **Parent Page** (optional): ${input:parent}
 - **Page ID** (for update): ${input:pageId}
@@ -37,8 +37,8 @@ Create, update, or publish articles to Confluence with professional formatting a
 ## Usage
 
 ```
-/article action=create source=file path=.github/specs/CTXENG-1234-Feature.spec.md space=CWS
-/article action=create space=SPA title="Feature X Overview"
+/article action=create source=file path=.github/specs/ENG-1234-Feature.spec.md space=DOCS
+/article action=create space=APP title="Feature X Overview"
 /article action=update pageId=123456 title="Feature X Overview"
 ```
 

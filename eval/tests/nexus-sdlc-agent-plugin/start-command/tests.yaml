@@ -1,11 +1,11 @@
 - description: Test routing through a bugfix prompt using a JIRA bugfix
   vars:    
-    request: Implement JIRA bug SPA-1234
-    jira: SPA-1234
+    request: Implement JIRA bug APP-1234
+    jira: APP-1234
   assert:
     - type: llm-rubric
       value: |
-        Evaluate whether the router agent correctly handled the request "Implement JIRA bug SPA-1234".
+        Evaluate whether the router agent correctly handled the request "Implement JIRA bug APP-1234".
 
         Score 1.0 if ALL of the following are true:
         - Provides a confidence level
@@ -16,28 +16,28 @@
       
 - description: Test routing for a JIRA feature implementation request
   vars:    
-    request: Implement JIRA story SPA-9876
-    jira: SPA-9876 
+    request: Implement JIRA story APP-9876
+    jira: APP-9876 
   assert:
     - type: llm-rubric
       value: |
-        Evaluate whether the router agent correctly handled the request "Implement feature SPA-9876".
+        Evaluate whether the router agent correctly handled the request "Implement feature APP-9876".
 
         Score 1.0 if ALL of the following are true:
         - Provides a confidence level as a percentage
         - Correctly identifies this as a feature implementation request
-        - Acknowledges or references the JIRA ID SPA-9876 explicitly     
+        - Acknowledges or references the JIRA ID APP-9876 explicitly     
         - Does NOT attempt to implement the feature itself — it only routes
       threshold: 1
 
 - description: Test routing through a bugfix prompt but passing a JIRA story
   vars:    
-    request: Implement JIRA bug SPA-9876
-    jira: SPA-9876 
+    request: Implement JIRA bug APP-9876
+    jira: APP-9876 
   assert:
     - type: llm-rubric
       value: |
-        Evaluate whether the router agent correctly handled the request "Implement JIRA bug SPA-9876".
+        Evaluate whether the router agent correctly handled the request "Implement JIRA bug APP-9876".
 
         Score 1.0 if ALL of the following are true:
         - Provides a confidence level
@@ -66,34 +66,34 @@
       
 - description: Test routing for a feature specification authoring request
   vars:    
-    request: Write a spec for CTXENG-9876
-    jira: CTXENG-9876 
+    request: Write a spec for ENG-9876
+    jira: ENG-9876 
   assert:
     - type: llm-rubric
       value: |
-        Evaluate whether the router agent correctly handled the request "Write a feature spec for CTXENG-9876".
+        Evaluate whether the router agent correctly handled the request "Write a feature spec for ENG-9876".
 
         Score 1.0 if ALL of the following are true:
         - Correctly identifies this as a feature specification authoring request
         - Routes to `spec-author`
-        - Acknowledges or references the JIRA ID CTXENG-9876 explicitly        
+        - Acknowledges or references the JIRA ID ENG-9876 explicitly        
         - Does NOT attempt to write the spec itself — it only routes
       threshold: 1
 
 - description: Test routing for a feature planning request
   vars:    
-    request: Plan the work for CTXENG-4567
-    jira: CTXENG-4567
+    request: Plan the work for ENG-4567
+    jira: ENG-4567
   assert:
     - type: llm-rubric
       value: |
-        Evaluate whether the router agent correctly handled the request "Plan the work for CTXENG-4567".
+        Evaluate whether the router agent correctly handled the request "Plan the work for ENG-4567".
 
         Score 1.0 if ALL of the following are true:
         - Provides a confidence level
         - Correctly identifies this as a feature planning request
         - Routes to `feature-planner` agent or /feature-plan command
-        - Acknowledges or references the JIRA ID CTXENG-4567 explicitly
+        - Acknowledges or references the JIRA ID ENG-4567 explicitly
         - Does NOT attempt to plan the work itself — it only routes
       threshold: 1
 
@@ -129,18 +129,18 @@
 
 - description: Test routing for a task to decompose an epic into stories
   vars:    
-    request: Decompose epic SPA-999 into implementable stories and create them in JIRA
-    jira: SPA-999
+    request: Decompose epic APP-999 into implementable stories and create them in JIRA
+    jira: APP-999
   assert:
     - type: llm-rubric
       value: |
-        Evaluate whether the router agent correctly handled the request "Decompose epic SPA-999 into implementable stories and create them in JIRA".
+        Evaluate whether the router agent correctly handled the request "Decompose epic APP-999 into implementable stories and create them in JIRA".
 
         Score 1.0 if ALL of the following are true:
         - Provides a confidence level
         - Correctly identifies this as a feature implementation or task decomposition request
         - Routes to `dev-coordinator` agent or /feature-planner command
-        - Acknowledges or references the JIRA ID SPA-999 explicitly
+        - Acknowledges or references the JIRA ID APP-999 explicitly
         - Recognizes the intent to decompose the epic and create child stories
         - Does NOT attempt to decompose the epic or create stories itself — it only routes
       threshold: 1

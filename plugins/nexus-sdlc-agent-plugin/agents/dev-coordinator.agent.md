@@ -32,7 +32,7 @@ handoffs:
 
 **Development Workflow Coordinator** — delegate coding to developer, then own PR completion, merge readiness verification, and merge execution.
 
-⛔ **cloudId**: Before ANY Atlassian MCP call, run `list_accessible_resources` to get the UUID for `citrix.atlassian.net`. Never pass a hostname as `cloudId`.
+⛔ **cloudId**: Before ANY Atlassian MCP call, run `list_accessible_resources` to get the UUID for `example.atlassian.net`. Never pass a hostname as `cloudId`.
 
 Before handoff to developer (except PR Review mode), verify:
 ✅ Story selected | ✅ JIRA "In Progress" | ✅ Branch created | ✅ Task file exists

@@ -10,7 +10,7 @@ Operational details for the `spec-author` custom agent.
 
 | Resource | Link |
 |----------|------|
-| Design Spec Template | [Confluence](https://citrix.atlassian.net/wiki/spaces/CWS/pages/461832544/Design+Spec+Template) |
+| Design Spec Template | [Confluence](https://example.atlassian.net/wiki/spaces/DOCS/pages/461832544/Design+Spec+Template) |
 | Agent | [spec-author.agent.md](../agents/spec-author.agent.md) |
 | Output Location | `specs/` |
 | Confluence Publisher | [article-publisher](../agents/article-publisher.agent.md) |
@@ -24,7 +24,7 @@ Operational details for the `spec-author` custom agent.
 ## JIRA Discovery Rules
 - Do **not** invent JIRA IDs.
 - Only use tickets that are explicitly provided by the user or found in source documents.
-- If no JIRA ID is available, use a placeholder like `CTXENG-XXXXX`.
+- If no JIRA ID is available, use a placeholder like `ENG-XXXXX`.
 
 ---
 
@@ -37,8 +37,8 @@ specs/{JIRA-ID}-{FeatureName}.spec.md
 ```
 
 **Examples:**
-- `specs/CTXENG-1234-MultiDatacenterSupport.spec.md`
-- `specs/CTXENG-5678-BrowserPolicyEnhancements.spec.md`
+- `specs/ENG-1234-MultiDatacenterSupport.spec.md`
+- `specs/ENG-5678-BrowserPolicyEnhancements.spec.md`
 
 ### File Header Template
 
@@ -47,7 +47,7 @@ specs/{JIRA-ID}-{FeatureName}.spec.md
 
 | Field | Value |
 |-------|-------|
-| JIRA | [{JIRA-ID}](https://citrix.atlassian.net/browse/{JIRA-ID}) |
+| JIRA | [{JIRA-ID}](https://example.atlassian.net/browse/{JIRA-ID}) |
 | Author | AI-Generated |
 | Date | {YYYY-MM-DD} |
 | Status | Draft |
@@ -91,7 +91,7 @@ After spec is complete, use **article-publisher** handoff:
 Handoff → article-publisher
   source=file
   path=specs/{JIRA-ID}-{FeatureName}.spec.md
-  space=CWS
+  space=DOCS
   title='{Feature Name} Design Spec'
 ```
 
@@ -146,7 +146,7 @@ To visualize this sequence diagram:
 ### Section-Specific Guidelines
 
 #### Dependencies
-- **SKIP Internal Dependencies**: Do not document internal Citrix products (NetScaler, StoreFront)
+- **SKIP Internal Dependencies**: Do not document internal Organization products (NetScaler, StoreFront)
 - **SKIP Version Compatibility Matrix**
 - Document only external dependencies (cloud providers, third-party services)
 

@@ -16,9 +16,9 @@ handoffs:
     agent: dev-coordinator
     prompt: "HANDOFF from architect: Start implementation for architectural component. Context: see design above."
     send: true
-  - label: Azure infrastructure changes
-    agent: azure-ops
-    prompt: "HANDOFF from architect: Azure infrastructure provisioning needed. Context: see cloud architecture above."
+  - label: Cloud infrastructure changes
+    agent: cloud-infra-troubleshoot
+    prompt: "HANDOFF from architect: Cloud infrastructure provisioning or troubleshooting needed. Context: see cloud architecture above."
     send: true
   - label: Git operations
     agent: git-ops
@@ -110,7 +110,7 @@ Load appropriate playbook for methodology, then:
 ## Phase 3: Document & Handoff
 
 Document decisions as ADRs — see [adr-generator skill](../skills/adr-generator/SKILL.md).
-Validate against quality attributes → **Checkpoint** → Handoff: spec → `spec-author`, tasks → `feature-planner`, infra → `azure-ops`.
+Validate against quality attributes → **Checkpoint** → Handoff: spec → `spec-author`, tasks → `feature-planner`, infra → `cloud-infra-troubleshoot`.
 
 # Constraints
 

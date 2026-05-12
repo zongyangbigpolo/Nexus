@@ -38,11 +38,11 @@ Don't know which prompt to use? Just describe what you need!
 | Move stories to sprint | `/move-my-stories-to-sprint` |
 | Code review | `/code-review` |
 | Confluence article | `/article` |
-| Test Citrix Cloud API | `/cc-api` |
+| Test Organization Cloud API | `/cc-api` |
 | Copilot assets | `/copilot-asset` |
 
 ---
 
-For SPA troubleshooting or SRE workflows, install `mac-troubleshooting-agent-plugin` from the same marketplace.
+For APP troubleshooting or SRE workflows, install `mac-troubleshooting-agent-plugin` from the same marketplace.
 
 **Your request**: ${input:request:describe what you need}

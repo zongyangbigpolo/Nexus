@@ -5,7 +5,7 @@ cloud-troubleshooting-plugin packages operational troubleshooting workflows for 
 ## Project Overview
 
 **Tech Stack**: Markdown-based Copilot assets, YAML frontmatter, JSON plugin manifests, observability-focused skills and playbooks
-**Architecture**: Operational investigation plugin with specialized agents for K8s, Docker, and cloud troubleshooting
+**Architecture**: Operational investigation plugin with specialized agents for Kubernetes, Docker, and cloud troubleshooting
 
 This plugin is optimized for incident response and diagnostics rather than code generation. Many workflows are explicitly read-only and depend on external observability systems.
 
@@ -40,7 +40,7 @@ This plugin is optimized for incident response and diagnostics rather than code 
 
 - `agents/` - Operational agents for `sre`, `cloud-alert-triage`, `service-troubleshoot`, and `cloud-infra-troubleshoot`
 - `commands/` - Entry points for SRE, alert triage, service troubleshooting, and infrastructure troubleshooting
-- `skills/` - Troubleshooting skill library covering K8s, Docker, Prometheus, Loki, Splunk, networking, and cloud health
+- `skills/` - Troubleshooting skill library covering Kubernetes, Docker, Prometheus, Loki, Splunk, networking, and cloud health
 - `agent-assets/` - Playbooks and report templates for investigation workflows
 - `.mcp.json` - Plugin-local MCP manifest (external MCP connectivity expected from consuming workspace)
 
@@ -50,7 +50,7 @@ This plugin is optimized for incident response and diagnostics rather than code 
 | ---------- | ----- | ----- |
 | Agents | 4 | `sre`, `cloud-alert-triage`, `service-troubleshoot`, `cloud-infra-troubleshoot` |
 | Commands | 4 | `/sre`, `/cloud-alert-triage`, `/service-troubleshoot`, `/cloud-infra-troubleshoot` |
-| Skills | 10 | K8s, Docker, Prometheus, Loki, Splunk, networking, cloud health, dependency tracing |
+| Skills | 10 | Kubernetes, Docker, Prometheus, Loki, Splunk, networking, cloud health, dependency tracing |
 | Playbooks | 4 | Investigation/report templates per agent |
 
 ## Asset Relationship Summary
@@ -86,10 +86,10 @@ This plugin is optimized for incident response and diagnostics rather than code 
 
 | Agent | Description |
 | ----- | ----------- |
-| `sre` | Multi-cloud K8s SRE for cluster access, log collection, and incident investigation |
+| `sre` | Multi-cloud Kubernetes SRE for cluster access, log collection, and incident investigation |
 | `cloud-alert-triage` | Alert triage and RCA agent for PagerDuty, Grafana, and Splunk alerts |
 | `service-troubleshoot` | Microservice troubleshooting agent using logs, metrics, and dependency analysis |
-| `cloud-infra-troubleshoot` | Cloud infrastructure troubleshooting for K8s, Docker, networking, and storage |
+| `cloud-infra-troubleshoot` | Cloud infrastructure troubleshooting for Kubernetes, Docker, networking, and storage |
 
 ### Playbooks (`agent-assets/`)
 
@@ -98,7 +98,7 @@ This plugin is optimized for incident response and diagnostics rather than code 
 | `sre.playbook.md` | `sre` | Investigation report template, cluster connection reference, diagnostic scenarios |
 | `cloud-alert-triage.playbook.md` | `cloud-alert-triage` | Alert parsing reference, report template, severity classification, common patterns |
 | `service-troubleshoot.playbook.md` | `service-troubleshoot` | Service investigation template, log/metric query patterns, common issues |
-| `cloud-infra-troubleshoot.playbook.md` | `cloud-infra-troubleshoot` | Infra report template, K8s/Docker/cloud/networking diagnostics reference |
+| `cloud-infra-troubleshoot.playbook.md` | `cloud-infra-troubleshoot` | Infra report template, Kubernetes/Docker/cloud/networking diagnostics reference |
 
 ### Agent Skills (`skills/`)
 
@@ -111,7 +111,7 @@ This plugin is optimized for incident response and diagnostics rather than code 
 | `loki-log-analyzer` | Log analysis via Grafana Loki — error patterns, request tracing, infrastructure logs |
 | `network-connectivity-diagnostics` | DNS, ingress, service mesh, network policies, CNI, load balancers |
 | `cloud-health-checker` | Multi-cloud (Azure/AWS/GCP) status API checks for region outages |
-| `service-dependency-tracer` | Trace K8s service dependency chains to find root cause of cascading failures |
+| `service-dependency-tracer` | Trace Kubernetes service dependency chains to find root cause of cascading failures |
 | `splunk-query-builder` | Generate ad-hoc Splunk queries for log analysis and troubleshooting |
 | `splunk-connectivity-test` | Test Splunk MCP connectivity before running diagnostic queries |
 

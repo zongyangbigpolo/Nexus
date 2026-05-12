@@ -22,15 +22,15 @@ This playbook provides: JQL templates, output report templates, GitHub search pa
 
 ## JQL Templates
 
-### Fetch all Epics under a CTXENG
+### Fetch all Epics under a ENG
 
 ```
-parent = {CTXENG-ID} AND issuetype = Epic
+parent = {ENG-ID} AND issuetype = Epic
 ```
 
 Alternative (when Epics are linked rather than children):
 ```
-"Epic Link" = {CTXENG-ID}
+"Epic Link" = {ENG-ID}
 ```
 
 ### Fetch all Stories under an Epic
@@ -39,11 +39,11 @@ Alternative (when Epics are linked rather than children):
 "Epic Link" = {EPIC-ID} ORDER BY key ASC
 ```
 
-### Fetch all Stories/Tasks under a CTXENG (multi-level)
+### Fetch all Stories/Tasks under a ENG (multi-level)
 
 ```
-project in (SPA, SPAOP) AND "Epic Link" in (
-  linkedIssues({CTXENG-ID}, "is Epic of")
+project in (APP, APP2) AND "Epic Link" in (
+  linkedIssues({ENG-ID}, "is Epic of")
 ) ORDER BY key ASC
 ```
 
@@ -66,10 +66,10 @@ AND "Affects Version" is not EMPTY
 ORDER BY priority ASC, created ASC
 ```
 
-### Bugs linked to a CTXENG feature (all statuses)
+### Bugs linked to a ENG feature (all statuses)
 
 ```
-issueFunction in linkedIssuesOf("issue = {CTXENG-ID}", "has bug") AND issuetype = Bug
+issueFunction in linkedIssuesOf("issue = {ENG-ID}", "has bug") AND issuetype = Bug
 ORDER BY status ASC, priority ASC
 ```
 
@@ -140,7 +140,7 @@ When the user does not specify a pattern, list all branches matching `release/*`
 ### Feature Release Mapping Report
 
 ```markdown
-## Release Mapping Report -- {CTXENG-ID}: {Feature Title}
+## Release Mapping Report -- {ENG-ID}: {Feature Title}
 
 **Generated**: {date}
 **Release Target**: {branch or version}
@@ -148,11 +148,11 @@ When the user does not specify a pattern, list all branches matching `release/*`
 
 ---
 
-### CTXENG Summary
+### ENG Summary
 
 | Field | Value |
 |-------|-------|
-| JIRA | [{CTXENG-ID}](https://citrix.atlassian.net/browse/{CTXENG-ID}) |
+| JIRA | [{ENG-ID}](https://example.atlassian.net/browse/{ENG-ID}) |
 | Status | {status} |
 | Fix Version | {fix version or "Not set"} |
 | Confluence | {link or "Not found"} |
@@ -207,7 +207,7 @@ When the user does not specify a pattern, list all branches matching `release/*`
 ### Bug Audit Report
 
 ```markdown
-## Bug Audit Report -- {PROJECT / CTXENG-ID} -- {date}
+## Bug Audit Report -- {PROJECT / ENG-ID} -- {date}
 
 **Scope**: Bugs linked to feature or project, grouped by fix status
 
@@ -234,13 +234,13 @@ When the user does not specify a pattern, list all branches matching `release/*`
 
 | Bug | Summary | Affects Version | Fix Branch | PR | Action |
 |-----|---------|----------------|------------|----|--------|
-| [{BUG-ID}](https://citrix.atlassian.net/browse/{BUG-ID}) | {summary} | {version} | release/2605.1 | #{n} | Set Fix Version = 26Q2.1 |
+| [{BUG-ID}](https://example.atlassian.net/browse/{BUG-ID}) | {summary} | {version} | release/2605.1 | #{n} | Set Fix Version = 26Q2.1 |
 
 #### Fix Unverified (Done but no PR found)
 
 | Bug | Summary | Affects Version | Status | Recommendation |
 |-----|---------|----------------|--------|----------------|
-| [{BUG-ID}](https://citrix.atlassian.net/browse/{BUG-ID}) | {summary} | {version} | Done | Manual review -- no fix PR found |
+| [{BUG-ID}](https://example.atlassian.net/browse/{BUG-ID}) | {summary} | {version} | Done | Manual review -- no fix PR found |
 
 ---
 
@@ -252,14 +252,14 @@ When the user does not specify a pattern, list all branches matching `release/*`
 
 | Bug | Summary | Status | Priority | Affects Version | Assignee | Notes |
 |-----|---------|--------|----------|----------------|----------|-------|
-| [{BUG-ID}](https://citrix.atlassian.net/browse/{BUG-ID}) | {summary} | In Progress | Major | {version} | {name} | PR open: #{n} |
-| [{BUG-ID}](https://citrix.atlassian.net/browse/{BUG-ID}) | {summary} | Backlog | Critical | {version} | Unassigned | No fix started |
+| [{BUG-ID}](https://example.atlassian.net/browse/{BUG-ID}) | {summary} | In Progress | Major | {version} | {name} | PR open: #{n} |
+| [{BUG-ID}](https://example.atlassian.net/browse/{BUG-ID}) | {summary} | Backlog | Critical | {version} | Unassigned | No fix started |
 
 #### Minor / Trivial (Review Needed)
 
 | Bug | Summary | Status | Priority | Affects Version | Assignee |
 |-----|---------|--------|----------|----------------|----------|
-| [{BUG-ID}](https://citrix.atlassian.net/browse/{BUG-ID}) | {summary} | Backlog | Minor | {version} | {name} |
+| [{BUG-ID}](https://example.atlassian.net/browse/{BUG-ID}) | {summary} | Backlog | Minor | {version} | {name} |
 
 ---
 
@@ -280,7 +280,7 @@ When the user does not specify a pattern, list all branches matching `release/*`
 | Affects Version/s | `versions` | Array of version objects — version where bug was found |
 | Fix Version/s | `fixVersions` | Array of version objects — version where fix is released |
 | Epic Link | `customfield_10014` | Parent Epic for Stories |
-| Parent Link | `customfield_10800` (varies) | CTXENG parent for Epics |
+| Parent Link | `customfield_10800` (varies) | ENG parent for Epics |
 | Story Points | `customfield_10016` | May vary by project |
 | Remote Links | `getJiraIssueRemoteIssueLinks` | GitHub PR links attached to issue |
 
@@ -294,5 +294,5 @@ When the user does not specify a pattern, list all branches matching `release/*`
 | Cherry-pick creates new commit SHA | Search release branch by JIRA ID pattern in commit message, not just original SHA |
 | PR merged to wrong branch | Always record `base.ref` from GitHub PR, not just PR merged status |
 | JIRA Done != code merged | Verify PR exists and is merged before declaring Story release-ready |
-| Multiple repos per CTXENG | Aggregate per-repo summaries; report each repo row separately |
-| Epics linked vs parented to CTXENG | Try both `parent =` and linked issues queries when children are not found |
+| Multiple repos per ENG | Aggregate per-repo summaries; report each repo row separately |
+| Epics linked vs parented to ENG | Try both `parent =` and linked issues queries when children are not found |

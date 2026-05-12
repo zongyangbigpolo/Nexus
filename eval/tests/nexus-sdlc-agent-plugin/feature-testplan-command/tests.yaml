@@ -1,10 +1,10 @@
 - vars:
-    spec: '.github/specs/CTXENG-5678-AppGroupPolicies.spec.md'
+    spec: '.github/specs/ENG-5678-AppGroupPolicies.spec.md'
     confluencePage: '987654'
   assert:
     - type: llm-rubric
       value: |
-        Evaluate whether the agent correctly handled a test plan generation request for spec=.github/specs/CTXENG-5678-AppGroupPolicies.spec.md targeting confluencePage=987654.
+        Evaluate whether the agent correctly handled a test plan generation request for spec=.github/specs/ENG-5678-AppGroupPolicies.spec.md targeting confluencePage=987654.
 
         Score 1.0 if ALL of the following are true:
         - Identifies this as a test plan generation task        

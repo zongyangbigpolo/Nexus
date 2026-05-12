@@ -11,18 +11,18 @@ Shared templates and references for JIRA agents:
 
 ## JIRA Project & Component Mapping
 
-> **Note**: This section contains **SPA-specific** mappings as a reference example.
+> **Note**: This section contains **APP-specific** mappings as a reference example.
 > For other repositories, check the repository's `AGENTS.md` for project/component mappings.
 
 | Component/Service | JIRA Project | Component Name | Team |
 | --- | --- | --- | --- |
-| SPA Proxy Service | `SPAOP` | `SPA Proxy Service` | SPA Hybrid Team |
-| SPA Plugin (Broker) | `SPAOP` | `Broker - Runtime` | SPA Hybrid Team |
-| SPA Admin UI | `SPAOP` | `Console - UI` | SPA UI Team |
-| SPA Micro Frontend (MFE) | `SPAOP` | `Console - UI` | SPA UI Team |
-| SPA Config Service | `SPA` | `GW Core` | SPA Service Team |
-| CEP Integration Service | `SPA` | `CEP Integration Service` | SPA Service Team |
-| Gateway Core | `SPA` | `GW Core` | SPA Service Team |
+| APP Proxy Service | `APP2` | `APP Proxy Service` | APP Hybrid Team |
+| APP Plugin (Broker) | `APP2` | `Broker - Runtime` | APP Hybrid Team |
+| APP Admin UI | `APP2` | `Console - UI` | APP UI Team |
+| APP Micro Frontend (MFE) | `APP2` | `Console - UI` | APP UI Team |
+| APP Config Service | `APP` | `GW Core` | APP Service Team |
+| CEP Integration Service | `APP` | `CEP Integration Service` | APP Service Team |
+| Gateway Core | `APP` | `GW Core` | APP Service Team |
 
 **Default Investment Type**: `CTXBV Linked Feature`
 
@@ -193,7 +193,7 @@ Labels: AI-Generated, epic, {component}
 
 ## Component Resolution for `createJiraIssue`
 
-**`components` is required** in projects like `SPAOP`. Always include it when calling `createJiraIssue`.
+**`components` is required** in projects like `APP2`. Always include it when calling `createJiraIssue`.
 
 If the visible MCP tool schema omits `additional_fields`, still attempt the call using the payload below. In this repo, Atlassian MCP may accept undocumented `additional_fields`, and agents should prefer the repo's known-working payload shape over assuming the request is unsupported.
 
@@ -209,12 +209,12 @@ Pass `components` and `labels` via the `additional_fields` parameter:
 
 ```json
 {
-  "cloudId": "<UUID for citrix.atlassian.net from list_accessible_resources>",
-  "projectKey": "SPAOP",
+  "cloudId": "<UUID for example.atlassian.net from list_accessible_resources>",
+  "projectKey": "APP2",
   "issueTypeName": "Story",
   "summary": "Implement feature X",
   "description": "...",
-  "parent": "SPAOP-12345",
+  "parent": "APP2-12345",
   "additional_fields": {
     "components": [{"name": "Hybrid"}],
     "labels": ["AI-Generated"]
@@ -224,7 +224,7 @@ Pass `components` and `labels` via the `additional_fields` parameter:
 
 ### Practical Rule
 
-- For `SPAOP`, do not declare ticket creation blocked until you have tried `additional_fields` with `components` and `labels`.
+- For `APP2`, do not declare ticket creation blocked until you have tried `additional_fields` with `components` and `labels`.
 - When creating a Story or Task under an Epic, pass the Epic key in `parent` and inherit `components` from the parent if available.
 
 > **Note**: `components` and `labels` are **not** top-level parameters — they must be inside `additional_fields`. The `parent` key (Epic key) **is** a top-level parameter.

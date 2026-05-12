@@ -10,14 +10,14 @@ Common rules for agents working with JIRA via Atlassian MCP.
 
 ## CRITICAL: cloudId Resolution — MUST DO FIRST
 
-Our Atlassian site is **`https://citrix.atlassian.net/`** — always and only this one.
+Our Atlassian site is **`https://example.atlassian.net/`** — always and only this one.
 
 `cloudId` is **NOT** a URL or hostname. It is a **UUID** that identifies this site internally. You MUST obtain it dynamically.
 
 **BEFORE making ANY Atlassian MCP call** (`getJiraIssue`, `createJiraIssue`, `searchJiraIssue`, etc.):
 
 1. Call `list_accessible_resources` (Atlassian MCP) — this is your **very first** Atlassian call
-2. In the response, find the entry for `https://citrix.atlassian.net/`
+2. In the response, find the entry for `https://example.atlassian.net/`
 3. Copy its `id` field — a UUID like `"a1b2c3d4-e5f6-7890-abcd-ef1234567890"`
 4. Pass this UUID as `cloudId` in ALL subsequent Atlassian MCP calls
 5. Cache it for the session — do not call `list_accessible_resources` again
@@ -26,10 +26,10 @@ Our Atlassian site is **`https://citrix.atlassian.net/`** — always and only th
 
 ## Valid JIRA Project Codes
 
-Primary: `SPA`, `SPAOP`, `CTXENG`, `CTXBV`, `AAUTH`, `RDXDEV`
+Primary: `APP`, `APP2`, `ENG`, `CTXBV`, `AAUTH`, `RDXDEV`
 Other: `AAUTHHELP`, `ATH`, `CC`, `CCOPS`, `CCUI`, `CGS`, `CGSHELP`, `CINC`, `CINF`, `COUT`, `DPS`, `LUI`, `SPAHELP`, `UNICON`, `WSSUCE`, `WSSHELP`
 
-URL: `https://citrix.atlassian.net/browse/{JIRA-ID}`
+URL: `https://example.atlassian.net/browse/{JIRA-ID}`
 
 ## Atlassian MCP Tools
 

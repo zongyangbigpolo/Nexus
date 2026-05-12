@@ -1,12 +1,12 @@
 ---
 name: xcode-test
-description: Run XCTest tests for icaclientmac — all tests, specific test class, or test method.
+description: Run XCTest tests for target repository — all tests, specific test class, or test method.
 agent: build-engineer
 ---
 
-# Xcode Test
+# native build tool Test
 
-Run unit tests for the icaclientmac project.
+Run unit tests for the target repository project.
 
 ## Test Scope
 
@@ -14,7 +14,7 @@ ${input:scope:Test scope — all, ClassName, ClassName/testMethod (default: all)
 
 ## Destination
 
-${input:destination:Destination platform (default: platform=macOS)}
+${input:destination:Destination platform (default: platform=desktop OS)}
 
 ---
 

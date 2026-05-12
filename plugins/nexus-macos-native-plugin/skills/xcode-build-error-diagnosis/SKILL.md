@@ -1,19 +1,19 @@
 ---
 name: xcode-build-error-diagnosis
 description: >
-  Diagnose and fix Xcode build errors for icaclientmac. Classifies errors by category
+  Diagnose and fix native build tool build errors for target repository. Classifies errors by category
   (compiler, linker, signing, dependency, bridging) and provides targeted fix steps.
 trigger: |
   Activate when the user mentions:
   - Build error, compile error, or linker error
   - "undefined symbol" or "module not found"
-  - Xcode build failure diagnosis
+  - native build tool build failure diagnosis
   - Header not found or bridging header issues
 ---
 
 # Purpose
 
-Classify and resolve Xcode build errors in the icaclientmac project. This skill provides a systematic error diagnosis workflow.
+Classify and resolve native build tool build errors in the target repository project. This skill provides a systematic error diagnosis workflow.
 
 # Diagnosis Workflow
 
@@ -37,12 +37,12 @@ Classify and resolve Xcode build errors in the icaclientmac project. This skill 
 - For Pod imports: run `pod install` and build with `.xcworkspace`
 - For local headers: check header search paths in target build settings
 
-### Swift/ObjC Bridging
-**Pattern**: `error: use of undeclared identifier` when calling ObjC from Swift or vice versa
+### native UI/native Bridging
+**Pattern**: `error: use of undeclared identifier` when calling native from native UI or vice versa
 **Fixes**:
-- Ensure `<Target>-Bridging-Header.h` imports the ObjC header
-- For Swift → ObjC: ensure `@objc` attribute and `public` access
-- For ObjC → Swift: `#import "<Target>-Swift.h"` (auto-generated)
+- Ensure `<Target>-Bridging-Header.h` imports the native header
+- For native UI → native: ensure `@objc` attribute and `public` access
+- For native → native UI: `#import "<Target>-native UI.h"` (auto-generated)
 
 ## 2. Linker Errors
 
@@ -51,7 +51,7 @@ Classify and resolve Xcode build errors in the icaclientmac project. This skill 
 **Fixes**:
 - Missing source file in target membership — add `.m` file to "Compile Sources"
 - Missing framework — add to "Link Binary With Libraries"
-- Missing Perforce native lib — sync P4 workspace
+- Missing external source depot native lib — sync P4 workspace
 
 ### Duplicate Symbol
 **Pattern**: `ld: duplicate symbol _<symbol> in`
@@ -61,31 +61,31 @@ Classify and resolve Xcode build errors in the icaclientmac project. This skill 
 - Category collision — rename category method
 
 ### Architecture Mismatch
-**Pattern**: `ld: building for 'macOS-arm64' but attempting to link with file built for 'macOS-x86_64'`
+**Pattern**: `ld: building for 'desktop OS-secondary_arch' but attempting to link with file built for 'desktop OS-primary_arch'`
 **Fixes**:
 - Rebuild the dependency for Universal Binary
 - Check `ARCHS` and `VALID_ARCHS` build settings
-- For native Perforce libs: ensure both slices are available
+- For native external source depot libs: ensure both slices are available
 
 ## 3. Signing Errors
 
 **Pattern**: `error: <target> has conflicting provisioning settings`
 **Fixes**:
 - For local development: set `CODE_SIGN_IDENTITY="-"` and `CODE_SIGNING_REQUIRED=NO`
-- Check team and signing certificate in Xcode project settings
+- Check team and signing certificate in native build tool project settings
 
 ## 4. Dependency Errors
 
-### CocoaPods
+### dependency manager
 **Pattern**: `error: The sandbox is not in sync with the Podfile.lock`
 **Fix**: `pod install`
 
 **Pattern**: `error: module '<PodName>' not found`
 **Fix**: `pod install --repo-update` and ensure building with `.xcworkspace`
 
-### Perforce Native Libraries
-**Pattern**: Linker errors referencing ICA stack symbols
-**Fix**: Sync Perforce workspace — these libraries are not in the GitHub repo
+### external source depot Native Libraries
+**Pattern**: Linker errors referencing protocol stack symbols
+**Fix**: Sync external source depot workspace — these libraries are not in the GitHub repo
 
 ## 5. Resource / Configuration Errors
 
@@ -101,6 +101,6 @@ Classify and resolve Xcode build errors in the icaclientmac project. This skill 
 
 If the error does not match any known category:
 1. Capture the full error output
-2. Search the Xcode project for related configuration
-3. Check Xcode release notes for known issues with Xcode 16.2
+2. Search the native build tool project for related configuration
+3. Check native build tool release notes for known issues with native build tool
 4. Suggest filing a build infrastructure issue with the error details

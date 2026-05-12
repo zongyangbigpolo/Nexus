@@ -67,7 +67,7 @@ Route user requests to specialized agents:
 2. **Extract signals**: JIRA patterns, file types, keywords
 3. **Resolve cloudId** (MANDATORY before any Atlassian MCP call):
    - Call `list_accessible_resources` FIRST
-   - Find `citrix.atlassian.net` in the response
+   - Find `example.atlassian.net` in the response
    - Use its `id` (UUID) as `cloudId` — NEVER guess or use a hostname
 4. **JIRA Type Detection** (MANDATORY if JIRA ID found):
    - Call `getJiraIssue(cloudId: "<UUID>", issueIdOrKey: "...")` to get actual type

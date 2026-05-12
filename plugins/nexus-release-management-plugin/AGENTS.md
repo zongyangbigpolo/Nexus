@@ -7,7 +7,7 @@ nexus-release-management-plugin contains release-readiness and reporting workflo
 **Tech Stack**: Markdown-based Copilot assets, YAML frontmatter, JSON plugin manifests, JSON config template
 **Architecture**: Focused workflow plugin for release analysis and reporting
 
-This plugin is designed for release audits rather than code authoring. It emphasizes traceability from CTXENG and bug tickets to GitHub repos, merged PRs, and release branches.
+This plugin is designed for release audits rather than code authoring. It emphasizes traceability from ENG and bug tickets to GitHub repos, merged PRs, and release branches.
 
 ## Development
 
@@ -93,7 +93,7 @@ release-manager is the deeper release-audit agent and is supported by:
 | Agent | Description |
 | ----- | ----------- |
 | `jira-github-report-analyzer` | Reporting agent for JIRA issue lists, GitHub linkage, and Confluence publishing |
-| `release-manager` | Release-readiness agent for CTXENG mapping, branch correlation, and fix-version hygiene |
+| `release-manager` | Release-readiness agent for ENG mapping, branch correlation, and fix-version hygiene |
 
 ### Playbooks (`agent-assets/`)
 
@@ -147,7 +147,7 @@ Use `jira-github-report-analyzer` for report-oriented workflows and `release-man
 
 ```text
 /jira-completed-by-assignee -> issue list -> epic enrichment -> GitHub linkage -> optional Confluence publish
-release-manager -> CTXENG or bug audit -> branch correlation -> risk summary -> release report
+release-manager -> ENG or bug audit -> branch correlation -> risk summary -> release report
 ```
 
 ### Troubleshooting

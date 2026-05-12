@@ -1,6 +1,6 @@
 ---
 name: jira-context-discovery
-description: Discover full JIRA context by traversing hierarchy upward (Story→Epic→CTXENG) and analyzing sibling stories. Use before implementation, investigation, or planning.
+description: Discover full JIRA context by traversing hierarchy upward (Story→Epic→ENG) and analyzing sibling stories. Use before implementation, investigation, or planning.
 ---
 
 # JIRA Context Discovery Skill
@@ -8,7 +8,7 @@ description: Discover full JIRA context by traversing hierarchy upward (Story→
 ## Purpose
 
 Systematically gather full context for any JIRA issue by:
-1. Reading the complete hierarchy upward (Story → Epic → CTXENG → Confluence)
+1. Reading the complete hierarchy upward (Story → Epic → ENG → Confluence)
 2. Analyzing sibling stories (Done, Current, Future)
 3. Extracting patterns and learnings from completed work
 4. Planning for compatibility with upcoming work
@@ -34,7 +34,7 @@ IF JIRA.type == "Epic":
 IF JIRA.type == "Story" OR "Task" OR "Bug":
     Proceed with full hierarchy traversal
     
-IF JIRA.type == "CTXENG":
+IF JIRA.type == "ENG":
     Read directly, skip to Confluence links
 ```
 
@@ -63,7 +63,7 @@ Current JIRA (Story/Task/Bug)
         │   - Technical design
         │   - All sibling Stories
         │
-        └── Parent CTXENG (if exists)
+        └── Parent ENG (if exists)
             │   - Business value
             │   - Success criteria
             │   - All Epics in feature
@@ -79,9 +79,9 @@ Current JIRA (Story/Task/Bug)
 # Find Epic for Story
 issue = {STORY_ID} -> read "Epic Link" field
 
-# Find CTXENG for Epic
+# Find ENG for Epic
 issue = {EPIC_ID} -> read "Parent Link" or search:
-project = CTXENG AND issue in linkedIssues({EPIC_ID})
+project = ENG AND issue in linkedIssues({EPIC_ID})
 ```
 
 ### Step 4: Analyze Sibling Stories
@@ -117,8 +117,8 @@ For each Done story, gather:
 
 | Story | Summary | Key Files | Patterns | Reusable |
 |-------|---------|-----------|----------|----------|
-| SPAOP-001 | DB Migration | migrations/001.sql | EF Core | Migration template |
-| SPAOP-002 | Base API | Controllers/Base.cs | REST+Service | BaseController |
+| APP2-001 | DB Migration | migrations/001.sql | EF Core | Migration template |
+| APP2-002 | Base API | Controllers/Base.cs | REST+Service | BaseController |
 ```
 
 ### Step 6: Plan for Future Stories
@@ -138,13 +138,13 @@ For each Future story, consider:
 
 | Story | Summary | Impact on Current | Action |
 |-------|---------|-------------------|--------|
-| SPAOP-004 | Add caching | Cache-friendly API design | Add ETag support |
-| SPAOP-005 | Multi-tenant | Tenant context needed | Add tenantId param |
+| APP2-004 | Add caching | Cache-friendly API design | Add ETag support |
+| APP2-005 | Multi-tenant | Tenant context needed | Add tenantId param |
 ```
 
 ### Step 7: Follow Confluence Links
 
-From any level (Story, Epic, CTXENG), follow linked Confluence pages:
+From any level (Story, Epic, ENG), follow linked Confluence pages:
 
 | Link Type | Content to Extract |
 |-----------|-------------------|
@@ -161,34 +161,34 @@ From any level (Story, Epic, CTXENG), follow linked Confluence pages:
 ### Hierarchy
 
 ```
-CTXENG-XXX: {Feature Title}
+ENG-XXX: {Feature Title}
     │
-    └── Epic SPAOP-YYY: {Component} - {Feature}
+    └── Epic APP2-YYY: {Component} - {Feature}
         │
-        ├── ✅ SPAOP-001: {Done Story 1}
-        ├── ✅ SPAOP-002: {Done Story 2}
-        ├── 🔄 **SPAOP-003: {Current Story}** ← YOU ARE HERE
-        ├── ⏳ SPAOP-004: {Future Story 1}
-        └── ⏳ SPAOP-005: {Future Story 2}
+        ├── ✅ APP2-001: {Done Story 1}
+        ├── ✅ APP2-002: {Done Story 2}
+        ├── 🔄 **APP2-003: {Current Story}** ← YOU ARE HERE
+        ├── ⏳ APP2-004: {Future Story 1}
+        └── ⏳ APP2-005: {Future Story 2}
 ```
 
-### Feature Context (CTXENG)
+### Feature Context (ENG)
 
-- **ID**: CTXENG-XXX
+- **ID**: ENG-XXX
 - **Business Goal**: {from description}
 - **Success Criteria**: {from description}
 - **Confluence**: {URL}
 
 ### Component Context (Epic)
 
-- **ID**: SPAOP-YYY
+- **ID**: APP2-YYY
 - **Component**: {component name}
 - **Technical Design**: {summary}
 - **Progress**: {x}/{n} Stories done
 
 ### Current Task
 
-- **ID**: SPAOP-ZZZ
+- **ID**: APP2-ZZZ
 - **Scope**: {description}
 - **Acceptance Criteria**: {list}
 - **Blocked By**: {dependencies}
@@ -218,7 +218,7 @@ CTXENG-XXX: {Feature Title}
 | Error | Action |
 |-------|--------|
 | No parent Epic | Warn user, proceed with available context |
-| No CTXENG | Proceed with Epic as top level |
+| No ENG | Proceed with Epic as top level |
 | Confluence link broken | Note in report, ask user for alternative |
 | No Done stories | No patterns to learn, proceed carefully |
 | No Future stories | No forward planning needed |

@@ -16,9 +16,9 @@ Create a comprehensive feature specification as a **markdown file**.
 ## Examples
 
 ```
-/feature-spec jira=CTXENG-1234 source=https://citrix.atlassian.net/wiki/...
-/feature-spec jira=CTXENG-5678 source='User needs ability to configure multiple datacenters'
-/feature-spec jira=SPA-9999 source=requirements.md
+/feature-spec jira=ENG-1234 source=https://example.atlassian.net/wiki/...
+/feature-spec jira=ENG-5678 source='User needs ability to configure multiple datacenters'
+/feature-spec jira=APP-9999 source=requirements.md
 ```
 
 ## Workflow
@@ -42,5 +42,5 @@ Create a comprehensive feature specification as a **markdown file**.
 After spec is ready:
 
 ```
-/article action=create source=file path=.github/specs/CTXENG-1234-FeatureName.spec.md space=CWS
+/article action=create source=file path=.github/specs/ENG-1234-FeatureName.spec.md space=DOCS
 ```

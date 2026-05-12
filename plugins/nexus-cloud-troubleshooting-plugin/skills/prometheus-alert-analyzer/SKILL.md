@@ -110,7 +110,7 @@ kube_node_status_condition{condition="Ready", status="true"}
 Check if the alert correlates with a recent deployment:
 
 ```promql
-# K8s deployment updated
+# Kubernetes deployment updated
 kube_deployment_status_observed_generation{namespace="<ns>", deployment="<deploy>"}
 
 # Deployment condition changes

@@ -15,8 +15,8 @@ Usage
   python3 step4_build_report.py \\
       --newer-branch release/hybrid/2601 \\
       --older-branch release/hybrid/2511 \\
-      --repo csg-citrix-secure-private-access/spa-onprem-service \\
-      --jira-base-url https://citrix.atlassian.net \\
+      --repo csg-organization-secure-private-access/spa-onprem-service \\
+      --jira-base-url https://example.atlassian.net \\
       [--workdir /tmp/rd_work] \\
       [--output /tmp/delta_report.md] \\
       [--summary-only] \\
@@ -258,8 +258,8 @@ def main():
                         help="The baseline release branch (e.g. release/hybrid/2511)")
     parser.add_argument("--repo", required=True,
                         help="GitHub repo in owner/repo format")
-    parser.add_argument("--jira-base-url", default="https://citrix.atlassian.net",
-                        help="JIRA base URL for issue links (default: https://citrix.atlassian.net)")
+    parser.add_argument("--jira-base-url", default="https://example.atlassian.net",
+                        help="JIRA base URL for issue links (default: https://example.atlassian.net)")
     parser.add_argument("--workdir", default="/tmp/rd_work",
                         help="Directory containing state files (default: /tmp/rd_work)")
     parser.add_argument("--output",

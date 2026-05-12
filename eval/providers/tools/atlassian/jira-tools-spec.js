@@ -20,7 +20,7 @@ export const jiraToolsSpecs = [
         type: "object",
         properties: {
           cloudId: { type: "string", description: "Atlassian cloud URL (optional)" },
-          issueIdOrKey: { type: "string", description: "JIRA issue ID or key like SPA-1234 (alias for issueKey)" },  
+          issueIdOrKey: { type: "string", description: "JIRA issue ID or key like APP-1234 (alias for issueKey)" },  
           responseContentFormat: { type: "string", description: "Format of the response content, e.g., 'markdown'" }        
         },
         required: []
@@ -36,7 +36,7 @@ export const jiraToolsSpecs = [
         type: "object",
         properties: {          
           cloudId: { type: "string", description: "Atlassian cloud URL (optional)" },
-          issueIdOrKey: { type: "string", description: "JIRA issue ID or key like SPA-1234 (alias for issueKey)" },  
+          issueIdOrKey: { type: "string", description: "JIRA issue ID or key like APP-1234 (alias for issueKey)" },  
           responseContentFormat: { type: "string", description: "Format of the response content, e.g., 'markdown'" }        
         },
         required: []
@@ -79,7 +79,7 @@ export const jiraToolsSpecs = [
       parameters: {
         type: "object",
         properties: {
-          issueKey: { type: "string", description: "JIRA issue key like SPA-1234" },
+          issueKey: { type: "string", description: "JIRA issue key like APP-1234" },
           body: { type: "string", description: "Comment text to add to the issue" }
         },
         required: []
@@ -95,8 +95,8 @@ export const jiraToolsSpecs = [
         type: "object",
         properties: {
           cloudId: { type: "string", description: "Atlassian cloud URL (optional)" },
-          issueKey: { type: "string", description: "JIRA issue key like SPA-1234" },
-          issueIdOrKey: { type: "string", description: "JIRA issue ID or key like SPA-1234 (alias for issueKey)" },
+          issueKey: { type: "string", description: "JIRA issue key like APP-1234" },
+          issueIdOrKey: { type: "string", description: "JIRA issue ID or key like APP-1234 (alias for issueKey)" },
           transitionId: { type: "string", description: "ID of the transition to apply (from getTransitionsForJiraIssue)" },
           transition: { type: "object", description: "Transition to apply" },
           comment: { type: "string", description: "Optional comment to add when transitioning" },
@@ -113,7 +113,7 @@ export const jiraToolsSpecs = [
       parameters: {
         type: "object",
         properties: {
-          project: { type: "string", description: "JIRA project key, e.g. SPA or CTXENG" },
+          project: { type: "string", description: "JIRA project key, e.g. APP or ENG" },
           summary: { type: "string", description: "Issue title/summary" },
           issueType: { type: "string", description: "Issue type: Story, Bug, Task, Epic, Sub-task" },
           description: { type: "string", description: "Detailed description of the issue" },

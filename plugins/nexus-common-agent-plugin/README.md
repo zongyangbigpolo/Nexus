@@ -1,6 +1,6 @@
 # Mac Common Agent Plugin
 
-`nexus-common-agent-plugin` is the shared foundation for the Mac Copilot marketplace. It packages the reusable commands, agents, instruction files, hooks, and skills that other macOS workflows build on.
+`nexus-common-agent-plugin` is the shared foundation for the Mac Copilot marketplace. It packages the reusable commands, agents, instruction files, hooks, and skills that other desktop OS workflows build on.
 
 ## What This Plugin Provides
 

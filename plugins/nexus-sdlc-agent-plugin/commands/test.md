@@ -23,7 +23,7 @@ Define testing strategy using [test-strategy](../skills/test-strategy/SKILL.md) 
 
 ## Examples
 ```
-/test jira=SPA-12345 scope=all
+/test jira=APP-12345 scope=all
 /test scope=unit context="New auth middleware"
 /test context="Refactored user service"
 ```

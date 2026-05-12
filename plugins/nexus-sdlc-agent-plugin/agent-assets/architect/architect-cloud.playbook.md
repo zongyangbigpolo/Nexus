@@ -189,7 +189,7 @@ Operational details for the **Cloud/Platform Architect** specialization of the `
 │  • Secret Management  • Policy Enforcement (OPA/Gatekeeper)     │
 ├─────────────────────────────────────────────────────────────────┤
 │                    Platform Capabilities Layer                   │
-│  • Container Runtime (K8s)  • CI/CD (GitHub Actions/ADO)        │
+│  • Container Runtime (Kubernetes)  • CI/CD (GitHub Actions/ADO)        │
 │  • Observability  • Service Mesh  • API Gateway                 │
 ├─────────────────────────────────────────────────────────────────┤
 │                    Infrastructure Layer                          │
@@ -203,7 +203,7 @@ Define golden paths for common scenarios:
 
 | Scenario | Golden Path |
 |----------|-------------|
-| New microservice | Template → GitHub repo → CI/CD → Deploy to K8s |
+| New microservice | Template → GitHub repo → CI/CD → Deploy to Kubernetes |
 | New API | OpenAPI spec → Code generation → Gateway registration |
 | New database | Request form → Provisioning → Connection string in Key Vault |
 | New environment | Landing zone → RBAC → Networking → Monitoring |

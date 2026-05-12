@@ -1,7 +1,7 @@
 - vars:
     scope: branch
     focus: security
-    path: feature/SPA-9876-fix-auth
+    path: feature/APP-9876-fix-auth
   assert:
     - type: llm-rubric
       value: |

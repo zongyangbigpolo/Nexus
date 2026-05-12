@@ -1,13 +1,13 @@
 # yaml-language-server: $schema=https://promptfoo.dev/config-schema.json
 
-description: 'SPA Common AI Agents - Security Prompt Evaluation'
+description: 'APP Common AI Agents - Security Prompt Evaluation'
 prompts:
   - file://../../../providers/copilot-prompt-loader.js
 defaultTest:
   vars:
-    __promptFile: spa-sdlc-agent-plugin/commands/security.md
+    __promptFile: nexus-sdlc-agent-plugin/commands/security.md
   options:
-    provider: file://../../../providers/azure-gpt5-provider.js
+    provider: file://../../../providers/generic-llm-provider.js
 providers:
-  - file://../../../providers/azure-gpt5-provider.js
+  - file://../../../providers/generic-llm-provider.js
 tests: file://tests.yaml

@@ -41,7 +41,7 @@ Before using this skill:
 
 Follow [JIRA ID Extraction](../git-workflow/SKILL.md) from git-workflow skill.
 
-**CRITICAL**: The extracted JIRA ID **MUST** be used in commit message. Never use placeholder `SPA-00000` when on a named branch.
+**CRITICAL**: The extracted JIRA ID **MUST** be used in commit message. Never use placeholder `APP-00000` when on a named branch.
 
 ### Step 1: Handle Task File (if exists)
 
@@ -86,22 +86,22 @@ Follow [git-operation](../../instructions/git-operation.instructions.md) instruc
 
 **Examples**:
 ```bash
-# Current branch: feature/SPAOP-1234-GatewayDiscovery
-# JIRA ID from branch: SPAOP-1234
+# Current branch: feature/APP2-1234-GatewayDiscovery
+# JIRA ID from branch: APP2-1234
 
 # ✅ CORRECT - Uses JIRA ID from branch
-git commit -m "SPAOP-1234 Implement gateway discovery API endpoint [AI-Generated]"
+git commit -m "APP2-1234 Implement gateway discovery API endpoint [AI-Generated]"
 
 # ❌ WRONG - Different JIRA ID
-git commit -m "SPA-00000 Implement gateway discovery API endpoint [AI-Generated]"
+git commit -m "APP-00000 Implement gateway discovery API endpoint [AI-Generated]"
 ```
 
 **Multiple commits** (same JIRA ID from branch):
 ```bash
-# Current branch: feature/SPAOP-1234-GatewayDiscovery
-git commit -m "SPAOP-1234 Add data model for gateway regions [AI-Generated]"
-git commit -m "SPAOP-1234 Implement gateway discovery service [AI-Generated]"
-git commit -m "SPAOP-1234 Add unit tests for gateway discovery [AI-Generated]"
+# Current branch: feature/APP2-1234-GatewayDiscovery
+git commit -m "APP2-1234 Add data model for gateway regions [AI-Generated]"
+git commit -m "APP2-1234 Implement gateway discovery service [AI-Generated]"
+git commit -m "APP2-1234 Add unit tests for gateway discovery [AI-Generated]"
 ```
 
 **REQUIRED**: Always include `[AI-Generated]` marker at the end.
@@ -171,7 +171,7 @@ Use this template when no `.github/PULL_REQUEST_TEMPLATE.md` exists:
 
 ## JIRA
 
-[{JIRA-ID}](https://citrix.atlassian.net/browse/{JIRA-ID}): {JIRA Title}
+[{JIRA-ID}](https://example.atlassian.net/browse/{JIRA-ID}): {JIRA Title}
 
 ## Changes
 

@@ -22,12 +22,12 @@
 │  │  │ mac-native-  │  │  mac-sdlc-   │  │ mac-common-   │  │     │
 │  │  │ dev-plugin   │  │ agent-plugin │  │ agent-plugin  │  │     │
 │  │  │              │  │              │  │               │  │     │
-│  │  │ Xcode Build  │  │ Architecture │  │ Git / JIRA    │  │     │
-│  │  │ ObjC/Swift   │  │ Feature Plan │  │ Analysis      │  │     │
+│  │  │ Build/Test   │  │ Architecture │  │ Git / JIRA    │  │     │
+│  │  │ Interop      │  │ Feature Plan │  │ Analysis      │  │     │
 │  │  │ Unit Test    │  │ Code Review  │  │ Copilot Asset │  │     │
-│  │  │ Virtual Ch.  │  │ Security     │  │               │  │     │
-│  │  │ CocoaPods    │  │ Bug Fix      │  │               │  │     │
-│  │  │ Jenkins CI   │  │ Test Plan    │  │               │  │     │
+│  │  │ Channels     │  │ Security     │  │               │  │     │
+│  │  │ Dependencies │  │ Bug Fix      │  │               │  │     │
+│  │  │ CI           │  │ Test Plan    │  │               │  │     │
 │  │  └──────────────┘  └──────────────┘  └───────────────┘  │     │
 │  │                                                          │     │
 │  │  ┌───────────────────┐                                   │     │
@@ -46,14 +46,14 @@
                          │
                          ▼
           ┌──────────────────────────┐
-          │   icaclientmac 代码仓库   │
-          │  csg-citrix-hdx/         │
-          │  icaclientmac            │
+          │   target repository      │
+          │  example-org/app-repo   │
+          │                         │
           │                          │
-          │  Objective-C / Swift / C │
-          │  Xcode 16.2 · CocoaPods │
-          │  Jenkins · Artifactory   │
-          │  XCTest · OCMock         │
+          │  native client languages │
+          │  native build tool · dependency manager │
+          │  CI system · artifact repository   │
+          │  XCTest · mock framework         │
           └──────────────────────────┘
 ```
 
@@ -63,18 +63,40 @@
 
 | 属性 | 值 |
 |------|-----|
-| **语言** | Objective-C（主体）、Swift（UI/新模块）、C（底层 ICA stack） |
-| **构建** | Xcode 16.2, `ICAClientUniversalBinary.xcodeproj`, legacy build mode |
-| **平台** | macOS 12.0+, x86_64 + ARM |
-| **依赖** | CocoaPods 1.13.0 (Sentry, OCMock, OHHTTPStubs, CWAMacPreferences), Perforce (native libs), Artifactory |
-| **测试** | XCTest + OCMock + OHHTTPStubs, `RunUnitTests.sh`, xcresult, SonarQube |
-| **CI/CD** | Jenkins, `Build.sh`, Artifactory 发布 |
-| **关键域** | Virtual Channels, Desktop Toolbar (SwiftUI), ICA Stack, Seamless Apps, Keyboard/DPI, Metal 渲染 |
-| **设计文档** | `Docs/` 和 `docs/` 目录下 Markdown 设计文档（DNS Cache, Shield V2, PoP Survey 等） |
+| **语言** | native client languages and system integration |
+| **构建** | Generic native build workflow |
+| **平台** | supported desktop OS targets |
+| **依赖** | Dependency management, artifact publishing, and external binary inputs |
+| **测试** | Unit tests, integration tests, result bundles, and quality reports |
+| **CI/CD** | CI workflow, local build script, artifact publishing |
+| **关键域** | Integration channels, desktop UX, protocol integration, input/display behavior |
+| **设计文档** | `Docs/` 和 `docs/` 目录下 Markdown 设计文档 |
 
 ---
 
 ## 3. Plugin 架构
+
+### 3.0 仓库技术资产
+
+本仓库发布 NexusAgent 的 VS Code Copilot agent plugin marketplace。面向用户的使用入口保留在 `README.md`；技术架构、资产结构、维护约定和验证命令集中记录在本文档和 `DEV-GUIDE.md`。
+
+| 资产 | 路径 | 说明 |
+|------|------|------|
+| Marketplace manifest | `.github/plugin/marketplace.json` | 注册可安装的 NexusAgent plugins |
+| Repository guidance | `.github/copilot-instructions.md` | 仓库级 Copilot 指令 |
+| Plugin assets | `plugins/` | 可安装 plugins，每个 plugin 独立维护 commands、agents、skills、instructions |
+| Evaluation assets | `eval/` | prompt 和 workflow eval suites，以及 mock provider/tooling |
+| Maintainer guide | `DEV-GUIDE.md` | marketplace 维护、plugin 创建、发布前检查 |
+| Setup notes | `SETUP.md` | 本地验证、依赖和 Phase 0 检查说明 |
+| Architecture docs | `ARCHITECTURE.md`, `CAPABILITY_ARCHITECTURE.md` | 系统架构、能力架构和支持矩阵 |
+
+维护者添加、删除或重命名 plugin 时，需要同步更新 marketplace manifest、plugin README、plugin AGENTS.md、eval 路径和能力文档。发布前运行：
+
+```text
+npm run phase0
+```
+
+该命令会执行资产验证、运行时依赖检查和 eval provider smoke test。
 
 ### 3.1 Plugin 清单
 
@@ -82,8 +104,9 @@
 |--------|------|
 | **nexus-common-agent-plugin** | 跨 plugin 共享能力: Git 操作、JIRA 管理、通用分析、Copilot Asset 工程 |
 | **nexus-sdlc-agent-plugin** | SDLC 全链路编排: 架构设计、需求规划、开发协调、测试策略、安全审计、Bug 修复 |
-| **nexus-macos-native-plugin** | macOS 原生开发专属: Xcode 构建/测试、ObjC/Swift 互操作、Virtual Channel 开发、CI 管道 |
+| **nexus-macos-native-plugin** | Desktop-native workflows: build/test, interop, integration channels, CI pipeline |
 | **nexus-release-management-plugin** | Release 管理: JIRA-GitHub 关联审计、完成度报告、Confluence 发布 |
+| **nexus-cloud-troubleshooting-plugin** | Cloud/Kubernetes/Docker 运维排障: 告警分流、日志指标分析、基础设施诊断 |
 
 ### 3.2 目录结构
 
@@ -165,7 +188,7 @@ nexus-agent-harness/
 │   │   ├── agent-assets/
 │   │   └── AGENTS.md
 │   │
-│   ├── nexus-macos-native-plugin/                  ← macOS 原生开发
+│   ├── nexus-macos-native-plugin/                  ← desktop OS 原生开发
 │   │   ├── .github/plugin/plugin.json
 │   │   ├── .mcp.json
 │   │   ├── AGENTS.md
@@ -215,7 +238,7 @@ nexus-agent-harness/
 ### 4.1 完整链路图
 
 ```
-用户输入: /feature-e2e jira=HDX-12345
+用户输入: /feature-e2e jira=APP-12345
               │
               ▼
  ┌─────────────────────────────────────────────────────────────────┐
@@ -404,14 +427,14 @@ Output: Test code committed, coverage targets met
 
 ### 5.1 统计概览
 
-| 类别 | 合计 | mac-common | mac-sdlc | mac-native-dev | mac-release-mgmt |
-|------|------|------------|----------|----------------|------------------|
-| **Agents** | 18 | 5 | 9 | 2 | 2 |
-| **Commands** | 27 | 5 | 15 | 3 | 4 |
-| **Skills** | 32 | 6 | 10 | 13 | 3 |
-| **Instructions** | 13 | 7 | 5 | 1 | — |
+| 类别 | 合计 | common | sdlc | native-dev | release-mgmt | cloud-troubleshoot |
+|------|------|--------|------|------------|--------------|--------------------|
+| **Agents** | 22 | 5 | 9 | 2 | 2 | 4 |
+| **Commands** | 31 | 5 | 15 | 3 | 4 | 4 |
+| **Skills** | 41 | 6 | 10 | 13 | 2 | 10 |
+| **Instructions** | 13 | 7 | 5 | 1 | — | — |
 
-### 5.2 全部 Agents（18 个）
+### 5.2 全部 Agents（22 个）
 
 | Agent | Plugin | 描述 |
 |-------|--------|------|
@@ -424,17 +447,21 @@ Output: Test code committed, coverage targets met
 | `bugfix` | mac-sdlc | Bug 调查与修复工作流 — 分析 JIRA bug、建立假设、调查代码、交接给 developer 实现 |
 | `dev-coordinator` | mac-sdlc | 开发工作流编排 — JIRA 上下文、Git 分支、task 文件、Epic 编排、PR 完成与 merge |
 | `developer` | mac-sdlc | 高级软件工程师 — 接收 task 文件、实现代码、编写测试、返回状态给 coordinator |
-| `feature-planner` | mac-sdlc | 从技术 spec 创建 JIRA 层级结构（CTXENG → Epic → Story），含 AC 和估点 |
+| `feature-planner` | mac-sdlc | 从技术 spec 创建 JIRA 层级结构（ENG → Epic → Story），含 AC 和估点 |
 | `feature-testplan-author` | mac-sdlc | 高级 QA 架构师 — 从 feature spec 生成功能性/非功能性测试计划 |
 | `router` | mac-sdlc | 智能路由器 — 分析用户输入和上下文，路由到最合适的 prompt/agent |
 | `security-engineer` | mac-sdlc | 安全工程师 — 代码/配置/日志深度安全分析，应用 OWASP、NIST、CIS 标准 |
 | `spec-author` | mac-sdlc | 高级软件架构师 — 将需求转化为完整的、可交付的 feature specification |
-| `build-engineer` | mac-native-dev | Xcode 构建与测试编排 — xcodebuild 调用、构建错误诊断、CocoaPods、CI 管道 |
-| `vc-developer` | mac-native-dev | Virtual Channel 开发专家 — ICA VC 创建、SDK 集成、协议处理、测试模式 |
+| `build-engineer` | mac-native-dev | native build tool 构建与测试编排 — xcodebuild 调用、构建错误诊断、dependency manager、CI 管道 |
+| `vc-developer` | mac-native-dev | extension channel 开发专家 — integration channel 创建、SDK 集成、协议处理、测试模式 |
 | `jira-github-report-analyzer` | mac-release-mgmt | 报告编排 — 查询 JIRA 完成项、关联 GitHub commits/PR、发布到 Confluence |
-| `release-manager` | mac-release-mgmt | Release 追踪 — 定位 CTXENG 下所有变更、映射 Git 仓库、审计 Fix Version |
+| `release-manager` | mac-release-mgmt | Release 追踪 — 定位 ENG 下所有变更、映射 Git 仓库、审计 Fix Version |
+| `sre` | cloud-troubleshoot | Kubernetes 集群诊断、日志收集和事件调查 |
+| `cloud-alert-triage` | cloud-troubleshoot | 告警分流与 RCA，关联指标、日志和服务上下文 |
+| `service-troubleshoot` | cloud-troubleshoot | 微服务故障排查，覆盖崩溃、延迟、错误和依赖链 |
+| `cloud-infra-troubleshoot` | cloud-troubleshoot | 云基础设施、节点、网络、存储和容器运行时排查 |
 
-### 5.3 全部 Slash Commands（27 个）
+### 5.3 全部 Slash Commands（31 个）
 
 | Command | Plugin | 描述 |
 |---------|--------|------|
@@ -449,7 +476,7 @@ Output: Test code committed, coverage targets met
 | `/bugfix` | mac-sdlc | 从 JIRA ticket 调查和修复 bug，含根因分析 |
 | `/code-review` | mac-sdlc | 审查代码变更的质量、安全性和正确性 |
 | `/feature-e2e` | mac-sdlc | 端到端 Feature 交付 — JIRA → 设计文档 → Confluence → Story 拆解 → 实现 → PR |
-| `/feature-plan` | mac-sdlc | 从 spec 创建或更新 JIRA 层级（CTXENG → Epic → Story） |
+| `/feature-plan` | mac-sdlc | 从 spec 创建或更新 JIRA 层级（ENG → Epic → Story） |
 | `/feature-spec` | mac-sdlc | 从多种来源创建 feature specification markdown 文件 |
 | `/feature-testplan` | mac-sdlc | 从 feature spec 生成完整测试计划，输出到 Confluence |
 | `/help` | mac-sdlc | 所有可用 prompts 和 agents 的快速参考及用法示例 |
@@ -458,13 +485,17 @@ Output: Test code committed, coverage targets met
 | `/start` | mac-sdlc | 智能入口 — 分析请求并路由到最佳专业 prompt/agent |
 | `/task` | mac-sdlc | 启动开发任务 — 编排 JIRA 上下文、Git 设置、委派给 developer |
 | `/test` | mac-sdlc | 定义测试策略 — 测试类型、覆盖率目标、测试用例推荐 |
-| `/xcode-build` | mac-native-dev | 构建 icaclientmac Xcode 项目 — 全量/增量/指定 target |
+| `/xcode-build` | mac-native-dev | 构建 target repository native build tool 项目 — 全量/增量/指定 target |
 | `/xcode-test` | mac-native-dev | 运行 XCTest — 全量测试、指定 class 或 method |
-| `/vc-scaffold` | mac-native-dev | 脚手架生成新的 ICA Virtual Channel 实现 |
+| `/vc-scaffold` | mac-native-dev | 脚手架生成新的 extension channel 实现 |
 | `/confluence-publish-report` | mac-release-mgmt | 将 JIRA 完成报告发布到 Confluence |
 | `/github-jira-commit-linkage` | mac-release-mgmt | 查找关联 JIRA key 的 GitHub commits 和 PR |
 | `/jira-completed-by-assignee` | mac-release-mgmt | 按 assignee 查询 JIRA 已完成条目 |
 | `/jira-epic-enrichment` | mac-release-mgmt | 为 JIRA issue 列表补充关联 Epic 信息 |
+| `/sre` | cloud-troubleshoot | 连接 Kubernetes 集群并收集运维诊断信息 |
+| `/cloud-alert-triage` | cloud-troubleshoot | 从告警入口进行分流、证据收集和 RCA |
+| `/service-troubleshoot` | cloud-troubleshoot | 排查微服务崩溃、延迟、错误和连接问题 |
+| `/cloud-infra-troubleshoot` | cloud-troubleshoot | 排查云基础设施、节点、网络、存储和容器问题 |
 
 ### 5.4 Skills 分布
 
@@ -501,16 +532,31 @@ Output: Test code committed, coverage targets met
 | `xcode-build` | xcodebuild 命令封装与输出解析 |
 | `xcode-test-runner` | XCTest 运行、xcresult 解析、coverage 报告 |
 | `xcode-build-error-diagnosis` | 构建错误分类与修复建议 |
-| `objc-swift-interop` | Objective-C ↔ Swift 互操作模式 |
-| `xctest-patterns` | XCTest + OCMock + OHHTTPStubs 测试模式 |
-| `macos-api-patterns` | macOS API 使用模式（AppKit, SwiftUI, Keychain 等） |
-| `virtual-channel-sdk` | ICA Virtual Channel SDK 架构与实现模式 |
-| `virtual-channel-scaffold` | VC 脚手架代码生成 |
-| `cocoapods-management` | CocoaPods 依赖管理与故障排查 |
-| `jenkins-ci` | Jenkins CI pipeline 与 Build.sh 集成 |
+| `objc-swift-interop` | native language ↔ native UI 互操作模式 |
+| `xctest-patterns` | XCTest + mock framework + HTTP stubbing framework 测试模式 |
+| `macos-api-patterns` | desktop OS API 使用模式（AppKit, native UI, Keychain 等） |
+| `virtual-channel-sdk` | extension channel SDK 架构与实现模式 |
+| `virtual-channel-scaffold` | channel 脚手架代码生成 |
+| `cocoapods-management` | dependency manager 依赖管理与故障排查 |
+| `jenkins-ci` | CI system CI pipeline 与 Build.sh 集成 |
 | `crash-log-analysis` | Crash log 分析与 symbolication |
 | `sonarqube-quality` | SonarQube 代码质量门禁 |
-| `hdx-design-document` | HDX 设计文档模板 |
+| `hdx-design-document` | platform 设计文档模板 |
+
+#### nexus-cloud-troubleshooting-plugin（10 个）
+
+| Skill | 用途 |
+|-------|------|
+| `k8s-pod-diagnostics` | Pod 状态、日志、退出码、资源和探针诊断 |
+| `k8s-cluster-diagnostics` | 集群节点、控制面、资源压力和系统组件诊断 |
+| `docker-container-diagnostics` | Docker/containerd/Podman 容器运行时诊断 |
+| `prometheus-alert-analyzer` | Prometheus/Grafana 告警指标分析 |
+| `loki-log-analyzer` | Grafana Loki 日志模式和请求链路分析 |
+| `network-connectivity-diagnostics` | DNS、Ingress、Service Mesh、网络策略和负载均衡诊断 |
+| `cloud-health-checker` | 多云区域状态和服务健康检查 |
+| `service-dependency-tracer` | Kubernetes 服务依赖链追踪 |
+| `splunk-query-builder` | 日志平台查询语句生成和统计分析 |
+| `splunk-connectivity-test` | 日志平台 MCP 连通性测试 |
 
 ---
 
@@ -531,32 +577,32 @@ Output: Test code committed, coverage targets met
 
 | 属性 | 说明 |
 |------|------|
-| **动机** | 团队使用 Splunk Cloud（`citrixsys.splunkcloud.com`）监控产品运行时数据和用户行为统计，bug 分析和 feature 优先级排序需要查阅这些数据 |
+| **动机** | 团队使用 Splunk Cloud（`observability.example.com`）监控产品运行时数据和用户行为统计，bug 分析和 feature 优先级排序需要查阅这些数据 |
 | **目标** | 通过 MCP Server 查询 Splunk 仪表盘和搜索结果，将统计数据直接注入 agent 工作流 |
 | **典型场景** | `/bugfix` 时查询错误频率和影响范围；`/feature-spec` 时获取功能使用率数据作为需求验证依据 |
 | **实现路径** | 1) 开发 Splunk MCP Server（Splunk REST API + Token Auth）→ 2) 支持 saved searches / dashboards 查询 → 3) 扩展 `analyzer` 和 `bugfix` agent |
 | **预期能力** | 执行 SPL 查询、读取 saved search 结果、获取 dashboard panel 数据、按时间范围过滤 |
 | **优先级** | P2 |
 
-### 6.3 Azure Databricks 仪表盘数据查阅
+### 6.3 data analytics platform 仪表盘数据查阅
 
 | 属性 | 说明 |
 |------|------|
-| **动机** | 团队在 Azure Databricks（`adb-7633431321730272.12.azuredatabricks.net`）上维护数据分析仪表盘，包含产品 KPI、用户行为分析等关键指标 |
-| **目标** | 通过 MCP Server 读取 Databricks SQL 仪表盘数据，为 feature 规划和质量分析提供数据支撑 |
+| **动机** | 团队在 data analytics platform（`data-platform.example.com`）上维护数据分析仪表盘，包含产品 KPI、用户行为分析等关键指标 |
+| **目标** | 通过 MCP Server 读取 data analytics platform SQL 仪表盘数据，为 feature 规划和质量分析提供数据支撑 |
 | **典型场景** | `/feature-plan` 时引用用户活跃度和功能采纳率；`/analyze` 时获取性能基线数据 |
-| **实现路径** | 1) 开发 Databricks MCP Server（Databricks REST API / SQL Warehouse）→ 2) 支持 dashboard 查询和 SQL 执行 → 3) 集成到 `analyzer` 和 `feature-planner` agent |
+| **实现路径** | 1) 开发 data analytics platform MCP Server（data analytics platform REST API / SQL Warehouse）→ 2) 支持 dashboard 查询和 SQL 执行 → 3) 集成到 `analyzer` 和 `feature-planner` agent |
 | **预期能力** | 读取 dashboard 内容、执行 SQL 查询、获取表/视图数据、返回结构化结果 |
 | **优先级** | P2 |
 
-### 6.4 Sentry Crash 智能审阅
+### 6.4 Crash Monitoring 智能审阅
 
 | 属性 | 说明 |
 |------|------|
-| **动机** | icaclientmac 使用 Sentry 进行崩溃监控，开发者经常需要手动查阅 Sentry issue 页面。希望直接粘贴 Sentry URL，agent 即可自动获取并分析 crash 信息 |
-| **目标** | 通过 Sentry MCP Server 读取 crash event 详情，自动完成 symbolication、堆栈分析、根因推测 |
-| **典型场景** | 用户粘贴 Sentry issue URL → agent 自动获取 crash 堆栈、设备信息、breadcrumbs → 结合代码库分析根因 → 输出修复建议 |
-| **实现路径** | 1) 部署 Sentry MCP Server（Sentry Web API + Auth Token）→ 2) 支持 issue/event 读取 → 3) 与 `crash-log-analysis` skill 和 `bugfix` agent 深度集成 |
+| **动机** | target repository 使用 crash monitoring 进行崩溃监控，开发者经常需要手动查阅 crash monitoring issue 页面。希望直接粘贴 crash monitoring URL，agent 即可自动获取并分析 crash 信息 |
+| **目标** | 通过 crash monitoring MCP Server 读取 crash event 详情，自动完成 symbolication、堆栈分析、根因推测 |
+| **典型场景** | 用户粘贴 crash monitoring issue URL → agent 自动获取 crash 堆栈、设备信息、breadcrumbs → 结合代码库分析根因 → 输出修复建议 |
+| **实现路径** | 1) 部署 crash monitoring MCP Server（crash monitoring Web API + Auth Token）→ 2) 支持 issue/event 读取 → 3) 与 `crash-log-analysis` skill 和 `bugfix` agent 深度集成 |
 | **预期能力** | 按 URL 获取 issue 详情、读取 event 堆栈和 breadcrumbs、查询 issue 趋势、关联 JIRA ticket |
 | **优先级** | P1 |
 
@@ -568,9 +614,9 @@ Output: Test code committed, coverage targets met
 ▶ Slack MCP Server               ▶ Splunk MCP Server              ▶ 全链路数据增强
   - OAuth Bot 部署                 - SPL 查询支持                    - /feature-e2e 自动
   - spec-author 集成               - Dashboard 数据读取               拉取 Slack + Splunk
-  - feature-planner 集成           - analyzer/bugfix 集成             + Databricks 数据
+  - feature-planner 集成           - analyzer/bugfix 集成             + data analytics platform 数据
 
-▶ Sentry MCP Server              ▶ Databricks MCP Server
+▶ crash monitoring MCP Server              ▶ data analytics platform MCP Server
   - Issue/Event API 对接           - SQL Warehouse 查询
   - crash-log-analysis 集成        - Dashboard 读取
   - bugfix agent 集成              - feature-planner 集成
@@ -592,12 +638,12 @@ Output: Test code committed, coverage targets met
     },
     "splunk": {
       "type": "http",
-      "url": "https://citrixsys.splunkcloud.com/mcp/sse",
+      "url": "https://observability.example.com/mcp/sse",
       "headers": { "Authorization": "Bearer ${SPLUNK_TOKEN}" }
     },
     "databricks": {
       "type": "http",
-      "url": "https://adb-7633431321730272.12.azuredatabricks.net/mcp/sse",
+      "url": "https://data-platform.example.com/mcp/sse",
       "headers": { "Authorization": "Bearer ${DATABRICKS_TOKEN}" }
     },
     "sentry": {
@@ -656,7 +702,7 @@ Output: Test code committed, coverage targets met
          | 3. prompt 文本传给 provider
          v
 +---------------------------+
-| azure-gpt5-provider.js    |  核心 provider，分两个角色:
+| generic-llm-provider.js    |  核心 provider，分两个角色:
 |                           |    A) Agent 执行器 — 构建 system prompt + agentic loop
 |                           |    B) Grader 评分器 — LLM-as-Judge 对输出打分
 +---------------------------+
@@ -675,7 +721,7 @@ Output: Test code committed, coverage targets met
     | 3b. 调用 LLM API（带 tools 定义）
     v
 +---------------------------+    LLM 返回 tool_calls
-|   LLM API (Azure/OpenAI) | ----------------------+
+|   Generic LLM API        | ----------------------+
 +---------------------------+                       |
                                                     v
                                     +-------------------------------+
@@ -717,8 +763,7 @@ Output: Test code committed, coverage targets met
 eval/
   providers/
     copilot-prompt-loader.js       <-- [1] Prompt 加载器
-    azure-gpt5-provider.js         <-- [2] LLM Provider（Agent + Grader）
-    claude-sonnet-4.6.js           <-- [2b] Claude Provider（开发中）
+    generic-llm-provider.js         <-- [2] LLM Provider（Agent + Grader）
     package.json                   <-- openai + js-yaml 依赖
     tools/
       agent-context-loader.js      <-- [3] Plugin Context 自动发现
@@ -756,29 +801,29 @@ eval/
 
 ```
 输入: vars = { __promptFile: "nexus-common-agent-plugin/commands/jira.md",
-               action: "create", jira: "SPA-1234" }
+               action: "create", jira: "APP-1234" }
 
 1. 解析 __promptFile，读取 plugins/nexus-common-agent-plugin/commands/jira.md
 2. 用正则 /\$\{input:(\w+)(:[^}]*)?\}/g 找到所有占位符
    例如: ${input:action:The JIRA action} → 替换为 "create"
-         ${input:jira:The JIRA key}     → 替换为 "SPA-1234"
+         ${input:jira:The JIRA key}     → 替换为 "APP-1234"
 3. 如果 vars 中有 __userPrompt，也做同样的替换并拼接
 4. 返回: 替换后的完整 prompt 文本
 ```
 
 **关键点**：这个 loader 让 promptfoo 可以直接复用 VS Code Copilot 格式的 `.md` prompt 文件，无需另外维护测试专用 prompt。
 
-#### 7.3.4 第 2 步: LLM Provider (`azure-gpt5-provider.js`)
+#### 7.3.4 第 2 步: LLM Provider (`generic-llm-provider.js`)
 
 Provider 是整个评估的核心，它同时扮演两个角色：
 
 **角色 A — Agent 执行器**（处理普通 prompt）：
 
 ```
-1. 根据环境变量自动选择 LLM 后端:
-   - AZURE_API_KEY → Azure OpenAI (默认 gpt-5.4)
-   - OPENAI_API_KEY → OpenAI 直连 (默认 gpt-4o)
-   - 都没有 → 报错并提示设置方法
+1. 根据环境变量自动选择 OpenAI-compatible LLM 后端:
+  - EVAL_PROVIDER=openai/deepseek/openrouter/gemini/ollama
+  - 如果未显式配置 provider，则按可用 API key 推断
+  - 都没有 → 报错并提示设置方法
 
 2. 从 __promptFile 路径推断 plugin workspace 根目录:
    例如: "nexus-sdlc-agent-plugin/commands/task.md"
@@ -923,7 +968,7 @@ Mock 不调用任何外部服务，只返回预设的假数据，使测试可以
 
 ```
 1. 从 prompt 中正则匹配 mcp_atlassian_<toolName>
-2. 从 prompt/vars 中提取 JIRA ID (如 SPA-1234)
+2. 从 prompt/vars 中提取 JIRA ID (如 APP-1234)
 3. 从 dataset/mock-jira-data.js 获取对应 mock 数据
 4. switch(toolName) 返回不同响应:
    - getJiraIssue → 返回 issue 详情 JSON
@@ -937,12 +982,12 @@ Mock 不调用任何外部服务，只返回预设的假数据，使测试可以
 
 ```
 1. 内建了一个虚拟文件系统 (mockData.files):
-   /workspace/ztna-ui-hello-world-mfe/
-     app/package.json          React 18 + Redux + single-spa
+   /workspace/sample-ui-module/
+     app/package.json          frontend framework + state management
      app/src/App.js            主组件
      app/src/Routes.js         路由配置
      app/src/features/         Feature 组件 + 样式 + 测试
-     app/src/data/             Redux store + slice + API
+     app/src/data/             state store + API
      test/cypress/             E2E 测试
      .github/tasks/            Task 文件（动态生成）
      AGENTS.md / ARCHITECTURE.md
@@ -956,7 +1001,7 @@ Mock 不调用任何外部服务，只返回预设的假数据，使测试可以
 
 3. 模拟 Git 操作:
    - git_currentBranch → 返回 "master"
-   - git_createBranch → 返回 { success, branchName: "feature/SPA-1234-..." }
+   - git_createBranch → 返回 { success, branchName: "feature/APP-1234-..." }
    - git_commit → 返回 { success, commit: "abc1234" }
    - git_push → 返回 { success, pushed: true }
 ```
@@ -977,9 +1022,9 @@ defaultTest:
   vars:
     __promptFile: nexus-sdlc-agent-plugin/commands/task.md # 指向哪个 slash command
   options:
-    provider: file://../../../providers/azure-gpt5-provider.js  # [2] LLM Provider
+    provider: file://../../../providers/generic-llm-provider.js  # [2] LLM Provider
 providers:
-  - file://../../../providers/azure-gpt5-provider.js
+  - file://../../../providers/generic-llm-provider.js
 tests: file://tests.yaml                                    # 测试用例文件
 ```
 
@@ -989,7 +1034,7 @@ tests: file://tests.yaml                                    # 测试用例文件
 - description: "Create JIRA story with full context"
   vars:
     action: create
-    jira: SPA-1234
+    jira: APP-1234
     __userPrompt: "Create a story for implementing auth module"
   assert:
     - type: llm-rubric
@@ -1012,8 +1057,8 @@ tests: file://tests.yaml                                    # 测试用例文件
    + 被评估的 output
    + rubric 标准
 3. 这个 grading prompt 发给同一个 provider
-4. Provider 检测到 grading prompt → 走 callAzureForGrading() 路径
-   （直接调 LLM，不带 toolss 不带 agent context）
+4. Provider 检测到 grading prompt → 走 callModelForGrading() 路径
+  （直接调 grader model，不带 tools，不带 agent context）
 5. LLM 返回评分: pass (1.0) 或 fail (0.0)
 6. 与 threshold 比较: score >= 1.0 → PASS，否则 → FAIL
 ```
@@ -1035,34 +1080,39 @@ tests: file://tests.yaml                                    # 测试用例文件
 
 #### 7.3.10 Provider 自动检测（已改造）
 
-当前 provider 支持多后端自动切换，无需修改代码：
+当前 provider 支持 agent model 和 grader model 分开配置。`generic-llm-provider.js` 通过 `model-client.js` 创建两个 client：
 
 ```
-启动时 createClient() 按优先级检测:
+agent model:
+  EVAL_PROVIDER / EVAL_MODEL / EVAL_API_KEY / EVAL_BASE_URL
 
-+-- AZURE_API_KEY 已设置?
-|     YES --> AzureOpenAI client
-|             model = EVAL_MODEL 或 'gpt-5.4'
-|             endpoint = AZURE_OPENAI_ENDPOINT 或 默认 Azure 实例
-|
-+-- OPENAI_API_KEY 已设置?
-|     YES --> OpenAI client
-|             model = EVAL_MODEL 或 'gpt-4o'
-|             baseURL = OPENAI_BASE_URL（可选，支持 Ollama / LM Studio）
-|
-+-- 都没有 --> 抛出错误，打印设置说明
+grader model:
+  GRADER_PROVIDER / GRADER_MODEL / GRADER_API_KEY / GRADER_BASE_URL
+  未配置时回退到 EVAL_* 配置
 ```
+
+支持的 provider family：
+
+| Provider | 默认模型/端点 | 说明 |
+|----------|---------------|------|
+| `openai` | `gpt-4o` | OpenAI 直连或 OpenAI-compatible endpoint |
+| `deepseek` | `deepseek-chat` | DeepSeek OpenAI-compatible API |
+| `openrouter` | `openai/gpt-4o-mini` | OpenRouter API |
+| `gemini` | `gemini-2.0-flash` | Gemini OpenAI-compatible endpoint |
+| `ollama` | `llama3.1`, `http://localhost:11434/v1` | 本地模型，默认 API key 为 `ollama` |
 
 **环境变量一览**：
 
-| 变量 | 必填 | 默认值 | 说明 |
-|------|------|--------|------|
-| `AZURE_API_KEY` | 二选一 | — | Azure OpenAI Key |
-| `OPENAI_API_KEY` | 二选一 | — | OpenAI Key（或 Ollama 填 "ollama"） |
-| `EVAL_MODEL` | 否 | gpt-5.4 / gpt-4o | 覆盖默认模型名 |
-| `AZURE_OPENAI_ENDPOINT` | 否 | 团队默认实例 | 覆盖 Azure endpoint |
-| `AZURE_API_VERSION` | 否 | 2025-04-01-preview | Azure API 版本 |
-| `OPENAI_BASE_URL` | 否 | api.openai.com | 自定义端点（Ollama: localhost:11434/v1） |
+| 变量 | 说明 |
+|------|------|
+| `EVAL_PROVIDER` | agent 执行模型 provider |
+| `EVAL_MODEL` | agent 执行模型名 |
+| `EVAL_API_KEY` | agent 执行模型 API key |
+| `EVAL_BASE_URL` | agent 执行模型 OpenAI-compatible base URL |
+| `GRADER_PROVIDER` | grader 评分模型 provider，可独立于 agent model |
+| `GRADER_MODEL` | grader 评分模型名 |
+| `GRADER_API_KEY` | grader 评分模型 API key |
+| `GRADER_BASE_URL` | grader 评分模型 OpenAI-compatible base URL |
 
 ### 7.4 五维评估模型
 
@@ -1079,7 +1129,7 @@ tests: file://tests.yaml                                    # 测试用例文件
 # A/B test example in tests.yaml
 - description: "WITH plugin context"
   vars:
-    __userPrompt: "Connect to staging K8s cluster and check pod health"
+    __userPrompt: "Connect to staging Kubernetes cluster and check pod health"
     skip_context: false
   assert:
     - type: llm-rubric
@@ -1090,7 +1140,7 @@ tests: file://tests.yaml                                    # 测试用例文件
 
 - description: "WITHOUT plugin context (baseline)"
   vars:
-    __userPrompt: "Connect to staging K8s cluster and check pod health"
+    __userPrompt: "Connect to staging Kubernetes cluster and check pod health"
     skip_context: true
   assert:
     - type: llm-rubric
@@ -1123,7 +1173,7 @@ Plugin context 注入会增加 prompt token，但如果能减少 agentic loop �
 | = 1.0 | 持平 | context 增加的 prompt token 被节省的 completion token 抵消 |
 | < 1.0 | Plugin 降低了 token 效率 | context 可能过大或与任务无关 |
 
-**数据来源**：`azure-gpt5-provider.js` 已在返回值中携带 `tokenUsage`（prompt_tokens + completion_tokens + tool_call_tokens），可直接使用。
+**数据来源**：`generic-llm-provider.js` 已在返回值中携带 `tokenUsage`（prompt_tokens + completion_tokens + tool_call_tokens），可直接使用。
 
 #### 维度 3: Tool Call 精准度
 
@@ -1149,8 +1199,8 @@ Plugin context 注入会增加 prompt token，但如果能减少 agentic loop �
 | S1  | JIRA Story 创建               | PASS      | PASS      |
 | S2  | Feature Spec 生成             | PASS      | PARTIAL   |
 | S3  | 安全代码审查                   | PASS      | FAIL      |
-| S4  | K8s CrashLoop 诊断            | PASS      | PARTIAL   |
-| S5  | Xcode 构建错误修复             | PASS      | FAIL      |
+| S4  | Kubernetes CrashLoop 诊断            | PASS      | PARTIAL   |
+| S5  | native build tool 构建错误修复             | PASS      | FAIL      |
 | S6  | 多服务依赖链追踪               | PASS      | FAIL      |
 +-----+-------------------------------+-----------+-----------+
 Plugin Lift = 改善场景数 / 总场景数 = 4/6 = 67%
@@ -1162,8 +1212,8 @@ Plugin Lift = 改善场景数 / 总场景数 = 4/6 = 67%
 |--------|----------|---------|
 | nexus-common-agent-plugin | 10-15 | JIRA CRUD、Git 操作、通用分析、Confluence 发布 |
 | nexus-sdlc-agent-plugin | 15-20 | Spec 生成、Story 拆解、代码实现、安全审查、PR 流程 |
-| nexus-cloud-troubleshooting-plugin | 10-15 | K8s 诊断、告警分流、Docker 排障、日志分析、依赖追踪 |
-| nexus-macos-native-plugin | 8-12 | Xcode 构建、测试运行、构建错误诊断、VC 脚手架 |
+| nexus-cloud-troubleshooting-plugin | 10-15 | Kubernetes 诊断、告警分流、Docker 排障、日志分析、依赖追踪 |
+| nexus-macos-native-plugin | 8-12 | native build tool 构建、测试运行、构建错误诊断、channel 脚手架 |
 | nexus-release-management-plugin | 5-8 | JIRA 完成查询、Commit 关联、Confluence 报告发布 |
 
 #### 维度 5: 回归检测（Prompt Regression）
@@ -1201,8 +1251,7 @@ promptfoo diff /tmp/baseline.json /tmp/current.json
                                   v                         v
                           +---------------+         +-------------------+
                           | Provider      |         | promptfoo view    |
-                          | (GPT-5.4 /   |         | (Browser viewer)  |
-                          |  Claude 4.6)  |         +-------------------+
+                          | (generic LLM) |         | (Browser viewer)  |
                           +---------------+
                                   |
                           Collects per test:
@@ -1243,21 +1292,28 @@ cd eval/providers && npm install && cd ../..
 
 #### 配置 LLM Provider
 
-评估需要调用真实 LLM 来执行 agent 任务和 LLM-as-Judge 评分。当前支持两种 provider：
+评估需要调用真实 LLM 来执行 agent 任务和 LLM-as-Judge 评分。当前通过 `generic-llm-provider.js` 支持多个 provider family，并允许 agent model 与 grader model 分开配置。
 
-| Provider | 模型 | 环境变量 | 状态 |
-|----------|------|---------|------|
-| Azure OpenAI | `gpt-5.4` | `AZURE_API_KEY` | 已就绪 |
-| AWS Bedrock Claude | `claude-sonnet-4.6` | `OPENAI_API_KEY` | 开发中 |
+| Provider | 示例模型 | 关键环境变量 | 状态 |
+|----------|----------|--------------|------|
+| OpenAI | `gpt-4o` | `EVAL_PROVIDER=openai`, `EVAL_API_KEY` | 已支持 |
+| DeepSeek | `deepseek-chat` | `EVAL_PROVIDER=deepseek`, `DEEPSEEK_API_KEY` | 已支持 |
+| OpenRouter | `openai/gpt-4o-mini` | `EVAL_PROVIDER=openrouter`, `OPENROUTER_API_KEY` | 已支持 |
+| Gemini | `gemini-2.0-flash` | `EVAL_PROVIDER=gemini`, `GEMINI_API_KEY` | 已支持 |
+| Ollama | `llama3.1` | `EVAL_PROVIDER=ollama` | 已支持 |
 
-设置环境变量（**选其一**）：
+设置环境变量示例：
 
 ```bash
-# 方式 A: Azure OpenAI（当前默认）
-export AZURE_API_KEY="<your-azure-openai-key>"
+# agent model
+export EVAL_PROVIDER="openai"
+export EVAL_MODEL="gpt-4o"
+export EVAL_API_KEY="<your-agent-model-key>"
 
-# 方式 B: AWS Bedrock Claude（开发中）
-export OPENAI_API_KEY="<your-aws-bedrock-key>"
+# optional grader model; unset values fall back to EVAL_*
+export GRADER_PROVIDER="openai"
+export GRADER_MODEL="gpt-4o-mini"
+export GRADER_API_KEY="<your-grader-model-key>"
 ```
 
 > **为什么需要 API Key？**
@@ -1269,8 +1325,7 @@ export OPENAI_API_KEY="<your-aws-bedrock-key>"
 > 2. **LLM-as-Judge 评分** — 用同一模型对输出质量进行 rubric 打分
 >
 > 这意味着你需要有权访问至少一个支持 function calling 的 LLM 服务。
-> 当前默认使用团队共享的 Azure OpenAI endpoint（`gpt-5.4`），
-> 未来计划支持更多 provider（见下方"Provider 扩展计划"）。
+> 如果单独配置 `GRADER_*`，评分会使用 grader model；否则评分回退到 agent model。
 
 #### 运行单个测试套件
 
@@ -1332,9 +1387,9 @@ defaultTest:
     __promptFile: nexus-common-agent-plugin/commands/analyze.md
     tool_choice: none
   options:
-    provider: file://../../../providers/azure-gpt5-provider.js
+    provider: file://../../../providers/generic-llm-provider.js
 providers:
-  - file://../../../providers/azure-gpt5-provider.js
+  - file://../../../providers/generic-llm-provider.js
 tests: file://tests.yaml
 ```
 
@@ -1353,16 +1408,14 @@ tests: file://tests.yaml
       threshold: 1
 ```
 
-### 7.8 Provider 扩展计划
+### 7.8 Provider 扩展状态
 
-当前评估框架硬绑定了 Azure OpenAI，这限制了没有 Azure 权限的开发者参与。扩展方向：
+当前评估框架只保留 `generic-llm-provider.js`。promptfoo 测试统一引用 generic provider，实际模型由环境变量决定。
 
-| 优先级 | Provider | 模型 | 适用场景 | 环境变量 |
-|--------|----------|------|---------|---------|
-| P0（已有） | Azure OpenAI | gpt-5.4 | 团队 CI + 日常测试 | `AZURE_API_KEY` |
-| P1（开发中） | AWS Bedrock | claude-sonnet-4.6 | 跨模型对比 | `OPENAI_API_KEY` |
-| P2（计划） | OpenAI 直连 | gpt-4o / gpt-5 | 无 Azure 权限的开发者 | `OPENAI_API_KEY` |
-| P2（计划） | Ollama 本地 | llama3 / mistral | 离线 / 免费评估 | 无需 key |
-| P3（计划） | GitHub Models | copilot-chat | 与生产行为最接近 | `GITHUB_TOKEN` |
+| 能力 | 状态 | 说明 |
+|------|------|------|
+| Agent/Grader 分离 | 已支持 | agent 使用 `EVAL_*`，grader 使用 `GRADER_*`，未配置时 grader 回退到 `EVAL_*` |
+| OpenAI-compatible API | 已支持 | OpenAI、DeepSeek、OpenRouter、Gemini、Ollama 均通过统一 client 接入 |
+| 新 provider family | 可扩展 | 在 `model-client.js` 中增加 defaults、key/baseURL 解析即可 |
 
-**目标**：在 `promptfooconfig.yaml` 中通过环境变量自动选择可用 provider，开发者无需修改配置即可使用自己有权限的 LLM 服务。
+**目标**：开发者只需要调整 `.env` 或 shell 环境变量，即可使用自己有权限的大模型服务运行同一批 eval。测试配置无需因模型供应商变化而改动。

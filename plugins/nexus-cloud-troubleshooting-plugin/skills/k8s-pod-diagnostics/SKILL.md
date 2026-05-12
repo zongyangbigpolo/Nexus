@@ -3,7 +3,7 @@ name: k8s-pod-diagnostics
 description: Kubernetes pod-level troubleshooting — inspect pod status, events, logs, resource usage, probe health, and container exit codes. Provides systematic diagnosis for CrashLoopBackOff, ImagePullBackOff, Pending, OOMKilled, and other common pod failure modes.
 ---
 
-# K8s Pod Diagnostics Skill
+# Kubernetes Pod Diagnostics Skill
 
 Systematic pod-level troubleshooting for any Kubernetes cluster.
 

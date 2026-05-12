@@ -24,7 +24,7 @@ classified table of Bugs and Stories.
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `repo` | Yes | GitHub repo in `owner/repo` format, e.g. `icaclientmac/ztna-ui-setup-mfe` |
+| `repo` | Yes | GitHub repo in `owner/repo` format, e.g. `target repository/access-ui-setup-mfe` |
 | `newer_branch` | Yes | The more recent release branch, e.g. `release/2605.1` |
 | `older_branch` | Yes | The baseline release branch, e.g. `release/2602.3` |
 | `cloudId` | Yes | Atlassian cloudId (resolve via `getAccessibleAtlassianResources` if unknown) |
@@ -45,9 +45,9 @@ classified table of Bugs and Stories.
 >
 > Always derive the working directory from the repo and branch names:
 > ```
-> repo_slug  = last segment of repo name, lowercased   # e.g. ztna-ui-navigation-mfe
+> repo_slug  = last segment of repo name, lowercased   # e.g. access-ui-navigation-mfe
 > newer_slug = newer_branch, replace / with -, truncated to 20 chars  # e.g. release-2605.1
-> WORKDIR    = /tmp/rd_<repo_slug>_<newer_slug>         # e.g. /tmp/rd_ztna-ui-navigation-mfe_release-2605.1
+> WORKDIR    = /tmp/rd_<repo_slug>_<newer_slug>         # e.g. /tmp/rd_access-ui-navigation-mfe_release-2605.1
 > ```
 > Create it with `mkdir -p $WORKDIR` before any script call.
 >
@@ -94,7 +94,7 @@ All analysis logic lives in `agent-assets/scripts/release-helpers/`. These scrip
 
 ```
 # Initialise
-REPO_SLUG=<last-segment-of-repo-name>    # e.g. ztna-ui-navigation-mfe
+REPO_SLUG=<last-segment-of-repo-name>    # e.g. access-ui-navigation-mfe
 NEWER_SLUG=<newer_branch-slug>           # e.g. release-2605.1  (replace / with -)
 WORKDIR=/tmp/rd_${REPO_SLUG}_${NEWER_SLUG}
 SCRIPTS=/path/to/repo/agent-assets/scripts/release-helpers
@@ -116,7 +116,7 @@ python3 $SCRIPTS/step3_ingest_jira.py --status --workdir $WORKDIR   # check cove
 # Step 5 — build report
 python3 $SCRIPTS/step4_build_report.py \
   --newer-branch "<NEWER_BRANCH>" --older-branch "<OLDER_BRANCH>" \
-  --repo "<OWNER/REPO>" --jira-base-url https://citrix.atlassian.net \
+  --repo "<OWNER/REPO>" --jira-base-url https://example.atlassian.net \
   --workdir $WORKDIR --output $WORKDIR/delta_report.md
 ```
 
@@ -128,7 +128,7 @@ reference and state file schema.
 ## Step 1 — Resolve cloudId
 
 If `cloudId` is not already known, call `getAccessibleAtlassianResources` and extract the UUID for
-`citrix.atlassian.net`. Cache it for all subsequent JIRA calls.
+`example.atlassian.net`. Cache it for all subsequent JIRA calls.
 
 ---
 
@@ -214,7 +214,7 @@ This script:
 - Writes `$WORKDIR/classification.pkl` and `$WORKDIR/jira_ids.txt`
 - Prints ready-to-paste JQL batches for Step 4 (JIRA lookup)
 
-Default JIRA prefixes recognized: `SPAOP, SPA, CTXENG, SPACON, SPATEC, ZTNA, ZTA`.
+Default JIRA prefixes recognized: `APP2, APP, ENG, SPACON, SPATEC, access, ZTA`.
 For other repos, pass `--jira-prefixes PREFIX1,PREFIX2,...`.
 
 Report count to the user:
@@ -234,7 +234,7 @@ For each batch, call the MCP tool then immediately ingest the result:
 # 1. Call MCP with the JQL from step2_classify.py stdout
 mcp: searchJiraIssuesUsingJql(
   cloudId   = <cloudId>,
-  jql       = "key in (SPAOP-1234, SPA-5678, ...)",
+  jql       = "key in (APP2-1234, APP-5678, ...)",
   fields    = ["summary", "issuetype", "status", "priority", "versions", "fixVersions"],
   maxResults = 50
 )
@@ -265,7 +265,7 @@ python3 $SCRIPTS/step4_build_report.py \
   --newer-branch "<newer_branch>" \
   --older-branch "<older_branch>" \
   --repo "<owner>/<repo>" \
-  --jira-base-url https://citrix.atlassian.net \
+  --jira-base-url https://example.atlassian.net \
   --workdir $WORKDIR \
   --output $WORKDIR/delta_report.md
 ```
@@ -450,7 +450,7 @@ After `jira-manager` completes, print:
 | Missing IDs in squash commits | Only scanning commit subject (first line) | Scan `commit.message` in full — squash bodies contain dozens of inner JIRA refs |
 | Silently dropping cherry-picks | Excluding IDs present in older branch | Flag as `also in {older_branch}` but still show in table |
 | False divergence on date cutoff | Cherry-pick commits may have the same date | Prefer SHA-set divergence; use date only as final fallback |
-| Missing IDs from CI/infra commits | Commits referencing SPA IDs only in body | Full-body scan catches these |
+| Missing IDs from CI/infra commits | Commits referencing APP IDs only in body | Full-body scan catches these |
 
 ---
 
@@ -463,7 +463,7 @@ After `jira-manager` completes, print:
 - JIRA `versions` field = **Affects Version/s** — the version where the bug was reported/observed
 - JIRA `fixVersions` field = **Fix Version/s** — the version where the fix was shipped
   These are independent fields. Never assume one equals the other.
-- Squash-merge repos (common in SPA) produce commits whose `message` body contains the full
+- Squash-merge repos (common in APP) produce commits whose `message` body contains the full
   history of the squashed branch, including every inner commit message and its JIRA IDs.
   Scanning only the first line can miss 80%+ of referenced JIRA IDs.
 
@@ -472,10 +472,10 @@ After `jira-manager` completes, print:
 ## Example Workflow Invocation
 
 ```
-User: Find bugs fixed between release/2605.1 and release/2602.3 in ztna-ui-setup-mfe
+User: Find bugs fixed between release/2605.1 and release/2602.3 in access-ui-setup-mfe
 
 SCRIPTS = /path/to/repo/agent-assets/scripts/release-helpers
-WORKDIR = /tmp/rd_ztna-ui-setup-mfe_release-2605.1
+WORKDIR = /tmp/rd_access-ui-setup-mfe_release-2605.1
 
 → Step 1: Resolve cloudId → 70cbc59a-...
 
@@ -494,13 +494,13 @@ WORKDIR = /tmp/rd_ztna-ui-setup-mfe_release-2605.1
    stdout: “Divergence found: NO — fetch page 2”
    [MCP] list_commits(sha=release/2605.1, page=2, perPage=100) → content_n2.json
    python3 $SCRIPTS/step1_ingest_branch.py --mode newer --input content_n2.json --workdir $WORKDIR --page 2
-   stdout: “Divergence found: SHA 545cfd12 \"SPAOP-10510 Add warning modal...\" — 2025-12-05”
+   stdout: “Divergence found: SHA 545cfd12 \"APP2-10510 Add warning modal...\" — 2025-12-05”
    → newer_state.pkl: 107 delta commits, 43 JIRA IDs extracted from full message bodies
 
 → Step 3: Classify
    python3 $SCRIPTS/step2_classify.py --workdir $WORKDIR
    stdout: 43 unique IDs (38 delta-only, 5 cherry-picks)
-           JQL Batch 1: key in (SPAOP-10510, SPA-30004, ...)
+           JQL Batch 1: key in (APP2-10510, APP-30004, ...)
 
 → Step 4: JIRA lookup
    [MCP] searchJiraIssuesUsingJql(cloudId, “key in (...)”, fields=[...]) → jira_b1.json
@@ -511,22 +511,22 @@ WORKDIR = /tmp/rd_ztna-ui-setup-mfe_release-2605.1
 → Step 5: Build report
    python3 $SCRIPTS/step4_build_report.py \
      --newer-branch release/2605.1 --older-branch release/2602.3 \
-     --repo icaclientmac/ztna-ui-setup-mfe \
-     --jira-base-url https://citrix.atlassian.net \
+     --repo target repository/access-ui-setup-mfe \
+     --jira-base-url https://example.atlassian.net \
      --workdir $WORKDIR --output $WORKDIR/delta_report.md
-   stdout: “Report written to /tmp/rd_ztna-ui-setup-mfe_release-2605.1/delta_report.md”
+   stdout: “Report written to /tmp/rd_access-ui-setup-mfe_release-2605.1/delta_report.md”
    stdout: “HIGH risks: 1 missing Fix Version, 0 open critical bugs”
 
 → Step 6: Present $WORKDIR/delta_report.md to user.
    Report shows:
-     Section A1 (Bugs delta-only): SPAOP-10746 — Fix Version: (empty) — HIGH
+     Section A1 (Bugs delta-only): APP2-10746 — Fix Version: (empty) — HIGH
      Section A2 (Bugs cherry-picks): 0
      Section B1 (Stories delta-only): 42 Stories
      Section B2 (Stories cherry-picks): 5
-     Risk Summary: HIGH | Fixed bugs with no Fix Version | SPAOP-10746
+     Risk Summary: HIGH | Fixed bugs with no Fix Version | APP2-10746
 
 → Step 7 (optional): Prompt user re: flagged bugs:
-   "Found 1 bug (SPAOP-10746) with Fix Version missing.
+   "Found 1 bug (APP2-10746) with Fix Version missing.
     Shall I add a comment and request the fixer to update it? (yes/no)"
    ...(Step 7A–7D proceeds if user confirms)”
 ```

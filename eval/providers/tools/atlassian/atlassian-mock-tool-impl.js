@@ -1,4 +1,3 @@
-// Copyright © 2025-2026. Citrix Systems, Inc. All Rights Reserved. Confidential & Proprietary.
 // Mock provider for Atlassian MCP Server tools or APIs (JIRA + Confluence)
 
 import { readFileSync } from 'fs';
@@ -22,7 +21,7 @@ export function callApi(prompt, options, context) {
 
   const toolName = toolCallMatch[1];
   const jiraIdFromPrompt = prompt.match(/([A-Z]+-\d+)/);
-  const jiraId = options?.vars?.jira || (jiraIdFromPrompt ? jiraIdFromPrompt[1] : 'SPA-0000');
+  const jiraId = options?.vars?.jira || (jiraIdFromPrompt ? jiraIdFromPrompt[1] : 'APP-0000');
   const mockData = getMockJiraData(jiraId);
 
   switch (toolName) {
@@ -91,7 +90,7 @@ export function callApi(prompt, options, context) {
       const summaryMatch = prompt.match(/"summary"\s*:\s*"([^"]+)"/);
       const issueTypeMatch = prompt.match(/"issueType"\s*:\s*"([^"]+)"/);
       const parentKeyMatch = prompt.match(/"parentKey"\s*:\s*"([^"]+)"/);
-      const project = projectMatch ? projectMatch[1] : (options?.vars?.project || 'SPA');
+      const project = projectMatch ? projectMatch[1] : (options?.vars?.project || 'APP');
       const summary = summaryMatch ? summaryMatch[1] : 'New issue';
       const issueType = issueTypeMatch ? issueTypeMatch[1] : 'Story';
       const issueNumber = Math.floor(1000 + Math.random() * 9000);
@@ -101,7 +100,7 @@ export function callApi(prompt, options, context) {
         output: JSON.stringify({
           id: String(issueNumber),
           key: issueKey,
-          self: `https://citrix.atlassian.net/rest/api/3/issue/${issueNumber}`,
+          self: `https://example.atlassian.net/rest/api/3/issue/${issueNumber}`,
           fields: {
             summary,
             issuetype: { name: issueType },
@@ -119,7 +118,7 @@ export function callApi(prompt, options, context) {
     case 'createContent': {
       const spaceMatch = prompt.match(/"space"\s*:\s*"([^"]+)"/);
       const titleMatch = prompt.match(/"title"\s*:\s*"([^"]+)"/);
-      const space = spaceMatch ? spaceMatch[1] : (options?.vars?.space || 'SPA');
+      const space = spaceMatch ? spaceMatch[1] : (options?.vars?.space || 'APP');
       const title = titleMatch ? titleMatch[1] : (options?.vars?.title || 'Untitled Page');
       const pageId = `mock-page-${Math.floor(1000 + Math.random() * 9000)}`;
 
@@ -137,7 +136,7 @@ export function callApi(prompt, options, context) {
     case 'createConfluencePage': {
       const spaceMatch = prompt.match(/"space"\s*:\s*"([^"]+)"/);
       const titleMatch = prompt.match(/"title"\s*:\s*"([^"]+)"/);
-      const space = spaceMatch ? spaceMatch[1] : (options?.vars?.space || 'SPA');
+      const space = spaceMatch ? spaceMatch[1] : (options?.vars?.space || 'APP');
       const title = titleMatch ? titleMatch[1] : (options?.vars?.title || 'Untitled Page');
 
       return {
@@ -149,7 +148,7 @@ export function callApi(prompt, options, context) {
           space: { key: space },
           version: { number: 1 },
           _links: {
-            webui: `https://citrix.atlassian.net/wiki/spaces/${space}/pages/112233/${encodeURIComponent(title.replace(/ /g, '+'))}`
+            webui: `https://example.atlassian.net/wiki/spaces/${space}/pages/112233/${encodeURIComponent(title.replace(/ /g, '+'))}`
           }
         }),
         tokenUsage: { total: 60, prompt: 30, completion: 30 }
@@ -172,7 +171,7 @@ export function callApi(prompt, options, context) {
           title,
           version: { number: newVersion },
           _links: {
-            webui: `https://citrix.atlassian.net/wiki/pages/${pageId}`
+            webui: `https://example.atlassian.net/wiki/pages/${pageId}`
           }
         }),
         tokenUsage: { total: 55, prompt: 25, completion: 30 }
@@ -195,9 +194,9 @@ export function callApi(prompt, options, context) {
       return {
         output: JSON.stringify({
           results: [
-            { key: 'SPA', name: 'Secure Private Access', type: 'global' },
-            { key: 'CWS', name: 'Citrix Workspace', type: 'global' },
-            { key: 'CTXENG', name: 'Citrix Engineering', type: 'global' }
+            { key: 'APP', name: 'private access', type: 'global' },
+            { key: 'DOCS', name: 'desktop workspace', type: 'global' },
+            { key: 'ENG', name: 'Organization Engineering', type: 'global' }
           ]
         }),
         tokenUsage: { total: 25, prompt: 10, completion: 15 }
@@ -221,13 +220,13 @@ export function callApi(prompt, options, context) {
 
     case 'getPagesInConfluenceSpace': {
       const spaceMatch = prompt.match(/"space"\s*:\s*"([^"]+)"/);
-      const space = spaceMatch ? spaceMatch[1] : (options?.vars?.space || 'SPA');
+      const space = spaceMatch ? spaceMatch[1] : (options?.vars?.space || 'APP');
 
       return {
         output: JSON.stringify({
           results: [
-            getMockPage('112233', space, 'ZTNA Policy Configuration Overview'),
-            getMockPage('112234', space, 'SPA Architecture Guide'),
+            getMockPage('112233', space, 'access Policy Configuration Overview'),
+            getMockPage('112234', space, 'Application Architecture Guide'),
             getMockPage('112235', space, 'Connector Setup Runbook')
           ]
         }),

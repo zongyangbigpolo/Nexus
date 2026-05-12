@@ -1,7 +1,7 @@
 ---
 name: git-ops
 description: Git operations specialist for branch management, commits, and PR creation following team conventions.
-argument-hint: "action=branch|checkout|pull|commit|push|pr jiraId=SPA-12345"
+argument-hint: "action=branch|checkout|pull|commit|push|pr jiraId=APP-12345"
 tools: ['vscode', 'execute', 'read', 'search', 'github/*', 'atlassian/*']
 handoffs:
   - label: Ready to implement feature

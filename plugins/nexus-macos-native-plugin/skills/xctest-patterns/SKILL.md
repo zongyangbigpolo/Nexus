@@ -1,28 +1,28 @@
 ---
 name: xctest-patterns
 description: >
-  XCTest testing patterns for icaclientmac. Covers OCMock mocking, OHHTTPStubs network stubbing,
+  XCTest testing patterns for target repository. Covers mock framework mocking, HTTP stubbing framework network stubbing,
   async testing, test organization, and common assertion patterns.
 trigger: |
   Activate when the user mentions:
   - Writing tests or test patterns
-  - OCMock or mocking in ObjC
-  - OHHTTPStubs or network stubbing
+  - mock framework or mocking in native
+  - HTTP stubbing framework or network stubbing
   - XCTest expectations or async testing
   - Test fixtures or test organization
 ---
 
 # Purpose
 
-Provide testing patterns and best practices for writing XCTest tests in the icaclientmac project using OCMock and OHHTTPStubs.
+Provide testing patterns and best practices for writing XCTest tests in the target repository project using mock framework and HTTP stubbing framework.
 
 # Test Structure
 
-## Basic ObjC Test Class
+## Basic native Test Class
 
 ```objc
 #import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
+#import <mock framework/mock framework.h>
 #import "ClassUnderTest.h"
 
 @interface ClassUnderTestTests : XCTestCase
@@ -55,11 +55,11 @@ Provide testing patterns and best practices for writing XCTest tests in the icac
 @end
 ```
 
-## Basic Swift Test Class
+## Basic native UI Test Class
 
 ```swift
 import XCTest
-@testable import ICAClientUniversalBinary
+@testable import SampleApp
 
 final class FeatureTests: XCTestCase {
 
@@ -88,7 +88,7 @@ final class FeatureTests: XCTestCase {
 }
 ```
 
-# OCMock Patterns
+# mock framework Patterns
 
 ## Mock a Protocol
 
@@ -145,13 +145,13 @@ OCMVerify([mockService sendRequest:[OCMArg checkWithBlock:^BOOL(NSURLRequest *re
 }]]);
 ```
 
-# OHHTTPStubs Patterns
+# HTTP stubbing framework Patterns
 
 ## Stub a GET Request
 
 ```objc
-#import <OHHTTPStubs/HTTPStubs.h>
-#import <OHHTTPStubs/HTTPStubsPathHelpers.h>
+#import <HTTP stubbing framework/HTTPStubs.h>
+#import <HTTP stubbing framework/HTTPStubsPathHelpers.h>
 
 - (void)setUp {
     [super setUp];
@@ -210,7 +210,7 @@ return [[HTTPStubsResponse responseWithData:data statusCode:200 headers:nil]
 }
 ```
 
-## Swift Async/Await (for Swift test targets)
+## native UI Async/Await (for native UI test targets)
 
 ```swift
 func testAsyncFetch() async throws {

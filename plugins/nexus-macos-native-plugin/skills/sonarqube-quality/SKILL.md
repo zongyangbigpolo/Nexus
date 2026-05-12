@@ -1,7 +1,7 @@
 ---
 name: sonarqube-quality
 description: >
-  SonarQube code quality guidance for icaclientmac. Covers quality gates,
+  SonarQube code quality guidance for target repository. Covers quality gates,
   code smells, coverage thresholds, and issue resolution.
 trigger: |
   Activate when the user mentions:
@@ -13,7 +13,7 @@ trigger: |
 
 # Purpose
 
-Help developers understand and resolve SonarQube findings for the icaclientmac project.
+Help developers understand and resolve SonarQube findings for the target repository project.
 
 # Quality Gate
 
@@ -24,7 +24,7 @@ Typical quality gate conditions:
 - **Vulnerabilities**: zero new security vulnerabilities
 - **Code Smells**: within acceptable threshold for new code
 
-# Common Code Smells in ObjC/Swift
+# Common Code Smells in native interop
 
 | Smell | Example | Fix |
 |-------|---------|-----|
@@ -41,9 +41,9 @@ Typical quality gate conditions:
 ## Generating coverage for SonarQube
 ```bash
 xcodebuild test \
-  -workspace ICAClientUniversalBinary.xcworkspace \
+  -workspace SampleApp.xcworkspace \
   -scheme <TEST_SCHEME> \
-  -destination 'platform=macOS' \
+  -destination 'platform=desktop OS' \
   -enableCodeCoverage YES \
   -resultBundlePath ./TestResults.xcresult
 
@@ -54,7 +54,7 @@ xcrun xccov view --report --json ./TestResults.xcresult > coverage.json
 ## Improving coverage
 1. Focus on business logic methods, not getters/setters
 2. Test error paths and edge cases
-3. Use OCMock to test code paths that depend on external state
+3. Use mock framework to test code paths that depend on external state
 4. Add tests for newly written code before committing
 
 # Resolving SonarQube Issues

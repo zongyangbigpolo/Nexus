@@ -15,7 +15,7 @@ Parse and investigate production alerts from PagerDuty, Grafana, or Splunk. Prod
 ```
 /cloud-alert-triage https://myorg.pagerduty.com/incidents/Q1ABC123
 /cloud-alert-triage https://myorg.grafana.net/alerting/grafana/abc123/view
-/cloud-alert-triage https://myorg.splunkcloud.com/app/search/@go?sid=scheduler_abc123
+/cloud-alert-triage https://observability.example.com/app/search/@go?sid=scheduler_abc123
 ```
 
 **Manual parameters**:

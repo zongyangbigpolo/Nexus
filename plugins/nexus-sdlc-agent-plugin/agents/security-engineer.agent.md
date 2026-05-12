@@ -24,9 +24,9 @@ handoffs:
     agent: jira-manager
     prompt: "HANDOFF from security-engineer: Create security bug ticket. Finding severity, description, and remediation provided above."
     send: true
-  - label: Audit Azure resources
-    agent: azure-ops
-    prompt: "HANDOFF from security-engineer: Audit Azure resources for security compliance. Scope and concerns provided above."
+  - label: Audit cloud resources
+    agent: cloud-infra-troubleshoot
+    prompt: "HANDOFF from security-engineer: Audit cloud resources for security compliance. Scope and concerns provided above."
     send: true
   - label: Analyze evidence
     agent: analyzer
@@ -73,7 +73,7 @@ Analyze security and provide: Findings (severity), Evidence, Impact, Remediation
 |------|---------|-------|
 | **Code Review** | PR, files | [security-code-review](../skills/security-code-review/SKILL.md) |
 | **Post-Implementation** | Handoff from developer | [security-code-review](../skills/security-code-review/SKILL.md) |
-| **Infrastructure** | Terraform, ARM, K8s | [security-infrastructure-audit](../skills/security-infrastructure-audit/SKILL.md) |
+| **Infrastructure** | Terraform, ARM, Kubernetes | [security-infrastructure-audit](../skills/security-infrastructure-audit/SKILL.md) |
 | **Compliance** | SOC 2, PCI, HIPAA | Compliance mapping via playbook |
 
 # Execution Workflow

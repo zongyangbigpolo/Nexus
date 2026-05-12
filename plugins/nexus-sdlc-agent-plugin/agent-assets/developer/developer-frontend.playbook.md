@@ -49,7 +49,7 @@ app/
     +-- Router.js               # React Router configuration
     +-- App.js                  # Main React app component
     +-- store.js                # Main Redux configuration
-    `-- ztna-ui-[name]-mfe.js   # MFE entry point
+    `-- access-ui-[name]-mfe.js   # MFE entry point
 
 test/                    # Cypress E2E tests
 +-- cypress/
@@ -521,9 +521,9 @@ module.exports = {
   moduleNameMapper: {
     '\\.(css)$': 'identity-obj-proxy',
     'single-spa-react/parcel': 'single-spa-react/lib/cjs/parcel.cjs',
-    '^@citrix-lib/rdx/(.*)$': '@citrix/rdx/lib/$1',
-    '^@citrix-lib/ztna-ui-utility-module/api/(.*)$': '@citrix/ztna-ui-utility-module/api/$1/$1.js',
-    '^@citrix-lib/(.*)$': '@citrix/$1'
+    '^@example-lib/rdx/(.*)$': '@example/rdx/lib/$1',
+    '^@example-lib/access-ui-utility-module/api/(.*)$': '@example/access-ui-utility-module/api/$1/$1.js',
+    '^@example-lib/(.*)$': '@example/$1'
   },
   transformIgnorePatterns: [
     'node_modules/(?!(some-es6-module)/)',
@@ -1039,7 +1039,7 @@ npm run headless:onprem # Run all hybrid/OnPrem hybrid tests with Cypress
 | State mutations                  | Use immutable updates with spread/Object.assign      | `setState(prev => ({ ...prev, count: prev.count + 1 }))`   |
 | Async state race conditions      | Use cleanup or latest request pattern                | `startTransition(() => setData(newData))`                  |
 | Bundle size bloat                | Code splitting, tree shaking, analyze bundles        | `const Component = lazy(() => import('./Component'))`      |
-| SEO issues with SPA              | Use React Router with proper meta tags               | `<Helmet><title>Page Title</title></Helmet>`               |
+| SEO issues with APP              | Use React Router with proper meta tags               | `<Helmet><title>Page Title</title></Helmet>`               |
 | Accessibility violations         | Use semantic HTML, ARIA attributes, focus management | `<button aria-label="Close dialog" onClick={close}>`       |
 | Testing async components         | Use waitFor, proper test isolation                   | `await waitFor(() => screen.getByText('Loaded'))`          |
 | Webpack config complexity        | Separate dev/prod configs, use composition           | `module.exports = merge(base, devConfig)`                  |

@@ -1,7 +1,7 @@
 ---
 name: bugfix
 description: Bug investigation and fix workflow. Analyzes JIRA bugs, forms hypotheses, investigates code, and hands off to developer for implementation.
-argument-hint: "jira=SPA-12345"
+argument-hint: "jira=APP-12345"
 tools: ['vscode', 'read', 'search', 'execute', 'atlassian/*']
 handoffs:
   - label: Create bugfix branch
@@ -55,7 +55,7 @@ Given a JIRA bug ticket:
 
 | Field | Required | Description |
 |-------|----------|-------------|
-| `jira` | Yes | JIRA bug ticket ID (e.g., SPA-12345) |
+| `jira` | Yes | JIRA bug ticket ID (e.g., APP-12345) |
 | `logs` | No | Error logs or stack traces |
 | `context` | No | Additional context from user |
 
@@ -73,7 +73,7 @@ Given a JIRA bug ticket:
 
 ## Phase 0: Environment Detection
 
-1. Detect terminal environment (Windows/macOS/Linux) for command syntax
+1. Detect terminal environment (Windows/desktop OS/Linux) for command syntax
 2. Use [repository-context-discovery](../skills/repository-context-discovery/SKILL.md) to understand codebase structure
 
 ## Phase 1: JIRA Context

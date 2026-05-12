@@ -36,7 +36,7 @@ Operational details for the `router` custom agent.
 ### JIRA ID Patterns
 
 ```regex
-(SPA|CTXENG|CTXBV|AAUTH|CGS|SPAOP|WSSUCE|WSSHELP|ATH|CC|CCOPS|CCUI|CINC|CINF|COUT|LUI|UNICON|CGSHELP|SPAHELP|DPS|RDXDEV|AAUTHHELP)-\d+
+(APP|ENG|CTXBV|AAUTH|CGS|APP2|WSSUCE|WSSHELP|ATH|CC|CCOPS|CCUI|CINC|CINF|COUT|LUI|UNICON|CGSHELP|SPAHELP|DPS|RDXDEV|AAUTHHELP)-\d+
 ```
 
 ---
@@ -47,14 +47,14 @@ For categories without direct handoff, suggest appropriate prompt:
 
 | Category | Suggest Prompt | Example |
 |----------|---------------|---------|
-| Project init | `/project-init` | `/project-init jira=SPAOP-12345` |
-| Specification | `/feature-spec` | `/feature-spec source=confluence jiraId=CTXENG-123` |
+| Project init | `/project-init` | `/project-init jira=APP2-12345` |
+| Specification | `/feature-spec` | `/feature-spec source=confluence jiraId=ENG-123` |
 | Architecture | `/architecture` | `/architecture mode=solution topic='API design'` |
 | Security | `/security` | `/security 'review PR #123'` |
 | Azure Costs | `/azure-costs` | `/azure-costs subscription=... days=30` |
 | Azure Audit | `/azure-audit` | `/azure-audit resource-group=...` |
 | Local Env | `/local-env` | `/local-env env=spa-proxy action=start` |
-| Documentation | `/article` | `/article action=create space=SPA` |
+| Documentation | `/article` | `/article action=create space=APP` |
 
 ---
 
@@ -66,10 +66,10 @@ See also [jira-ops instruction](../instructions/jira-ops.instructions.md) for MC
 
 **Use `getJiraIssue`** (NOT `search` which is Rovo Search).
 
-**First**, resolve `cloudId` by calling `list_accessible_resources` and finding the UUID for `citrix.atlassian.net` (see [jira-ops instruction](../instructions/jira-ops.instructions.md#cloudid-discovery-mandatory)).
+**First**, resolve `cloudId` by calling `list_accessible_resources` and finding the UUID for `example.atlassian.net` (see [jira-ops instruction](../instructions/jira-ops.instructions.md#cloudid-discovery-mandatory)).
 
 ```
-getJiraIssue(cloudId: "<UUID for citrix.atlassian.net>", issueIdOrKey: "{JIRA_ID}")
+getJiraIssue(cloudId: "<UUID for example.atlassian.net>", issueIdOrKey: "{JIRA_ID}")
 ```
 
 Returns full issue details including `issuetype.name`.
@@ -222,7 +222,7 @@ Base confidence = keyword matches × 20%
 
 | Mistake | Correct Approach |
 |---------|------------------|
-| Assume SPAOP-* is Story | SPAOP can be Epic, Story, Task, Bug — always verify |
+| Assume APP2-* is Story | APP2 can be Epic, Story, Task, Bug — always verify |
 | Route Epic directly | Resolve to first unfinished Story |
 | Write "switch to agent" | End response — buttons appear automatically |
 | Write `/task jira=...` | Just show summary — user clicks handoff button |

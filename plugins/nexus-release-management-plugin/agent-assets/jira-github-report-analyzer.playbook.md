@@ -16,9 +16,9 @@ Default repo scope and assignee list: `../config/jira-assignees-github-repos.jso
 | Field | Required | Description |
 |-------|----------|-------------|
 | `assignees` | Yes | List of JIRA display names (exactly as shown in JIRA) |
-| `githubSPABaseProjectUrl` | Yes | Base GitHub org URL ending with trailing slash (e.g. `https://github.com/citrix/`) |
+| `githubSPABaseProjectUrl` | Yes | Base GitHub org URL ending with trailing slash (e.g. `https://github.com/organization/`) |
 | `repos` | Yes | List of GitHub repository names (without org prefix) |
-| `projects` | Yes | List of JIRA project codes (e.g. `SPA`, `SPAOP`) |
+| `projects` | Yes | List of JIRA project codes (e.g. `APP`, `APP2`) |
 
 ### Config override format
 
@@ -26,8 +26,8 @@ Users can provide overrides inline:
 
 ```json
 {
-  "repoPrefix": "ztna-ui",
-  "repos": ["ztna-ui-cas-dashboard-mfe"],
+  "repoPrefix": "access-ui",
+  "repos": ["access-ui-cas-dashboard-mfe"],
   "timeframe": "-2w",
   "keywords": ["performance"]
 }

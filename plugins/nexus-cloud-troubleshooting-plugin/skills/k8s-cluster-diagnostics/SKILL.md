@@ -3,7 +3,7 @@ name: k8s-cluster-diagnostics
 description: Kubernetes cluster-level diagnostics — node health, control plane status, resource pressure, system component health, etcd, scheduling, and cluster-wide event analysis. Works with AKS, EKS, GKE, and self-managed clusters.
 ---
 
-# K8s Cluster Diagnostics Skill
+# Kubernetes Cluster Diagnostics Skill
 
 Systematic cluster-level troubleshooting for any Kubernetes distribution.
 

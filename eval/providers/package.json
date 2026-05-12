@@ -1,6 +1,6 @@
 {
-  "name": "@citrix/spa-common-ai-agents-eval-providers",
-  "description": "Evaluator project that uses Azure Open AI models with mock tools",
+  "name": "@nexus/eval-providers",
+  "description": "Evaluation providers with environment-driven model selection and mock tools",
   "type": "module",
   "dependencies": {
     "js-yaml": "^4.1.1",

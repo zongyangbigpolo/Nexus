@@ -1,21 +1,21 @@
 ---
 name: objc-swift-coding-conventions
 description: >
-  Coding conventions for Objective-C and Swift in the icaclientmac project.
+  Coding conventions for native language and native UI in the target repository project.
   Covers naming, formatting, memory management, and language-specific rules.
 applyTo: "**/*.{m,h,mm,swift}"
 ---
 
-# Objective-C / Swift Coding Conventions for icaclientmac
+# native language / native UI Coding Conventions for target repository
 
 ## General Rules
 
 - Follow Apple's official coding guidelines for Cocoa
 - Use the existing codebase style as the primary reference — consistency over personal preference
-- New modules should be written in Swift unless they need deep C/ICA stack integration
-- Existing ObjC code stays in ObjC unless there's a strong reason to rewrite
+- New modules should be written in native UI unless they need deep C/protocol stack integration
+- Existing native code stays in native unless there's a strong reason to rewrite
 
-## Objective-C Conventions
+## native language Conventions
 
 ### Naming
 - **Classes**: `CTX` prefix + PascalCase (e.g., `CTXConnectionManager`, `CTXVirtualChannel`)
@@ -41,18 +41,18 @@ applyTo: "**/*.{m,h,mm,swift}"
 ### Nullability
 - Use `NS_ASSUME_NONNULL_BEGIN` / `NS_ASSUME_NONNULL_END` in all public headers
 - Mark nullable parameters and return values explicitly with `nullable`
-- This improves Swift interop by avoiding implicitly unwrapped optionals
+- This improves native UI interop by avoiding implicitly unwrapped optionals
 
-## Swift Conventions
+## native UI Conventions
 
 ### Naming
 - **Types**: PascalCase (e.g., `ConnectionManager`, `ChannelState`)
 - **Functions/Properties**: camelCase (e.g., `func fetchConfig()`, `var hostName: String`)
-- **No prefix** — Swift has modules, so `CTX` prefix is not needed in pure Swift types
-- When bridging to ObjC, use `@objc(CTXSwiftClassName)` to add the prefix for ObjC visibility
+- **No prefix** — native UI has modules, so `CTX` prefix is not needed in pure native UI types
+- When bridging to native, use `@objc(CTXnative UIClassName)` to add the prefix for native visibility
 
 ### Formatting
-- Follow Swift standard formatting (Xcode default)
+- Follow native UI standard formatting (native build tool default)
 - Use `guard` for early exits
 - Prefer `let` over `var` when possible
 - Use trailing closure syntax for single-closure parameters
@@ -61,16 +61,16 @@ applyTo: "**/*.{m,h,mm,swift}"
 ### Error Handling
 - Prefer `throws` over optional returns for operations that can fail
 - Use typed errors when the error types are known
-- When bridging to ObjC, errors must be `NSError`-compatible
+- When bridging to native, errors must be `NSError`-compatible
 
 ### Access Control
 - Default to `internal` — only mark `public` for API exposed to other modules
-- Mark `@objc` only on members that need ObjC visibility
+- Mark `@objc` only on members that need native visibility
 - Use `private` for implementation details within a file
 
 ## File Organization
 
-### ObjC Files
+### native Files
 ```
 #import "ClassName.h"           // Own header
 #import <Framework/Header.h>    // Framework imports
@@ -90,7 +90,7 @@ applyTo: "**/*.{m,h,mm,swift}"
 @end
 ```
 
-### Swift Files
+### native UI Files
 ```
 import Foundation
 import SomeFramework
@@ -109,10 +109,10 @@ extension ClassName: SomeProtocol { }
 
 ## Code Review Checklist
 
-When reviewing icaclientmac code, verify:
-- [ ] Naming follows `CTX` prefix convention (ObjC) or no prefix (Swift)
-- [ ] Nullability annotations present in public ObjC headers
+When reviewing target repository code, verify:
+- [ ] Naming follows `CTX` prefix convention (native) or no prefix (native UI)
+- [ ] Nullability annotations present in public native headers
 - [ ] No retain cycles in block/closure captures
 - [ ] `NS_ENUM` used for enums (not plain C enum)
-- [ ] New modules prefer Swift unless interfacing with C/ICA stack
+- [ ] New modules prefer native UI unless interfacing with C/protocol stack
 - [ ] Proper `#pragma mark` / `// MARK:` organization

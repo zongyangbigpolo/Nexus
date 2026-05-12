@@ -3,7 +3,7 @@
     "description": "Template for jira-assignees-github-repos.json. Copy this file to jira-assignees-github-repos.json and replace all placeholder values.",
     "assignees": "List of JIRA user display names (exactly as shown in JIRA, case-sensitive).",
     "githubSPABaseProjectUrl": "Base GitHub org URL ending with a trailing slash.",
-    "projects": "List of JIRA project codes to search issues in (e.g. SPA, SPAOP, WSSUCE).",
+    "projects": "List of JIRA project codes to search issues in (e.g. APP, APP2, WSSUCE).",
     "repos": "List of GitHub repository names (without org prefix) to search commits/PRs in.",
     "issueTypes": "JIRA issue types to include in the report. Common values: Story, Epic, Bug, Task.",
     "defaultTimeframe": "Default JQL date filter. Examples: -2w (2 weeks), -1w, -30d, 2026-01-01."

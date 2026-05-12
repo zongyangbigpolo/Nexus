@@ -36,14 +36,14 @@ Always create the workdir using this naming pattern:
 ```
 
 **Rules:**
-- `<repo-slug>` — last component of the repo name in kebab-case (e.g. `ztna-ui-navigation-mfe`)
+- `<repo-slug>` — last component of the repo name in kebab-case (e.g. `access-ui-navigation-mfe`)
 - `<newer-branch-slug>` — branch name with `/` replaced by `-` (e.g. `release-2605.1`)
 
 **Example:**
 ```
-# Repo: icaclientmac/ztna-ui-navigation-mfe
+# Repo: target repository/access-ui-navigation-mfe
 # Newer branch: release/2605.1
-WORKDIR=/tmp/rd_ztna-ui-navigation-mfe_release-2605.1
+WORKDIR=/tmp/rd_access-ui-navigation-mfe_release-2605.1
 mkdir -p $WORKDIR
 ```
 
@@ -192,8 +192,8 @@ Generates the final Markdown report. All release-specific context is passed as a
 python3 step4_build_report.py \
   --newer-branch release/hybrid/2601 \
   --older-branch release/hybrid/2511 \
-  --repo icaclientmac/spa-onprem-service \
-  --jira-base-url https://citrix.atlassian.net \
+  --repo target repository/spa-onprem-service \
+  --jira-base-url https://example.atlassian.net \
   --workdir /tmp/rd_work \
   --output /tmp/delta_report.md
 ```
@@ -221,11 +221,11 @@ Optional flags:
 All scripts use the following pattern to extract JIRA IDs from commit messages:
 
 ```
-\b((?:SPAOP|SPA|CTXENG|SPACON|SPATEC|ZTNA|ZTA)-[0-9]{3,6})\b
+\b((?:APP2|APP|ENG|SPACON|SPATEC|access|ZTA)-[0-9]{3,6})\b
 ```
 
 To extend to additional projects, modify the `--jira-prefixes` argument (step1, step2).
-Default: `SPAOP,SPA,CTXENG,SPACON,SPATEC,ZTNA,ZTA`
+Default: `APP2,APP,ENG,SPACON,SPATEC,access,ZTA`
 
 ---
 
@@ -253,7 +253,7 @@ python3 $SCRIPTS/step2_classify.py --workdir $WORKDIR
 # Read jira_ids.txt → batch into groups of 40 for MCP JQL queries
 
 # --- JIRA LOOKUP ---
-# Call MCP: searchJiraIssuesUsingJql(cloudId, "key in (SPAOP-1, SPA-2, ...)", fields=[...])
+# Call MCP: searchJiraIssuesUsingJql(cloudId, "key in (APP2-1, APP-2, ...)", fields=[...])
 python3 $SCRIPTS/step3_ingest_jira.py --input "/var/folders/.../content.json" --workdir $WORKDIR
 # Repeat for each batch until step3 --status shows 100% coverage
 
@@ -261,25 +261,25 @@ python3 $SCRIPTS/step3_ingest_jira.py --input "/var/folders/.../content.json" --
 python3 $SCRIPTS/step4_build_report.py \
   --newer-branch release/hybrid/2601 \
   --older-branch release/hybrid/2511 \
-  --repo icaclientmac/spa-onprem-service \
-  --jira-base-url https://citrix.atlassian.net \
+  --repo target repository/spa-onprem-service \
+  --jira-base-url https://example.atlassian.net \
   --workdir $WORKDIR \
   --output $WORKDIR/report.md
 ```
 
 ---
 
-## Real-World Example: ztna-ui-navigation-mfe (2605.1 vs 2602.3)
+## Real-World Example: access-ui-navigation-mfe (2605.1 vs 2602.3)
 
 This example is from a live analysis comparing `release/2605.1` (Mar 2026) against
-`release/2602.3` (Feb 2026) in `icaclientmac/ztna-ui-navigation-mfe`.
+`release/2602.3` (Feb 2026) in `target repository/access-ui-navigation-mfe`.
 
 **Branch characteristics:**
 - Older branch (`release/2602.3`) had 3 pages of commits (page 3 partially full)
 - Newer branch (`release/2605.1`) diverged at page 1 — only 1 MCP call needed for newer
-- Divergence SHA: `ca809bef` — `SPA-30004 Update OnPremMfe to SetUp mfe (#581)` — 2025-12-05
+- Divergence SHA: `ca809bef` — `APP-30004 Update OnPremMfe to SetUp mfe (#581)` — 2025-12-05
 - Delta: 31 commits unique to `release/2605.1`
-- JIRA IDs found: 15 unique IDs (all `SPA-*` or `SPAOP-*`)
+- JIRA IDs found: 15 unique IDs (all `APP-*` or `APP2-*`)
 
 **Command sequence used:**
 ```
@@ -307,7 +307,7 @@ python3 step3_ingest_jira.py --input jira_batch1.json --workdir $WORKDIR
 python3 step4_build_report.py \
   --newer-branch release/2605.1 \
   --older-branch release/2602.3 \
-  --repo icaclientmac/ztna-ui-navigation-mfe \
+  --repo target repository/access-ui-navigation-mfe \
   --workdir $WORKDIR \
   --output $WORKDIR/delta_report.md
 ```

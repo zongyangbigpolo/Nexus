@@ -24,7 +24,7 @@ Manage individual JIRA tickets.
 ```
 /jira action=create type=bug
 /jira action=create type=story
-/jira action=update jira=SPA-12345
+/jira action=update jira=APP-12345
 /jira action=list
 ```
 
@@ -33,8 +33,8 @@ Manage individual JIRA tickets.
 - Updating existing ticket
 - Viewing your open issues
 
-## SPAOP Note
+## APP2 Note
 
-For `SPAOP` ticket creation, `components` is required. If the visible Atlassian MCP schema does not show `additional_fields`, still attempt creation using the repo playbook pattern with `additional_fields.components` and `additional_fields.labels`.
+For `APP2` ticket creation, `components` is required. If the visible Atlassian MCP schema does not show `additional_fields`, still attempt creation using the repo playbook pattern with `additional_fields.components` and `additional_fields.labels`.
 
-**For feature hierarchy** (CTXENG → Epics → Stories), use `/feature-plan` instead.
+**For feature hierarchy** (ENG → Epics → Stories), use `/feature-plan` instead.

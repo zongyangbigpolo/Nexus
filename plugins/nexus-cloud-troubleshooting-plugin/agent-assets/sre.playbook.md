@@ -25,7 +25,7 @@ Use this template after collecting diagnostic data:
 **Namespace**: {namespace or "cluster-wide"}
 
 ### Cluster Health
-| Node | Status | Roles | CPU | Memory | Disk | K8s Version |
+| Node | Status | Roles | CPU | Memory | Disk | Kubernetes Version |
 |------|--------|-------|-----|--------|------|-------------|
 | {node} | Ready/NotReady | control-plane/worker | {%} | {%} | {%} | {version} |
 

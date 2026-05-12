@@ -1,4 +1,3 @@
-// Copyright © 2026. Citrix Systems, Inc. All Rights Reserved. Confidential & Proprietary.
 import fs from 'fs';
 import path from 'path';
 import yaml from 'js-yaml';

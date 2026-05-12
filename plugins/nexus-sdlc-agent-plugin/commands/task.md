@@ -10,13 +10,13 @@ Coordinate and execute a development task (Story, Bug, or Epic).
 
 ## JIRA ID
 
-${input:jira:JIRA ID (e.g., SPAOP-12345, CTXENG-1234)}
+${input:jira:JIRA ID (e.g., APP2-12345, ENG-1234)}
 
 ---
 
 ## What happens
 
-1. **Read JIRA context** — Story/Bug details, parent Epic, CTXENG
+1. **Read JIRA context** — Story/Bug details, parent Epic, ENG
 2. **Create branch** — following naming conventions
 3. **Create task file** — structured plan in `.github/tasks/`
 4. **Delegate to developer** — for implementation

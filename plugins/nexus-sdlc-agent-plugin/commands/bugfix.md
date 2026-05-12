@@ -2,7 +2,7 @@
 name: bugfix
 description: Investigate and fix bugs from JIRA tickets with root cause analysis.
 agent: bugfix
-argument-hint: "jira=SPA-12345"
+argument-hint: "jira=APP-12345"
 ---
 
 Investigate and fix a bug using structured root cause analysis.
@@ -23,8 +23,8 @@ Investigate and fix a bug using structured root cause analysis.
 
 **Examples**:
 ```
-/bugfix jira=SPA-12345
-/bugfix jira=CTXENG-1234 logs="NullReferenceException at line 42"
+/bugfix jira=APP-12345
+/bugfix jira=ENG-1234 logs="NullReferenceException at line 42"
 ```
 
 **Output**:

@@ -1,6 +1,6 @@
 # AGENTS.md
 
-nexus-sdlc-agent-plugin contains the structured software delivery workflows for macOS engineering: project initialization, architecture authoring, feature specification, planning, implementation coordination, end-to-end feature delivery, code review, testing, bug fixing, and security review. The assets in this folder orchestrate multi-step handoffs across specialized agents instead of implementing code directly.
+nexus-sdlc-agent-plugin contains the structured software delivery workflows for desktop OS engineering: project initialization, architecture authoring, feature specification, planning, implementation coordination, end-to-end feature delivery, code review, testing, bug fixing, and security review. The assets in this folder orchestrate multi-step handoffs across specialized agents instead of implementing code directly.
 
 ## Project Overview
 
@@ -229,9 +229,9 @@ Agent skills do not activate:
 - GitHub MCP: branch, PR, issue, and repository workflows used during implementation and submission
 - Atlassian MCP: JIRA and Confluence context discovery, planning, and tracking workflows
 - Azure MCP: available to architecture and operational workflows when required by the target system
-- Citrix Cloud APIs: used by the CC API tester workflow and related skills
+- Organization Cloud APIs: used by the CC API tester workflow and related skills
 
 ## Team & Ownership
 
-- **Domain**: macOS SDLC workflow automation and architecture documentation
+- **Domain**: desktop OS SDLC workflow automation and architecture documentation
 - **Primary Use**: Project initialization, feature lifecycle orchestration, and developer/security handoff management

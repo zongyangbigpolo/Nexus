@@ -1,12 +1,12 @@
 - vars:
-    jira: CTXENG-5678
+    jira: ENG-5678
     source: 'Users need the ability to configure access policies per application group'
     name: AppGroupPolicies
   assert:
     - type: llm-rubric
       value: |
-        Evaluate whether the agent correctly handled a feature spec creation request for jira=CTXENG-5678 with inline requirements text.
+        Evaluate whether the agent correctly handled a feature spec creation request for jira=ENG-5678 with inline requirements text.
 
         Score 1.0 if ALL of the following are true:
-        - Identifies this as a spec authoring task for CTXENG-5678        
+        - Identifies this as a spec authoring task for ENG-5678        
       threshold: 1

@@ -1,29 +1,29 @@
 ---
 name: virtual-channel-scaffold
 description: >
-  Scaffold generator for new ICA Virtual Channel implementations.
+  Scaffold generator for new extension channel implementations.
   Generates boilerplate header, implementation, and test files.
 trigger: |
   Activate when the user mentions:
   - Creating a new virtual channel
-  - VC scaffold or boilerplate
+  - channel scaffold or boilerplate
   - New channel implementation from scratch
 ---
 
 # Purpose
 
-Generate the complete file set for a new Virtual Channel in icaclientmac, following project conventions.
+Generate the complete file set for a new extension channel in target repository, following project conventions.
 
 # Scaffold Output
 
-For a new VC named `<Name>`, generate these files:
+For a new channel named `<Name>`, generate these files:
 
 ## 1. Header — `CTX<Name>Channel.h`
 
 ```objc
 //
 //  CTX<Name>Channel.h
-//  ICAClientUniversalBinary
+//  SampleApp
 //
 //  Copyright © 2026 Cloud Software Group, Inc. All rights reserved.
 //
@@ -33,7 +33,7 @@ For a new VC named `<Name>`, generate these files:
 
 NS_ASSUME_NONNULL_BEGIN
 
-/// Virtual Channel implementation for <description>.
+/// extension channel implementation for <description>.
 /// Direction: <client-to-server | server-to-client | bidirectional>
 @interface CTX<Name>Channel : NSObject <CTXVirtualChannelProtocol>
 
@@ -61,7 +61,7 @@ NS_ASSUME_NONNULL_END
 ```objc
 //
 //  CTX<Name>Channel.m
-//  ICAClientUniversalBinary
+//  SampleApp
 //
 //  Copyright © 2026 Cloud Software Group, Inc. All rights reserved.
 //
@@ -119,7 +119,7 @@ static NSString * const kChannelName = @"CTX<NAME_UPPER>";
         }
         return NO;
     }
-    // TODO: Send data via VC API
+    // TODO: Send data via channel API
     return YES;
 }
 
@@ -131,13 +131,13 @@ static NSString * const kChannelName = @"CTX<NAME_UPPER>";
 ```objc
 //
 //  CTX<Name>ChannelTests.m
-//  ICAClientTests
+//  SampleAppTests
 //
 //  Copyright © 2026 Cloud Software Group, Inc. All rights reserved.
 //
 
 #import <XCTest/XCTest.h>
-#import <OCMock/OCMock.h>
+#import <mock framework/mock framework.h>
 #import "CTX<Name>Channel.h"
 
 @interface CTX<Name>ChannelTests : XCTestCase
@@ -217,8 +217,8 @@ static NSString * const kChannelName = @"CTX<NAME_UPPER>";
 
 After generating files:
 
-1. **Add to Xcode project** — drag files into the correct group in the project navigator
-2. **Register channel** — add to the ICA client's VC registry initialization code
+1. **Add to native build tool project** — drag files into the correct group in the project navigator
+2. **Register channel** — add to the protocol client's channel registry initialization code
 3. **Target membership** — ensure `.m` files are in the correct build target
 4. **Test target** — ensure test files are in the test target only
 5. **Verify build** — run incremental build to confirm compilation

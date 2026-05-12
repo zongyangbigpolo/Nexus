@@ -40,7 +40,7 @@ Query `ALERTS{alertname="<name>"}` to extract full label set and determine `fire
 ### Splunk Alert URL
 
 ```
-https://<host>.splunkcloud.com/app/<app>/@go?sid=scheduler_<encoded-sid>
+https://observability.example.com/app/<app>/@go?sid=scheduler_<encoded-sid>
 ```
 
 Parse SID to extract `firedAt`, `appName`, Splunk instance. Look up saved search to get SPL query, then query events.

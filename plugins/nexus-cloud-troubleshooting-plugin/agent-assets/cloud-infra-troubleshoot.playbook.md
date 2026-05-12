@@ -21,7 +21,7 @@ Reference material for the [cloud-infra-troubleshoot agent](../agents/cloud-infr
 **JIRA**: {jiraId or "N/A"}
 **Cloud Provider**: {AWS/Azure/GCP/on-prem}
 **Cluster**: {cluster}
-**K8s Version**: {version}
+**Kubernetes Version**: {version}
 
 ### Issue Summary
 {1-3 sentence description of the infrastructure issue}
@@ -63,7 +63,7 @@ Reference material for the [cloud-infra-troubleshoot agent](../agents/cloud-infr
 ```bash
 # Overall cluster status
 kubectl cluster-info
-kubectl get componentstatuses  # Deprecated in newer K8s but still useful
+kubectl get componentstatuses  # Deprecated in newer Kubernetes but still useful
 kubectl get nodes -o wide
 
 # Node conditions

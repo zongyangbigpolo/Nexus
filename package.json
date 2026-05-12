@@ -1,0 +1,12 @@
+{
+  "name": "nexus-agent-harness",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "validate": "node scripts/validate-assets.js",
+    "check:runtime": "node scripts/check-runtime.js",
+    "smoke:eval-provider": "node scripts/smoke-eval-provider.js",
+    "phase0": "npm run validate && npm run check:runtime && npm run smoke:eval-provider"
+  }
+}

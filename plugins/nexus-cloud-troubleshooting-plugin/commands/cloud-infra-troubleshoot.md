@@ -42,7 +42,7 @@ Diagnose infrastructure-level issues across Kubernetes clusters, Docker environm
 | **Networking** | DNS resolution, ingress controllers, service mesh, CNI, network policies |
 | **Storage** | PV/PVC issues, CSI driver failures, storage class problems |
 | **Docker/Container Runtime** | containerd/CRI-O issues, image pull failures, runtime crashes |
-| **Cloud Provider** | VM health, managed K8s control plane, cloud networking, LB health |
+| **Cloud Provider** | VM health, managed Kubernetes control plane, cloud networking, LB health |
 | **Resource Capacity** | CPU/memory/disk pressure, IPAM exhaustion, quota limits |
 
 ## Investigation Flow

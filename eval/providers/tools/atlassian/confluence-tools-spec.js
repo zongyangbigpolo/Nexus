@@ -7,7 +7,7 @@ export const confluenceToolsSpecs = [
       parameters: {
         type: "object",
         properties: {
-          space: { type: "string", description: "Confluence space key (e.g. SPA, CWS)" },
+          space: { type: "string", description: "Confluence space key (e.g. APP, DOCS)" },
           title: { type: "string", description: "Page title" },
           type: { type: "string", description: "Content type — typically 'page'" },
           body: {
@@ -38,7 +38,7 @@ export const confluenceToolsSpecs = [
       parameters: {
         type: "object",
         properties: {
-          space: { type: "string", description: "Confluence space key (e.g. SPA, CWS)" },
+          space: { type: "string", description: "Confluence space key (e.g. APP, DOCS)" },
           title: { type: "string", description: "Page title" },
           body: { type: "string", description: "Page body content in Confluence storage format (HTML)" },
           parentId: { type: "string", description: "Optional parent page ID to nest the new page under" }
@@ -98,7 +98,7 @@ export const confluenceToolsSpecs = [
       parameters: {
         type: "object",
         properties: {
-          cql: { type: "string", description: "CQL query string (e.g. space=SPA AND title~\"Feature\")" },
+          cql: { type: "string", description: "CQL query string (e.g. space=APP AND title~\"Feature\")" },
           limit: { type: "number", description: "Maximum number of results to return" }
         },
         required: []
@@ -113,7 +113,7 @@ export const confluenceToolsSpecs = [
       parameters: {
         type: "object",
         properties: {
-          space: { type: "string", description: "Confluence space key (e.g. SPA)" }
+          space: { type: "string", description: "Confluence space key (e.g. APP)" }
         },
         required: []
       }

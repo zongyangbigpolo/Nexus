@@ -1,23 +1,23 @@
 ---
 name: crash-log-analysis
 description: >
-  Crash log analysis for icaclientmac. Parse macOS crash reports, symbolicate stack traces,
+  Crash log analysis for target repository. Parse desktop OS crash reports, symbolicate stack traces,
   identify root causes, and suggest fixes.
 trigger: |
   Activate when the user mentions:
   - Crash log, crash report, or .crash file
   - EXC_BAD_ACCESS, SIGABRT, or SIGSEGV
   - Symbolication or stack trace analysis
-  - Sentry crash or crash reporting
+  - crash monitoring crash or crash reporting
 ---
 
 # Purpose
 
-Analyze macOS crash logs from icaclientmac to identify root causes and suggest fixes.
+Analyze desktop OS crash logs from target repository to identify root causes and suggest fixes.
 
 # Crash Report Structure
 
-A macOS crash report contains:
+A desktop OS crash report contains:
 1. **Header** — process name, bundle ID, version, OS version
 2. **Exception Information** — exception type, signal, faulting thread
 3. **Thread Backtraces** — stack frames for all threads
@@ -29,7 +29,7 @@ A macOS crash report contains:
 |-----------|--------|-------------|
 | `EXC_BAD_ACCESS` | `SIGSEGV` / `SIGBUS` | Accessing deallocated memory, null pointer dereference |
 | `EXC_CRASH` | `SIGABRT` | Assertion failure, uncaught exception, `abort()` |
-| `EXC_BREAKPOINT` | `SIGTRAP` | Swift runtime error, force-unwrap nil, precondition failure |
+| `EXC_BREAKPOINT` | `SIGTRAP` | native UI runtime error, force-unwrap nil, precondition failure |
 | `EXC_BAD_INSTRUCTION` | `SIGILL` | Invalid CPU instruction (corrupt binary) |
 | `EXC_RESOURCE` | — | Resource limit exceeded (memory, CPU) |
 
@@ -37,13 +37,13 @@ A macOS crash report contains:
 
 ## Using atos
 ```bash
-atos -arch x86_64 -o ICAClientUniversalBinary.app.dSYM/Contents/Resources/DWARF/ICAClientUniversalBinary -l 0x100000000 0x<address>
+atos -arch primary_arch -o SampleApp.app.dSYM/Contents/Resources/DWARF/SampleApp -l 0x100000000 0x<address>
 ```
 
-## Using Xcode
-1. Open Xcode → Window → Devices and Simulators → View Device Logs
+## Using native build tool
+1. Open native build tool → Window → Devices and Simulators → View Device Logs
 2. Import the .crash file
-3. Xcode symbolicates automatically if dSYM is available
+3. native build tool symbolicates automatically if dSYM is available
 
 # Analysis Workflow
 
@@ -53,18 +53,18 @@ atos -arch x86_64 -o ICAClientUniversalBinary.app.dSYM/Contents/Resources/DWARF/
 4. **Check the faulting address** — `0x0` suggests null pointer; small values suggest use-after-free
 5. **Look for patterns** — same crash across multiple reports suggests a systemic issue
 
-# Sentry Integration
+# crash monitoring Integration
 
-icaclientmac uses Sentry for crash reporting:
+target repository uses crash monitoring for crash reporting:
 - Crashes are automatically uploaded with symbolicated stack traces
-- Sentry groups similar crashes into issues
-- Check Sentry dashboard for crash frequency and affected versions
+- crash monitoring groups similar crashes into issues
+- Check crash monitoring dashboard for crash frequency and affected versions
 
-# Common icaclientmac Crash Patterns
+# Common target repository Crash Patterns
 
 | Pattern | Stack Hint | Likely Cause | Fix |
 |---------|-----------|-------------|-----|
-| VC data callback crash | `didReceiveData:` | Data received after channel close | Check `isOpen` before processing |
+| channel data callback crash | `didReceiveData:` | Data received after channel close | Check `isOpen` before processing |
 | UI thread assertion | `__NSCFString` / Main Thread | Background thread UI update | Dispatch to main queue |
-| ObjC message to dealloc'd | `objc_msgSend` + zombie | Weak reference not zeroed | Use `weak` property, check nil |
-| Swift force-unwrap | `Swift runtime` | `nil` on force-unwrap `!` | Use `guard let` / `if let` |
+| native message to dealloc'd | `objc_msgSend` + zombie | Weak reference not zeroed | Use `weak` property, check nil |
+| native UI force-unwrap | `native UI runtime` | `nil` on force-unwrap `!` | Use `guard let` / `if let` |

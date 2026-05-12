@@ -1,7 +1,7 @@
 - description: Test unit test strategy definition for a JIRA feature
   vars:    
     __userPrompt: "jira={{jira}} scope={{scope}}"
-    jira: SPA-9876
+    jira: APP-9876
     scope: unit    
   assert:
     - type: llm-rubric
@@ -10,7 +10,7 @@
 
         Score 1.0 if ALL of the following are true:
         - Identifies this as a unit test strategy definition task
-        - References JIRA ID SPA-9876 
+        - References JIRA ID APP-9876 
         - Reads or references the repository AGENTS.md for test frameworks and conventions                
         - Includes coverage targets and does NOT recommend E2E tests — scope is unit only
       threshold: 1

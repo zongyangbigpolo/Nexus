@@ -1,28 +1,28 @@
 ---
 name: cocoapods-management
 description: >
-  CocoaPods dependency management for icaclientmac. Covers pod install, update,
+  dependency manager dependency management for target repository. Covers pod install, update,
   Podfile configuration, and common dependency issues.
 trigger: |
   Activate when the user mentions:
-  - CocoaPods, Podfile, or pod install
+  - dependency manager, Podfile, or pod install
   - Dependency management or third-party libraries
-  - Sentry, OCMock, or OHHTTPStubs integration
+  - crash monitoring, mock framework, or HTTP stubbing framework integration
   - Module not found after pod changes
 ---
 
 # Purpose
 
-Manage CocoaPods dependencies in the icaclientmac project. The project uses CocoaPods 1.13.0 for third-party library management.
+Manage dependency manager dependencies in the target repository project. The project uses dependency manager for third-party library management.
 
 # Known Dependencies
 
 | Pod | Purpose | Target |
 |-----|---------|--------|
-| Sentry | Crash reporting and error tracking | Main app |
-| OCMock | ObjC mocking framework | Test target |
-| OHHTTPStubs | HTTP request stubbing | Test target |
-| CWAMacPreferences | Shared preferences framework | Main app |
+| crash monitoring | Crash reporting and error tracking | Main app |
+| mock framework | native mocking framework | Test target |
+| HTTP stubbing framework | HTTP request stubbing | Test target |
+| preferences framework | Shared preferences framework | Main app |
 
 # Common Commands
 
@@ -69,15 +69,15 @@ pod repo update
 pod install
 ```
 
-## "Module 'PodName' not found" in Xcode
+## "Module 'PodName' not found" in native build tool
 1. Ensure you opened `.xcworkspace` (not `.xcodeproj`)
 2. Run `pod install`
 3. Clean build folder: Product > Clean Build Folder
-4. Restart Xcode
+4. Restart native build tool
 
-## Xcode version mismatch warning
-If CocoaPods warns about Xcode version:
+## native build tool version mismatch warning
+If dependency manager warns about native build tool version:
 ```bash
-sudo xcode-select -s /Applications/Xcode16.2.app/Contents/Developer
+sudo xcode-select -s /Applications/native build tool16.2.app/Contents/Developer
 pod install
 ```

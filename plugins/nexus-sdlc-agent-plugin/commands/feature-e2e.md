@@ -12,7 +12,7 @@ Execute the complete feature delivery pipeline: design → publish → plan → 
 
 ## JIRA Feature ID
 
-${input:jira:JIRA Feature/Epic ID (e.g., HDX-12345)}
+${input:jira:JIRA Feature/Epic ID (e.g., APP-12345)}
 
 ---
 

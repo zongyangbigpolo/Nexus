@@ -39,7 +39,7 @@ User can interrupt at any point, but default is continuous execution.
 
 **Input**:
 ```
-epic_id: "SPAOP-10702"
+epic_id: "APP2-10702"
 ```
 
 **Process**:
@@ -88,7 +88,7 @@ epic_context: { ... from router ... }
 
 **Input**:
 ```
-story_id: "SPAOP-10708"
+story_id: "APP2-10708"
 epic_context: { ... }  # optional, for Epic status update
 ```
 
@@ -119,15 +119,15 @@ epic_context: { ... }  # optional, for Epic status update
 
 **Input**:
 ```
-story_id: "SPAOP-10708"
+story_id: "APP2-10708"
 commit_message: "Add GoogleUserIdType column to SiteSettings"
 ```
 
 **Process**:
 ```
 1. Verify: git branch --show-current contains story_id
-   - Branch: feature/SPAOP-10708-AddGoogleUserIdTypeColumn
-   - Expected JIRA ID in commit: SPAOP-10708 ✓
+   - Branch: feature/APP2-10708-AddGoogleUserIdTypeColumn
+   - Expected JIRA ID in commit: APP2-10708 ✓
 2. Stage all changes: git add .
 3. Commit: git commit -m "{STORY_ID} {message} [AI-Generated]"
    - CRITICAL: STORY_ID must match JIRA ID from branch name
@@ -170,9 +170,9 @@ commit_message: "Add GoogleUserIdType column to SiteSettings"
 ```
 epic_context: { ... }
 completed_stories: [
-  { id: "SPAOP-10708", branch: "feature/...", status: "Ready for Test" },
-  { id: "SPAOP-10709", branch: "feature/...", status: "Ready for Test" },
-  { id: "SPAOP-10710", branch: "feature/...", status: "Ready for Test" }
+  { id: "APP2-10708", branch: "feature/...", status: "Ready for Test" },
+  { id: "APP2-10709", branch: "feature/...", status: "Ready for Test" },
+  { id: "APP2-10710", branch: "feature/...", status: "Ready for Test" }
 ]
 ```
 

@@ -2,7 +2,7 @@
 name: git
 description: Git operations - branch creation, checkout, commit, push, and PR summary generation.
 agent: git-ops
-argument-hint: "action=branch|checkout|pull|commit|push|pr jira=SPA-12345"
+argument-hint: "action=branch|checkout|pull|commit|push|pr jira=APP-12345"
 ---
 
 Execute Git operations following team conventions.
@@ -15,13 +15,13 @@ Execute Git operations following team conventions.
 
 **Examples**:
 ```
-/git action=branch jira=SPA-12345
-/git action=checkout jira=SPA-12345
-/git action=checkout branchName=feature/SPA-12345-MyFeature
+/git action=branch jira=APP-12345
+/git action=checkout jira=APP-12345
+/git action=checkout branchName=feature/APP-12345-MyFeature
 /git action=pull
-/git action=commit jira=SPA-12345 message="Add new endpoint"
+/git action=commit jira=APP-12345 message="Add new endpoint"
 /git action=push
-/git action=pr jira=SPA-12345
+/git action=pr jira=APP-12345
 ```
 
 **Actions**:

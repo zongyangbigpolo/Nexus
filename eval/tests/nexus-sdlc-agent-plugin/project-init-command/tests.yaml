@@ -1,10 +1,10 @@
 - vars:
-    jira: CTXENG-9900
+    jira: ENG-9900
   assert:
     - type: llm-rubric
       value: |
-        Evaluate whether the agent correctly handled a project initialization request for jira=CTXENG-9900.
+        Evaluate whether the agent correctly handled a project initialization request for jira=ENG-9900.
 
         Score 1.0 if ALL of the following are true:
-        - Identifies this as a full project init task for CTXENG-9900        
+        - Identifies this as a full project init task for ENG-9900        
       threshold: 1

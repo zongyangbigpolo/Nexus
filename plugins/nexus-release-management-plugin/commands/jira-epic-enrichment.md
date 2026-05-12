@@ -2,7 +2,7 @@
 name: jira-epic-enrichment
 description: Enrich a list of Jira issue keys with their linked Epic (key, summary, status). Uses batched getJiraIssue calls (max 3 in parallel) for reliability. Outputs an augmented table with Epic columns added.
 agent: jira-github-report-analyzer
-argument-hint: "jiraKeys=SPA-123,SPA-456,SPAOP-789"
+argument-hint: "jiraKeys=APP-123,APP-456,APP2-789"
 ---
 
 Enrich the given Jira issue keys with their linked Epic details.
@@ -35,7 +35,7 @@ Return a markdown table with Epic columns added:
 ```markdown
 | Jira Key | Summary | Linked Epic | Epic Summary | Epic Status |
 |---|---|---|---|---|
-| SPA-12345 | Short summary | SPA-10000 | Epic title | In Progress |
-| SPA-12346 | Short summary | No Epic linked | N/A | N/A |
-| SPA-12347 | Short summary | Not fetched | N/A | N/A |
+| APP-12345 | Short summary | APP-10000 | Epic title | In Progress |
+| APP-12346 | Short summary | No Epic linked | N/A | N/A |
+| APP-12347 | Short summary | Not fetched | N/A | N/A |
 ```

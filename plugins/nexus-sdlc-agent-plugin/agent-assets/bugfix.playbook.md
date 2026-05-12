@@ -37,7 +37,7 @@ Use OS-appropriate syntax based on detected environment:
 
 ### File Search
 
-| Task | Windows (PowerShell) | macOS/Linux (bash) |
+| Task | Windows (PowerShell) | desktop OS/Linux (bash) |
 |------|---------------------|-------------------|
 | Find files by pattern | `Get-ChildItem -Recurse -Filter "*.ts"` | `find . -name "*.ts"` |
 | Search in files | `Select-String -Pattern "{text}" -Path "*.ts" -Recurse` | `grep -r "{text}" --include="*.ts"` |
@@ -45,7 +45,7 @@ Use OS-appropriate syntax based on detected environment:
 
 ### Process Investigation
 
-| Task | Windows (PowerShell) | macOS/Linux (bash) |
+| Task | Windows (PowerShell) | desktop OS/Linux (bash) |
 |------|---------------------|-------------------|
 | Check port usage | `Get-NetTCPConnection -LocalPort {port}` | `lsof -i :{port}` |
 | List processes | `Get-Process \| Where-Object {$_.Name -like "*{name}*"}` | `ps aux \| grep {name}` |

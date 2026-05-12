@@ -2,14 +2,14 @@
 
 # Learn more about building a configuration: https://promptfoo.dev/docs/configuration/guide
 
-description: 'SPA Common AI Agents - Start Prompt Evaluation'
+description: 'APP Common AI Agents - Start Prompt Evaluation'
 prompts:
   - file://../../../providers/copilot-prompt-loader.js
 defaultTest:
   vars:
-    __promptFile: spa-sdlc-agent-plugin/commands/start.md    
+    __promptFile: nexus-sdlc-agent-plugin/commands/start.md    
   options:
-    provider: file://../../../providers/azure-gpt5-provider.js
+    provider: file://../../../providers/generic-llm-provider.js
 providers:
-  - file://../../../providers/azure-gpt5-provider.js
+  - file://../../../providers/generic-llm-provider.js
 tests: file://tests.yaml

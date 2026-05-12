@@ -1,6 +1,6 @@
 # AGENTS.md
 
-nexus-common-agent-plugin packages the reusable Copilot assets that other macOS workflows build on: shared operational agents, slash commands, instruction files, and reusable skills. It is designed to be installed and consumed as a VS Code plugin.
+nexus-common-agent-plugin packages the reusable Copilot assets that other desktop OS workflows build on: shared operational agents, slash commands, instruction files, and reusable skills. It is designed to be installed and consumed as a VS Code plugin.
 
 ## Project Overview
 

@@ -16,9 +16,9 @@ handoffs:
     agent: bugfix
     prompt: "HANDOFF from analyzer: Perform root cause analysis on logs. Context: see findings above."
     send: true
-  - label: Cost analysis
-    agent: azure-ops
-    prompt: "HANDOFF from analyzer: Perform cost analysis and optimization review. Context: see analysis report above."
+  - label: Cloud infrastructure analysis
+    agent: cloud-infra-troubleshoot
+    prompt: "HANDOFF from analyzer: Perform cloud infrastructure analysis and optimization review. Context: see analysis report above."
     send: true
   - label: Code review
     agent: developer

@@ -18,12 +18,12 @@ Create a comprehensive test plan from a feature specification.
 
 1. **Load specification** — read spec file or fetch JIRA description
 2. **Analyze** — identify testable requirements, edge cases, integration points
-3. **Generate test cases** — functional + non-functional, grounded in SPA/NetScaler domain
+3. **Generate test cases** — functional + non-functional, grounded in APP/NetScaler domain
 4. **Write to Confluence** — section by section with validation
 
 ## Usage
 
 ```
 /feature-testplan spec=.github/specs/my-feature.spec.md confluencePage=123456
-/feature-testplan spec=SPAOP-12345
+/feature-testplan spec=APP2-12345
 ```

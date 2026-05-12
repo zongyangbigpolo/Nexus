@@ -9,7 +9,7 @@ argument-hint: "jira=<JIRA_ID>"
 
 End-to-end repository initialization for AI-assisted development.
 
-**JIRA ID**: ${input:jira:JIRA ID (e.g., SPAOP-12345, CTXENG-1234)}
+**JIRA ID**: ${input:jira:JIRA ID (e.g., APP2-12345, ENG-1234)}
 
 ## Workflow
 
@@ -35,7 +35,7 @@ Per [architecturemd workflow](architecturemd.md):
 ### Phase 3.5: Go + Protobuf Enrichment (conditional)
 If `go.mod` exists in the repository root:
 1. Identify the repo name (e.g., `acs-policy-service`)
-2. Check `icaclientmac/protobuf` repo for a matching folder with the same name
+2. Check `target repository/protobuf` repo for a matching folder with the same name
 3. If found, scan `.proto` files to extract gRPC service definitions, methods, and message types
 4. Enrich the **API Surface** section in AGENTS.md with API contract tables from proto definitions
 5. Update ARCHITECTURE.md with gRPC service interaction details

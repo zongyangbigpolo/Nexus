@@ -2,7 +2,7 @@
 name: github-jira-commit-linkage
 description: Find GitHub commits and pull requests that reference a given set of Jira keys within a repo scope and timeframe. Returns a table mapping each Jira key to its repo, commit SHA, and PR.
 agent: jira-github-report-analyzer
-argument-hint: "jiraKeys=SPA-123,SPA-456 repoScope=ztna-ui* timeframe=-2w"
+argument-hint: "jiraKeys=APP-123,APP-456 repoScope=access-ui* timeframe=-2w"
 ---
 
 Find GitHub references (commits and PRs) for the given Jira keys.
@@ -15,10 +15,10 @@ Find GitHub references (commits and PRs) for the given Jira keys.
 ## Instructions
 
 ### 1. Resolve repo list
-If `repoScope` is a prefix glob (e.g., `ztna-ui*`), expand it using `search_repositories` and use the `full_name` field (`<owner>/<repo>`) from each matching repository.
+If `repoScope` is a prefix glob (e.g., `access-ui*`), expand it using `search_repositories` and use the `full_name` field (`<owner>/<repo>`) from each matching repository.
 If no `repoScope` provided:
 - Load `repos` array and `githubSPABaseProjectUrl` from [../config/jira-assignees-github-repos.json](../config/jira-assignees-github-repos.json).
-- Derive the GitHub owner/org from `githubSPABaseProjectUrl` (e.g., `https://github.com/citrix/` → `citrix`).
+- Derive the GitHub owner/org from `githubSPABaseProjectUrl` (e.g., `https://github.com/organization/` → `organization`).
 - Construct the full repo identifier as `<owner>/<repoName>` for each entry in `repos`.
 - Use these full `owner/repo` identifiers for all GitHub MCP calls.
 
@@ -44,6 +44,6 @@ Return a markdown table:
 ```markdown
 | Jira Key | Repo | Commit SHA | Commit URL | PR |
 |---|---|---|---|---|
-| SPA-12345 | ztna-ui-cas-dashboard-mfe | abc1234 | https://github.com/… | #456 |
-| SPA-12346 | Not found | Not found | Not found | Not found |
+| APP-12345 | access-ui-cas-dashboard-mfe | abc1234 | https://github.com/… | #456 |
+| APP-12346 | Not found | Not found | Not found | Not found |
 ```

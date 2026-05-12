@@ -1,8 +1,8 @@
 - description: Test feature planning with Confluence spec decomposition into epics and stories
   vars:
     action: create
-    source: 'https://citrix.atlassian.net/wiki/spaces/CWS/pages/834306930/CTXENG-2222+SPA+CEP+-+Provision+users+in+Google+Directory+using+UPN+as+Email'
-    jira: CTXENG-2222
+    source: 'https://example.atlassian.net/wiki/spaces/DOCS/pages/834306930/ENG-2222+APP+CEP+-+Provision+users+in+Google+Directory+using+UPN+as+Email'
+    jira: ENG-2222
   assert:
     - type: llm-rubric
       value: |
@@ -15,17 +15,17 @@
         - The agent read and understood the spec content about UPN-based provisioning for Google Directory
 
         **Epic Decomposition** (must identify at a minimum 3 epics):
-        - Epic 1: Admin UI changes (ztna-ui-cep-mfe) — configuration controls for choosing Email vs UPN
-        - Epic 2: SPA Proxy Service changes — orchestrating the UPN/Email setting across deployments
-        - Epic 3: SPA Plugin (on-premise component) — integrating UPN-based lookups into app enumeration and launch workflows
+        - Epic 1: Admin UI changes (access-ui-cep-mfe) — configuration controls for choosing Email vs UPN
+        - Epic 2: APP Proxy Service changes — orchestrating the UPN/Email setting across deployments
+        - Epic 3: APP Plugin (on-premise component) — integrating UPN-based lookups into app enumeration and launch workflows
 
         **Hierarchy Structure**:
-        - Proposes a CTXENG → Epics → Stories hierarchy
+        - Proposes a ENG → Epics → Stories hierarchy
         - Each epic has at least one story underneath it
         - Stories include meaningful summaries related to the spec content
 
         **Labels and Metadata**:
-        - References the JIRA ID CTXENG-2222 explicitly
+        - References the JIRA ID ENG-2222 explicitly
         - Includes AI-Generated label on created tickets
 
         **Checkpoint Behavior**:

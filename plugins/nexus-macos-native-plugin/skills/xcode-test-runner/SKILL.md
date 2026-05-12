@@ -1,7 +1,7 @@
 ---
 name: xcode-test-runner
 description: >
-  XCTest execution skill for icaclientmac. Handles test invocation via xcodebuild,
+  XCTest execution skill for target repository. Handles test invocation via xcodebuild,
   xcresult parsing, coverage reporting, and failure analysis.
 trigger: |
   Activate when the user mentions:
@@ -13,13 +13,13 @@ trigger: |
 
 # Purpose
 
-Execute and analyze XCTest test runs for the icaclientmac project. Handles test scope selection, xcodebuild test invocation, xcresult parsing, and failure diagnosis.
+Execute and analyze XCTest test runs for the target repository project. Handles test scope selection, xcodebuild test invocation, xcresult parsing, and failure diagnosis.
 
 # Prerequisites
 
 1. Read `AGENTS.md` for test target names and conventions
 2. Ensure the project builds successfully before running tests
-3. Check that OCMock and OHHTTPStubs pods are installed
+3. Check that mock framework and HTTP stubbing framework pods are installed
 
 # Test Execution Commands
 
@@ -27,9 +27,9 @@ Execute and analyze XCTest test runs for the icaclientmac project. Handles test 
 
 ```bash
 xcodebuild test \
-  -workspace ICAClientUniversalBinary.xcworkspace \
+  -workspace SampleApp.xcworkspace \
   -scheme <TEST_SCHEME> \
-  -destination 'platform=macOS' \
+  -destination 'platform=desktop OS' \
   -UseNewBuildSystem=NO \
   -resultBundlePath ./TestResults.xcresult \
   | tee test.log
@@ -39,9 +39,9 @@ xcodebuild test \
 
 ```bash
 xcodebuild test \
-  -workspace ICAClientUniversalBinary.xcworkspace \
+  -workspace SampleApp.xcworkspace \
   -scheme <TEST_SCHEME> \
-  -destination 'platform=macOS' \
+  -destination 'platform=desktop OS' \
   -UseNewBuildSystem=NO \
   -only-testing:<TEST_TARGET>/<TestClassName> \
   -resultBundlePath ./TestResults.xcresult
@@ -51,9 +51,9 @@ xcodebuild test \
 
 ```bash
 xcodebuild test \
-  -workspace ICAClientUniversalBinary.xcworkspace \
+  -workspace SampleApp.xcworkspace \
   -scheme <TEST_SCHEME> \
-  -destination 'platform=macOS' \
+  -destination 'platform=desktop OS' \
   -UseNewBuildSystem=NO \
   -only-testing:<TEST_TARGET>/<TestClassName>/<testMethodName> \
   -resultBundlePath ./TestResults.xcresult
@@ -96,8 +96,8 @@ xcrun xccov view --report --json ./TestResults.xcresult
 |----------|---------|-------------|
 | Test timeout | `Test timed out after` | Increase timeout or fix async wait |
 | Assertion failure | `XCTAssert*` failed | Fix expected vs actual values |
-| Mock setup | `OCMock` unexpected invocation | Update mock expectations |
-| Network stub | `OHHTTPStubs` no match | Add stub for the request URL |
+| Mock setup | `mock framework` unexpected invocation | Update mock expectations |
+| Network stub | `HTTP stubbing framework` no match | Add stub for the request URL |
 | Setup crash | `setUp()` or `tearDown()` crash | Fix test fixture initialization |
 | Missing dependency | Module not found in test target | Add to test target's dependencies |
 
@@ -110,17 +110,17 @@ xcrun xccov view --report --json ./TestResults.xcresult
 
 # Test Organization
 
-Expected test structure in icaclientmac:
+Expected test structure in target repository:
 
 ```
 <TestTarget>/
 ├── <Feature>Tests/
-│   ├── <Feature>Tests.m          # ObjC test class
-│   └── <Feature>Tests.swift      # Swift test class
+│   ├── <Feature>Tests.m          # native test class
+│   └── <Feature>Tests.swift      # native UI test class
 ├── Mocks/
-│   └── Mock<Protocol>.m          # OCMock-based mocks
+│   └── Mock<Protocol>.m          # mock framework-based mocks
 └── Stubs/
-    └── <API>Stubs.m              # OHHTTPStubs configurations
+    └── <API>Stubs.m              # HTTP stubbing framework configurations
 ```
 
 # Coverage Requirements

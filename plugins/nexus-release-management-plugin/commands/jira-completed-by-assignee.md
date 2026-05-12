@@ -2,7 +2,7 @@
 name: jira-completed-by-assignee
 description: Query Jira for completed issues by one or more assignees within a timeframe using fast, reliable JQL. Returns a table of Jira keys, summaries, statuses, and assignees.
 agent: jira-github-report-analyzer
-argument-hint: "assignees=john.doe,jane.smith timeframe=-2w projects=SPA,SPAOP"
+argument-hint: "assignees=john.doe,jane.smith timeframe=-2w projects=APP,APP2"
 ---
 
 Fetch completed Jira issues for the specified assignees and timeframe.
@@ -51,7 +51,7 @@ Return a markdown table:
 ```markdown
 | Assignee | Jira Key | Jira Status | Summary |
 |---|---|---|---|
-| john.doe | SPA-12345 | Done | Short one-line summary |
+| john.doe | APP-12345 | Done | Short one-line summary |
 ```
 
 List all issues grouped by assignee, sorted by resolved date descending. If an assignee has no completed issues, include a row: `| <name> | — | — | No completed issues in period |`.

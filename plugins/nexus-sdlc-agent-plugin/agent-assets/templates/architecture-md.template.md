@@ -133,7 +133,7 @@ enabling efficient navigation and effective contribution. Update as the codebase
 | **Compute** | [e.g., AKS, ECS, App Service, Lambda] |
 | **Networking** | [e.g., VNet, Load Balancer, API Gateway] |
 | **IaC** | [e.g., Terraform, Bicep, CloudFormation] |
-| **CI/CD** | [e.g., GitHub Actions, Azure DevOps, Jenkins] |
+| **CI/CD** | [e.g., GitHub Actions, Azure DevOps, CI system] |
 | **Environments** | [e.g., dev, staging, production] |
 
 ---

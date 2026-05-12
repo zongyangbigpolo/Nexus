@@ -1,19 +1,19 @@
 ---
 name: copyright-headers
-description: Copyright header rules for source code files. Ensures Citrix copyright notice is present and year is current.
+description: Copyright header rules for source code files. Ensures Organization copyright notice is present and year is current.
 applyTo: '**/*.{cs,ts,tsx,js,jsx,py,go,java,swift,kt,rs,cpp,c,h,hpp,sql,ps1,sh,bash}'
 ---
 
 # Copyright Headers
 
-## Rule: All source code files MUST have Citrix copyright header
+## Rule: All source code files MUST have Organization copyright header
 
 ### For NEW files
 
 Add copyright header as the **first line** (as a comment):
 
 ```
-Copyright © {CURRENT_YEAR}. Citrix Systems, Inc. All Rights Reserved. Confidential & Proprietary.
+Copyright © {CURRENT_YEAR}. Organization Systems, Inc. All Rights Reserved. Confidential & Proprietary.
 ```
 
 **Current year**: Use the current calendar year from the system date context (e.g., 2026). Do not hardcode a specific year in instruction text.
@@ -33,7 +33,7 @@ Copyright © {CURRENT_YEAR}. Citrix Systems, Inc. All Rights Reserved. Confident
 
 | Language                                                         | Comment Syntax             |
 | ---------------------------------------------------------------- | -------------------------- |
-| C#, Java, TypeScript, JavaScript, Go, Swift, Kotlin, Rust, C/C++ | `// Copyright © ...`       |
+| C#, Java, TypeScript, JavaScript, Go, native UI, Kotlin, Rust, C/C++ | `// Copyright © ...`       |
 | Python                                                           | `# Copyright © ...`        |
 | PowerShell                                                       | `# Copyright © ...`        |
 | Shell/Bash                                                       | `# Copyright © ...`        |
@@ -45,11 +45,11 @@ Copyright © {CURRENT_YEAR}. Citrix Systems, Inc. All Rights Reserved. Confident
 
 ```
 Is this a NEW file?
-├─► YES: Add "Copyright © {CURRENT_YEAR}. Citrix..."
+├─► YES: Add "Copyright © {CURRENT_YEAR}. Organization..."
 └─► NO: Check line 1 for copyright
          │
          Does copyright exist?
-         ├─► NO: Add "Copyright © {CURRENT_YEAR}. Citrix..."
+         ├─► NO: Add "Copyright © {CURRENT_YEAR}. Organization..."
          └─► YES: Check year
                   │
                   Is year/end-year = {CURRENT_YEAR}?

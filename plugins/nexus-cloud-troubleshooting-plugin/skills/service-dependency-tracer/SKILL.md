@@ -1,6 +1,6 @@
 ---
 name: service-dependency-tracer
-description: Trace K8s service dependency chains to find the true root failure. When service A is crashing or unhealthy, it may be because dependent service B is down. This skill inspects deployment manifests for initContainer/readiness dependencies and environment variable service references, checks health of dependent services, and recursively traces to the leaf/base service that is the actual root failure.
+description: Trace Kubernetes service dependency chains to find the true root failure. When service A is crashing or unhealthy, it may be because dependent service B is down. This skill inspects deployment manifests for initContainer/readiness dependencies and environment variable service references, checks health of dependent services, and recursively traces to the leaf/base service that is the actual root failure.
 ---
 
 # Service Dependency Tracer Skill
@@ -84,7 +84,7 @@ kubectl get deployment <name> -n <ns> -o jsonpath='{.spec.template.spec.containe
 
 **Dependency indicators** (env var name contains):
 - `*_URL`, `*_HOST`, `*_ENDPOINT`, `*_ADDR`
-- `*_SERVICE_HOST`, `*_SERVICE_PORT` (K8s service discovery)
+- `*_SERVICE_HOST`, `*_SERVICE_PORT` (Kubernetes service discovery)
 - `DATABASE_URL`, `REDIS_URL`, `KAFKA_BROKERS`, `RABBITMQ_HOST`
 
 Extract hostname from URL values:

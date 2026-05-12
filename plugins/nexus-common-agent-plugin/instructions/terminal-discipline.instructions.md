@@ -1,6 +1,7 @@
 ---
 name: terminal-discipline
 description: Rules for managing terminals and long-running processes. Attach via "Add Context > Instructions" when running servers or simulators.
+applyTo: "**/*"
 ---
 
 # Terminal discipline
@@ -16,7 +17,7 @@ Treat commands like `dotnet run`, `npm start`, simulators, and local servers as 
 
 ## VS Code terminal management
 - If you need additional terminals, create them via VS Code (`workbench.action.terminal.new`).
-- Prefer naming terminals by purpose (example: `SPA-Proxy-Server`, `FFS-Simulator`, `Verification-Terminal`).
+- Prefer naming terminals by purpose (example: `APP-Proxy-Server`, `FFS-Simulator`, `Verification-Terminal`).
 
 ## Safety
 - Avoid `Ctrl+C` in server terminals.

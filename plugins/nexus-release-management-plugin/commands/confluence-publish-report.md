@@ -2,7 +2,7 @@
 name: confluence-publish-report
 description: Publish a Jira completion report table to Confluence. Resolves the space numeric ID, names the page as <requestor>_<PI>_<reportDate>_Jira_progress_report, creates or updates the page, and returns the published page URL.
 agent: jira-github-report-analyzer
-argument-hint: "requestor=himanshu.parihar pi=PI-2602 reportDate=2026-03-05 spaceKey=CWS parentPageId=1094516746"
+argument-hint: "requestor=himanshu.parihar pi=PI-2602 reportDate=2026-03-05 spaceKey=DOCS parentPageId=1094516746"
 ---
 
 Publish the Jira completion report to Confluence.
@@ -14,7 +14,7 @@ Publish the Jira completion report to Confluence.
 - **Report table** (markdown table from previous step): ${input:reportTable}
 - **Summary bullet points**: ${input:summaryBullets}
 - **Report period** (e.g. `February 5 – February 19, 2026`): ${input:reportPeriod}
-- **Confluence space key** (e.g. `CWS`): ${input:spaceKey:CWS}
+- **Confluence space key** (e.g. `DOCS`): ${input:spaceKey:DOCS}
 - **Parent page ID** (optional): ${input:parentPageId}
 - **cloudId** (required — resolved by agent via `list_accessible_resources` before calling this prompt): ${input:cloudId}
 
@@ -70,7 +70,7 @@ First check if a page with the same title already exists in the space:
 
 ### 5. Return result
 Output the published page URL in the format:
-`https://citrix.atlassian.net/wiki/spaces/<spaceKey>/pages/<pageId>/<page-title-slug>`
+`https://example.atlassian.net/wiki/spaces/<spaceKey>/pages/<pageId>/<page-title-slug>`
 
 ### Error handling
 - If `spaceKey` cannot be resolved to a numeric ID, report the error and ask the user to provide the numeric space ID directly.

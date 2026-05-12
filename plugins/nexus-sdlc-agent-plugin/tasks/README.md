@@ -13,13 +13,13 @@ This directory contains task files created by `dev-coordinator` during developme
 
 Files are named: `{JIRA_ID}-task.md`
 
-Example: `SPAOP-12345-task.md`
+Example: `APP2-12345-task.md`
 
 ## Contents
 
 Each task file contains:
 - Story/Bug context from JIRA
-- Parent Epic/CTXENG context
+- Parent Epic/ENG context
 - Implementation plan with steps
 - Progress log
 - Files modified

@@ -105,7 +105,7 @@ Check services critical to Kubernetes and cloud-native workloads:
 
 | Service Category | Azure | AWS | GCP |
 |-----------------|-------|-----|-----|
-| K8s managed | AKS | EKS | GKE |
+| Kubernetes managed | AKS | EKS | GKE |
 | Container registry | ACR | ECR | Artifact Registry |
 | Compute | Virtual Machines | EC2 | Compute Engine |
 | Identity | Entra ID / AAD | IAM | Cloud IAM |

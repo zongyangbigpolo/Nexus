@@ -1,6 +1,6 @@
 # Mac SDLC Agent Plugin
 
-`nexus-sdlc-agent-plugin` contains the structured delivery workflows for macOS engineering. It packages the prompts, agents, skills, templates, and instructions used for project initialization, specification authoring, architecture work, planning, implementation coordination, review, testing, and security analysis.
+`nexus-sdlc-agent-plugin` contains the structured delivery workflows for desktop OS engineering. It packages the prompts, agents, skills, templates, and instructions used for project initialization, specification authoring, architecture work, planning, implementation coordination, review, testing, and security analysis.
 
 ## What This Plugin Provides
 

@@ -68,7 +68,7 @@ Inspect the user's input and route to the correct parsing path:
 | `https://*.pagerduty.com/incidents/*` | PagerDuty URL | Fetch incident via API → extract alert labels |
 | Raw JSON with `details.firing` | PagerDuty payload | Parse labels directly |
 | `https://*.grafana.net/alerting/*` | Grafana URL | Query ALERTS{} in Prometheus → extract labels |
-| `https://*.splunkcloud.com*/app/*/@go?sid=*` | Splunk alert URL | Parse SID, fetch saved search, query events |
+| `https://observability.example.com/app/search/@go?sid=*` | Log analytics alert URL | Parse SID, fetch saved search, query events |
 | `alertName=... cluster=...` | Manual parameters | Use provided values directly |
 | None of the above | Unrecognized | Show supported formats and stop |
 
@@ -95,7 +95,7 @@ Load [cloud-health-checker](../skills/cloud-health-checker/SKILL.md) to check if
 |------------|-------------------|
 | Prometheus metric alert | Load `prometheus-alert-analyzer` → query current metric state, evaluate threshold, check recent deployments |
 | Log-based alert | Load `loki-log-analyzer` → query error patterns, correlate with timeline |
-| K8s infrastructure alert (OOM, restarts, node) | Load `k8s-cluster-diagnostics` → check node health, pod status, resource pressure |
+| Kubernetes infrastructure alert (OOM, restarts, node) | Load `k8s-cluster-diagnostics` → check node health, pod status, resource pressure |
 | Splunk-sourced alert | Use `splunk-query-builder` → fetch triggering events, analyze patterns |
 
 ## Phase 4: Evidence Collection
@@ -103,7 +103,7 @@ Load [cloud-health-checker](../skills/cloud-health-checker/SKILL.md) to check if
 For each investigation path, collect:
 - **Metrics**: Current values vs thresholds, trend over last 1h/6h/24h
 - **Logs**: Error patterns, stack traces, correlation IDs
-- **Events**: K8s events, deployment events, config changes
+- **Events**: Kubernetes events, deployment events, config changes
 - **Dependencies**: Upstream/downstream service health
 
 ## Phase 5: Root Cause Analysis

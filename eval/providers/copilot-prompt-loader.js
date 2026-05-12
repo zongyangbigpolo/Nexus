@@ -1,4 +1,3 @@
-// Copyright © 2026. Citrix Systems, Inc. All Rights Reserved. Confidential & Proprietary.
 /** 
  * Prompt loader for Copilot-style .md files.
  * Resolves ${input:varName:description} placeholders using test vars, so promptfoo can drive 

@@ -13,7 +13,7 @@ Operational details for the `feature-testplan-author` custom agent.
 | Test case format & examples | [Test Case Format](#test-case-format) |
 | Section templates | [Section Writing Templates](#section-writing-templates) |
 | Confluence update mechanics | [Confluence Update Mechanics](#confluence-update-mechanics) |
-| Citrix doc reference links | [Citrix Documentation Reference](#citrix-documentation-reference) |
+| Organization doc reference links | [Organization Documentation Reference](#organization-documentation-reference) |
 | Non-functional criteria | [Non-Functional Test Criteria](#non-functional-test-criteria) |
 | Priority definitions | [Priority Definitions](#priority-definitions) |
 
@@ -42,7 +42,7 @@ Use sparingly — only when preconditions and multi-step behavior genuinely need
 
 **Given**:
 - User has valid AD credentials
-- SaaS app configured with SAML SSO in SPA admin console
+- SaaS app configured with SAML SSO in APP admin console
 
 **When**:
 - User authenticates via StoreFront and clicks the SaaS app
@@ -127,8 +127,8 @@ Use sparingly — only when preconditions and multi-step behavior genuinely need
 - <Conditions assumed true during testing>
 
 ## References
-- [Citrix SPA Hybrid Documentation](https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid)
-- [NetScaler Gateway Documentation](https://docs.netscaler.com/en-us/netscaler-gateway/current-release/about-citrix-gateway.html)
+- [Organization APP Hybrid Documentation](https://docs.organization.com/en-us/organization-secure-private-access/hybrid)
+- [NetScaler Gateway Documentation](https://docs.netscaler.com/en-us/netscaler-gateway/current-release/about-organization-gateway.html)
 - <Additional relevant links>
 ```
 
@@ -209,11 +209,11 @@ Each functional section uses the table format and is organized by feature area:
 
 **Common integration pairs to consider:**
 - NetScaler Gateway ↔ StoreFront
-- Cloud Connector ↔ Citrix Cloud (SPA service)
+- Cloud Connector ↔ Organization Cloud (APP service)
 - NetScaler Gateway ↔ Authentication servers (LDAP, RADIUS, SAML IdP)
 - CSA Client ↔ NetScaler Gateway
 - Chrome Browser ↔ Chrome Enterprise Premium ↔ NetScaler Gateway
-- SPA Admin Console ↔ Cloud Connector (policy sync)
+- APP Admin Console ↔ Cloud Connector (policy sync)
 - StoreFront ↔ App enumeration service
 - Device Posture service ↔ Access policy engine
 
@@ -390,7 +390,7 @@ After any Confluence update, **ALWAYS verify**: Fetch updated page → confirm A
 
 ## Non-Functional Test Criteria
 
-### Performance Benchmarks (SPA Hybrid typical targets)
+### Performance Benchmarks (APP Hybrid typical targets)
 
 | Metric | Target | Notes |
 |--------|--------|-------|
@@ -421,46 +421,46 @@ After any Confluence update, **ALWAYS verify**: Fetch updated page → confirm A
 | NetScaler Gateway HA | Primary gateway failure; failover to secondary; session persistence |
 | StoreFront failover | Primary StoreFront unavailable; server group behavior |
 | Network interruption | Intermittent connectivity; VPN reconnection; partial packet loss |
-| Graceful degradation | Citrix Cloud unavailable; on-prem-only operation mode |
+| Graceful degradation | Organization Cloud unavailable; on-prem-only operation mode |
 
 ---
 
-## Citrix Documentation Reference
+## Organization Documentation Reference
 
 ### Always Fetch (Baseline)
 
 | URL | Purpose |
 |-----|---------|
-| `https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid` | SPA Hybrid overview, components, architecture, limitations |
-| `https://docs.netscaler.com/en-us/netscaler-gateway/current-release/about-citrix-gateway.html` | NetScaler Gateway architecture, user connection flows |
+| `https://docs.organization.com/en-us/organization-secure-private-access/hybrid` | APP Hybrid overview, components, architecture, limitations |
+| `https://docs.netscaler.com/en-us/netscaler-gateway/current-release/about-organization-gateway.html` | NetScaler Gateway architecture, user connection flows |
 
 ### Conditional Fetch (Based on Feature Scope)
 
 | Feature Area | URL |
 |-------------|-----|
 | Authentication | `https://docs.netscaler.com/en-us/netscaler-gateway/current-release/authentication-authorization` |
-| StoreFront | `https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid/spa-hybrid-storefront-config` |
-| NetScaler Config | `https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid/spa-hybrid-netscaler-configuration` |
-| Cloud Connector | `https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid/spa-hybrid-cloud-connector-configuration` |
-| Chrome / CEP | `https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid/spa-hybrid-cep-spa-integration` |
-| Device Posture | `https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid/spa-hybrid-device-posture` |
-| Troubleshooting | `https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid/spa-hybrid-troubleshoot-triage` |
-| System Requirements | `https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid/spa-hybrid-system-requirements` |
-| What's New | `https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid/spa-hybrid-whats-new` |
-| Known Issues | `https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid/spa-hybrid-known-issues` |
-| End User Flow | `https://docs.citrix.com/en-us/citrix-secure-private-access/hybrid/spa-hybrid-end-user-flow` |
+| StoreFront | `https://docs.organization.com/en-us/organization-secure-private-access/hybrid/spa-hybrid-storefront-config` |
+| NetScaler Config | `https://docs.organization.com/en-us/organization-secure-private-access/hybrid/spa-hybrid-netscaler-configuration` |
+| Cloud Connector | `https://docs.organization.com/en-us/organization-secure-private-access/hybrid/spa-hybrid-cloud-connector-configuration` |
+| Chrome / CEP | `https://docs.organization.com/en-us/organization-secure-private-access/hybrid/spa-hybrid-cep-spa-integration` |
+| Device Posture | `https://docs.organization.com/en-us/organization-secure-private-access/hybrid/spa-hybrid-device-posture` |
+| Troubleshooting | `https://docs.organization.com/en-us/organization-secure-private-access/hybrid/spa-hybrid-troubleshoot-triage` |
+| System Requirements | `https://docs.organization.com/en-us/organization-secure-private-access/hybrid/spa-hybrid-system-requirements` |
+| What's New | `https://docs.organization.com/en-us/organization-secure-private-access/hybrid/spa-hybrid-whats-new` |
+| Known Issues | `https://docs.organization.com/en-us/organization-secure-private-access/hybrid/spa-hybrid-known-issues` |
+| End User Flow | `https://docs.organization.com/en-us/organization-secure-private-access/hybrid/spa-hybrid-end-user-flow` |
 
 ---
 
-## SPA Hybrid Component Awareness
+## APP Hybrid Component Awareness
 
 When generating test cases, the agent must reason about these component interactions:
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
-│                      Citrix Cloud (Control Plane)               │
+│                      Organization Cloud (Control Plane)               │
 │  ┌──────────────────┐  ┌─────────────────┐  ┌───────────────┐  │
-│  │ SPA Admin Console│  │ Citrix Monitor  │  │ Policy Engine │  │
+│  │ APP Admin Console│  │ Organization Monitor  │  │ Policy Engine │  │
 │  └────────┬─────────┘  └────────┬────────┘  └───────┬───────┘  │
 │           │                     │                    │          │
 └───────────┼─────────────────────┼────────────────────┼──────────┘

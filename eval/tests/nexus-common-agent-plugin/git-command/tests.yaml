@@ -2,11 +2,11 @@
   vars:    
     __userPrompt: "action={{action}} jira={{jira}} message={{message}}" 
     action: push
-    jira: SPA-9876    
+    jira: APP-9876    
   assert:
     - type: llm-rubric
       value: |
-        Evaluate whether the agent correctly handled a Git push request with action=push and jiraId=SPA-9876.
+        Evaluate whether the agent correctly handled a Git push request with action=push and jiraId=APP-9876.
 
         Score 1.0 if ALL of the following are true:
         - Identifies this as a push task        

@@ -1,19 +1,19 @@
 ---
 name: jenkins-ci
 description: >
-  Jenkins CI knowledge for icaclientmac. Covers pipeline structure, build triggers,
-  Artifactory publishing, and CI failure diagnosis.
+  CI system CI knowledge for target repository. Covers pipeline structure, build triggers,
+  artifact repository publishing, and CI failure diagnosis.
 trigger: |
   Activate when the user mentions:
-  - Jenkins, CI/CD, or build pipeline
-  - Artifactory or build artifacts
+  - CI system, CI/CD, or build pipeline
+  - artifact repository or build artifacts
   - CI build failure or pipeline debugging
   - Build.sh or automated builds
 ---
 
 # Purpose
 
-Provide knowledge about the icaclientmac Jenkins CI pipeline for build automation, artifact publishing, and CI failure diagnosis.
+Provide knowledge about the target repository CI system CI pipeline for build automation, artifact publishing, and CI failure diagnosis.
 
 # Pipeline Overview
 
@@ -28,7 +28,7 @@ Trigger (PR/merge/manual)
                                                                        │
                                           ┌──────────────┐     ┌──────┴───────┐
                                           │  Publish     │◄────│  SonarQube   │
-                                          │  (Artifactory)│     │  (Quality)   │
+                                          │  (artifact repository)│     │  (Quality)   │
                                           └──────────────┘     └──────────────┘
 ```
 
@@ -46,12 +46,12 @@ This script typically:
 3. Invokes `xcodebuild` with the correct scheme, configuration, and signing
 4. Packages the build output (`.app`, `.pkg`, or `.dmg`)
 
-# Artifactory
+# artifact repository
 
-Build artifacts are published to Artifactory:
+Build artifacts are published to artifact repository:
 - Release builds go to the release repository
 - CI builds go to the snapshot repository
-- Dependencies may also be fetched from Artifactory (Perforce native libs)
+- Dependencies may also be fetched from artifact repository (external source depot native libs)
 
 # CI Failure Diagnosis
 
@@ -61,10 +61,10 @@ Build artifacts are published to Artifactory:
 |---------|-------|-----|
 | Pod install fails | Repo out of date | Add `pod repo update` step |
 | Signing error | Missing certificates on CI | Check CI machine's Keychain |
-| Perforce sync fail | P4 credentials expired | Refresh P4 token |
+| external source depot sync fail | P4 credentials expired | Refresh P4 token |
 | Test timeout | Flaky test on CI | Increase timeout or fix async test |
 | SonarQube fail | Quality gate not met | Fix code smells / coverage |
-| Architecture error | Missing arm64 slice | Ensure Universal Binary build |
+| Architecture error | Missing secondary_arch slice | Ensure Universal Binary build |
 
 ## Reading CI logs
 
@@ -76,7 +76,7 @@ Build artifacts are published to Artifactory:
 # Best Practices
 
 - Keep `Build.sh` as the single source of truth for build commands
-- Pin CocoaPods version in CI to match local development
+- Pin dependency manager version in CI to match local development
 - Cache `Pods/` directory in CI for faster builds
 - Run tests in parallel when test targets are independent
 - Archive xcresult bundles as CI artifacts for post-failure analysis

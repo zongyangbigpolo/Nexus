@@ -152,9 +152,9 @@ JQL: "Epic Link" = {EPIC_ID} ORDER BY key ASC
 
 | #   | Story                   | Depends On | Status |
 | --- | ----------------------- | ---------- | ------ |
-| 1   | SPAOP-001: DB Migration | -          | To Do  |
-| 2   | SPAOP-002: API Endpoint | SPAOP-001  | To Do  |
-| 3   | SPAOP-003: Unit Tests   | SPAOP-002  | To Do  |
+| 1   | APP2-001: DB Migration | -          | To Do  |
+| 2   | APP2-002: API Endpoint | APP2-001  | To Do  |
+| 3   | APP2-003: Unit Tests   | APP2-002  | To Do  |
 
 **Proceed with Story #1?**
 ```
@@ -174,7 +174,7 @@ For full hierarchy traversal and sibling story analysis, use:
 
 The skill provides:
 
-- Hierarchy traversal (Story → Epic → CTXENG → Confluence)
+- Hierarchy traversal (Story → Epic → ENG → Confluence)
 - Sibling story analysis (Done/Current/Future)
 - Pattern extraction from completed work
 - Forward planning for upcoming stories

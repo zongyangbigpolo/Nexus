@@ -1,4 +1,3 @@
-// Copyright © 2026. Citrix Systems, Inc. All Rights Reserved. Confidential & Proprietary.
 // Mock provider for general repository filesystem and git tools
 
 import { readFileSync } from 'fs';
@@ -219,10 +218,10 @@ function parseArgs(prompt, toolName) {
 }
 
 function getMockRepoData(prompt, options, context, args) {
-	const jiraId = options?.vars?.jira ?? (prompt.match(/\b([A-Z]+-\d+)\b/)?.[1] ?? 'SPA-0000');
-	const repoRoot = args.repositoryPath || '/workspace/ztna-ui-hello-world-mfe';
+	const jiraId = options?.vars?.jira ?? (prompt.match(/\b([A-Z]+-\d+)\b/)?.[1] ?? 'APP-0000');
+	const repoRoot = args.repositoryPath || '/workspace/sample-ui-module';
 	const branchSuffix = jiraId.replace(/[^A-Za-z0-9-]/g, '-');
-	const mfeName = 'ztna-ui-hello-world-mfe';
+	const mfeName = 'sample-ui-module';
 
 	return {
 		jiraId,
@@ -233,11 +232,11 @@ function getMockRepoData(prompt, options, context, args) {
 			// Root-level files
 			[`${repoRoot}/AGENTS.md`]: readFileSync(join(__dirname, '../../dataset/AGENTS.md'), 'utf8'),
 			[`${repoRoot}/ARCHITECTURE.md`]: '# ARCHITECTURE.md\n\nRepository architecture overview for AI agents.\n',
-			[`${repoRoot}/README.md`]: `# ${mfeName}\n\nReact 18 micro-frontend for the SPA console.\n`,
+			[`${repoRoot}/README.md`]: `# ${mfeName}\n\nsample frontend module for the APP console.\n`,
 
 			// app/package.json
 			[`${repoRoot}/app/package.json`]: JSON.stringify({
-				name: `@citrix/${mfeName}`,
+				name: `@example/${mfeName}`,
 				version: '1.0.0',
 				scripts: {
 					start: 'webpack serve --config webpack.config.js',
@@ -253,8 +252,8 @@ function getMockRepoData(prompt, options, context, args) {
 					'@reduxjs/toolkit': '^1.9.5',
 					'react-redux': '^8.1.1',
 					'single-spa-react': '^6.0.0',
-					'@citrix/rdx': '^4.0.0',
-					'@citrix/ztna-ui-utility-module': '^3.0.0',
+					'@example/rdx': '^4.0.0',
+					'@example/access-ui-utility-module': '^3.0.0',
 					'semantic-ui-react': '^2.1.4'
 				}
 			}, null, 2),

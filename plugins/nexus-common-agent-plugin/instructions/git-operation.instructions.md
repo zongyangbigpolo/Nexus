@@ -1,6 +1,7 @@
 ---
 name: git-operation
 description: Branch naming and commit message conventions. Attach via "Add Context > Instructions" when working with Git.
+applyTo: "**/*"
 ---
 
 # Git Operation Conventions
@@ -17,7 +18,7 @@ bugfix/{JIRA-ID}-PascalCaseBranchName
 
 ### Rules
 - **Prefix**: `feature/` for Stories, `bugfix/` for Bugs
-- **JIRA-ID**: Ticket identifier (e.g., `SPA-12345`, `CTXENG-1514`)
+- **JIRA-ID**: Ticket identifier (e.g., `APP-12345`, `ENG-1514`)
 - **Separator**: Single hyphen `-` after JIRA-ID
 - **Name**: PascalCase, derived from JIRA title (3-5 words max)
 - **User override**: Honor explicit user request for branch type
@@ -25,9 +26,9 @@ bugfix/{JIRA-ID}-PascalCaseBranchName
 ### Examples
 | ✅ Valid | ❌ Invalid |
 |----------|-----------|
-| `feature/SPA-12345-EnableBrowserPolicies` | `SPA-12345-EnableBrowserPolicies` (no prefix) |
-| `bugfix/AAUTH-5193-FixAppProtection` | `feature/SPA-12345-enable-browser` (not PascalCase) |
-| `feature/CTXENG-1514-AddTunnelExclusion` | `feature/SPA12345-Enable` (no hyphen after ID) |
+| `feature/APP-12345-EnableBrowserPolicies` | `APP-12345-EnableBrowserPolicies` (no prefix) |
+| `bugfix/AAUTH-5193-FixAppProtection` | `feature/APP-12345-enable-browser` (not PascalCase) |
+| `feature/ENG-1514-AddTunnelExclusion` | `feature/SPA12345-Enable` (no hyphen after ID) |
 
 ---
 
@@ -47,7 +48,7 @@ bugfix/{JIRA-ID}-PascalCaseBranchName
 
 ### Regex Pattern
 ```regex
-^(SPA|SPAOP|WSSUCE|WSSHELP|CTXBV|CTXENG|ATH|CC|CCOPS|CCUI|CINC|CINF|COUT|LUI|UNICON|CGS|CGSHELP|SPAHELP|DPS|RDXDEV|AAUTH|AAUTHHELP)-\d{1,}\s+.{10,}
+^(APP|APP2|WSSUCE|WSSHELP|CTXBV|ENG|ATH|CC|CCOPS|CCUI|CINC|CINF|COUT|LUI|UNICON|CGS|CGSHELP|SPAHELP|DPS|RDXDEV|AAUTH|AAUTHHELP)-\d{1,}\s+.{10,}
 ```
 
 See [jira-ops](jira-ops.instructions.md) for full project code reference.
@@ -55,9 +56,9 @@ See [jira-ops](jira-ops.instructions.md) for full project code reference.
 ### Examples
 | ✅ Valid | ❌ Invalid |
 |----------|-----------|
-| `SPA-12345 Enable browser policies` | `SPA-12345Enable browser` (no space) |
-| `CTXENG-1514 Add tunnel exclusion feature` | `Enable browser policies` (no JIRA-ID) |
-| `AAUTH-5193 Fix app protection validation` | `SPA-12345 Fix` (too short) |
+| `APP-12345 Enable browser policies` | `APP-12345Enable browser` (no space) |
+| `ENG-1514 Add tunnel exclusion feature` | `Enable browser policies` (no JIRA-ID) |
+| `AAUTH-5193 Fix app protection validation` | `APP-12345 Fix` (too short) |
 
 ---
 
@@ -65,7 +66,7 @@ See [jira-ops](jira-ops.instructions.md) for full project code reference.
 
 Append ` [AI-Generated]` for AI-generated code:
 ```
-SPA-12345 Implement authentication endpoint [AI-Generated]
+APP-12345 Implement authentication endpoint [AI-Generated]
 ```
 
 ---
@@ -81,7 +82,7 @@ SPA-12345 Implement authentication endpoint [AI-Generated]
 ### Commit
 - ✅ JIRA ID must match branch JIRA ID
 - ✅ Atomic commits (one logical change)
-- ❌ Never use placeholder `SPA-00000` on named branch
+- ❌ Never use placeholder `APP-00000` on named branch
 
 ---
 

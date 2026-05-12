@@ -14,7 +14,7 @@ Systematic container-level troubleshooting for Docker, containerd, and Podman en
 - Image pull failures or registry authentication issues
 - Container networking problems
 - Volume mount or storage issues
-- Container runtime (containerd/CRI-O) problems on K8s nodes
+- Container runtime (containerd/CRI-O) problems on Kubernetes nodes
 
 ---
 

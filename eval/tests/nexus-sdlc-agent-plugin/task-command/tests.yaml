@@ -1,7 +1,7 @@
 - description: Test starting a development task for a JIRA issue
   vars:    
     __userPrompt: "Start development task for jira={{jira}}"
-    jira: SPA-9876
+    jira: APP-9876
   assert:
     - type: llm-rubric
       value: |
@@ -9,8 +9,8 @@
 
         Score 1.0 if:
         - Acts as a dev coordinator agent         
-        - Makes an attempt to fetch the JIRA issue SPA-9876 OR offer to fetch if the user confirms
-        - Plans to create a feature branch starting with: "feature/SPA-9876"
-        - Plans to create a structured task file for the developer with path starting with: ".github/tasks/SPA-9876"
+        - Makes an attempt to fetch the JIRA issue APP-9876 OR offer to fetch if the user confirms
+        - Plans to create a feature branch starting with: "feature/APP-9876"
+        - Plans to create a structured task file for the developer with path starting with: ".github/tasks/APP-9876"
         - Plans for next steps        
       threshold: 1

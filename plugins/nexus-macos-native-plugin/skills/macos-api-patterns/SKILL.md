@@ -1,26 +1,26 @@
 ---
 name: macos-api-patterns
 description: >
-  macOS API patterns for icaclientmac development. Covers AppKit, SwiftUI interop,
-  system APIs, security frameworks, and macOS-specific best practices.
+  desktop OS API patterns for target repository development. Covers AppKit, native UI interop,
+  system APIs, security frameworks, and desktop OS-specific best practices.
 trigger: |
   Activate when the user mentions:
-  - macOS API, AppKit, or SwiftUI
+  - desktop OS API, AppKit, or native UI
   - Cocoa framework patterns
   - System preferences, notifications, or accessibility
   - Security framework, keychain, or entitlements
-  - macOS permissions or sandboxing
+  - desktop OS permissions or sandboxing
 ---
 
 # Purpose
 
-Provide macOS-specific API patterns and best practices relevant to icaclientmac development.
+Provide desktop OS-specific API patterns and best practices relevant to target repository development.
 
 # UI Frameworks
 
 ## AppKit (existing UI)
 
-The majority of icaclientmac UI is built with AppKit (ObjC).
+The majority of target repository UI is built with AppKit (native).
 
 ### Window Management
 ```objc
@@ -45,13 +45,13 @@ NSWindowController *wc = [[NSWindowController alloc]
 @end
 ```
 
-## SwiftUI (new modules — Desktop Toolbar)
+## native UI (new modules — Desktop Toolbar)
 
-New UI modules use SwiftUI, hosted in AppKit via `NSHostingView` / `NSHostingController`.
+New UI modules use native UI, hosted in AppKit via `NSHostingView` / `NSHostingController`.
 
-### Hosting SwiftUI in AppKit
+### Hosting native UI in AppKit
 ```swift
-import SwiftUI
+import native UI
 import AppKit
 
 let swiftUIView = ToolbarView()
@@ -59,7 +59,7 @@ let hostingView = NSHostingView(rootView: swiftUIView)
 // Add hostingView to an AppKit window or view hierarchy
 ```
 
-### SwiftUI View Pattern
+### native UI View Pattern
 ```swift
 struct ToolbarView: View {
     @StateObject private var viewModel = ToolbarViewModel()
@@ -94,7 +94,7 @@ UNNotificationRequest *request = [UNNotificationRequest
 ```objc
 NSDictionary *query = @{
     (__bridge id)kSecClass: (__bridge id)kSecClassGenericPassword,
-    (__bridge id)kSecAttrAccount: @"citrix-credentials",
+    (__bridge id)kSecAttrAccount: @"organization-credentials",
     (__bridge id)kSecReturnData: @YES,
     (__bridge id)kSecMatchLimit: (__bridge id)kSecMatchLimitOne
 };
@@ -126,16 +126,16 @@ BOOL isReachable = (flags & kSCNetworkFlagsReachable) != 0;
 CFRelease(reachability);
 ```
 
-# macOS-Specific Considerations
+# desktop OS-Specific Considerations
 
 ## Architecture: Universal Binary
-- icaclientmac ships as Universal Binary (x86_64 + arm64)
-- Use `#if arch(arm64)` / `#if arch(x86_64)` for arch-specific code
+- target repository ships as Universal Binary (primary_arch + secondary_arch)
+- Use `#if arch(secondary_arch)` / `#if arch(primary_arch)` for arch-specific code
 - Test on both architectures when possible
 
 ## Deployment Target
-- macOS 12.0+ — do not use APIs introduced after this version without availability checks
-- Use `@available(macOS 13.0, *)` for newer APIs with fallback
+- desktop OS 12.0+ — do not use APIs introduced after this version without availability checks
+- Use `@available(desktop OS 13.0, *)` for newer APIs with fallback
 
 ## Accessibility
 ```objc
@@ -145,7 +145,7 @@ button.accessibilityRole = NSAccessibilityButtonRole;
 ```
 
 ## Entitlements
-Key entitlements for icaclientmac:
+Key entitlements for target repository:
 - `com.apple.security.network.client` — outbound network connections
 - `com.apple.security.device.usb` — USB device access (for FIDO2)
 - Hardened Runtime entitlements for Notarization

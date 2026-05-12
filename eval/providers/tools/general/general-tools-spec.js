@@ -1,4 +1,3 @@
-// Copyright © 2026. Citrix Systems, Inc. All Rights Reserved. Confidential & Proprietary.
 
 export const generalToolsSpecs = [
 	{

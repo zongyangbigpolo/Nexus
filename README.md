@@ -1,8 +1,10 @@
 # NexusAgent
 
+[![Claude Compatible](https://img.shields.io/badge/Claude-Compatible-191919?style=for-the-badge)](https://www.anthropic.com/claude)
+
 Read this in Chinese: [README.zh-CN.md](README.zh-CN.md)
 
-NexusAgent is a VS Code + GitHub Copilot multi-agent harness for engineering teams. It packages installable Copilot agent plugins that help teams move from requirements to specifications, JIRA work items, implementation handoff, review, testing, release reporting, and troubleshooting inside Copilot Chat.
+NexusAgent is a VS Code + GitHub Copilot multi-agent harness for engineering teams, with Claude-compatible prompt and evaluation workflows. It packages installable Copilot agent plugins that help teams move from requirements to specifications, JIRA work items, implementation handoff, review, testing, release reporting, and troubleshooting inside Copilot Chat.
 
 For normal users, this README is the only document you need to start. Maintainer documents such as [SETUP.md](SETUP.md), [DEV-GUIDE.md](DEV-GUIDE.md), [ARCHITECTURE.md](ARCHITECTURE.md), and [CAPABILITY_ARCHITECTURE.md](CAPABILITY_ARCHITECTURE.md) are for people developing, validating, or publishing this repository.
 
